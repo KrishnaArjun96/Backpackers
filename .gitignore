@@ -1,0 +1,7 @@
+# EXCLUDE workspace.xml and tasks.xml
+Backpackers/.idea/workspace.xml
+Backpackers/.idea/tasks.xml
+
+# EXCLUDE /out folder
+Backpackers/out/*
+
