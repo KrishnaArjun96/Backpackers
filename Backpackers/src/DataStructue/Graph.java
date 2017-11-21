@@ -34,7 +34,6 @@ public class Graph {
                 return nodes.get(i).addDestination(destination);
             }
         }
-
         GraphNode newNode = new GraphNode(origin);
         newNode.addDestination(destination);
         return nodes.add(newNode);

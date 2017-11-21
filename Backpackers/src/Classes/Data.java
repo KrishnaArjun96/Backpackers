@@ -50,19 +50,35 @@ public final class Data {
 
     public static Flight findFlight(String code, String flightNumber) throws SQLException, ClassNotFoundException {
         Airline airline = findAirline(code);
-        ResultSet rs_flight = ExecQuery.execQuery("SELECT * FROM Flight WHERE AirlineId=\"" + airline.getId() + "\" AND FlightNo=" + flightNumber + " AND IsVisible=1;");
-        Flight newFlight = new Flight(airline, flightNumber, Integer.parseInt(rs_flight.getString(3)), rs_flight.getString(4).toCharArray());
+        ResultSet rs_flight = ExecQuery.execQuery("SELECT * FROM Flight WHERE AirlineId=\"" + airline.getId() + "\" AND FlightNo=" + flightNumber + " AND IsVisible=1");
+        if(rs_flight.next()) {
+            Flight newFlight = new Flight(airline, flightNumber, Integer.parseInt(rs_flight.getString(3)), getDays(rs_flight.getString(4)));
+            return newFlight;
+        }
+
         return null;
     }
 
-    public static ArrayList<Flight> findFlights(String origin, String destination) {
-        ArrayList<Flight> flights = new ArrayList<>();
+    public static char[] getDays(String days) {
+        char[] days_op = new char[7];
+        while(days.length() < 7) {
+            days = "0".concat(days);
+        }
+        for(int i=0; i<7; i++) {
+            days_op[i] = days.charAt(i);
+        }
+
+        return days_op;
+    }
+
+    public static ArrayList<Leg> findLegs(String origin, String destination) {
+        ArrayList<Leg> legs = new ArrayList<>();
         for(Leg leg: LEGS) {
             if(leg.getOrigin().getId().equals(origin) && leg.getDestination().getId().equals(destination)) {
-                flights.add(leg.getFlight());
+                legs.add(leg);
             }
         }
-        return flights;
+        return legs;
     }
 
     //THIS METHOD CLEANS THE MASTER LISTS AND ADDS DATA FROM THE DB.
