@@ -119,5 +119,5 @@ INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Depar
 INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 225, 1, "DXB", "SFO", '08:20:00', '13:05:00', '16:00:00');
 INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 226, 1, "SFO", "DXB", '15:40:00', '07:25:00', '16:00:00');
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 442, 1, "JFK", "SFO", '11:30:00', '14:30:00', '16:00:00);
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 443, 1, "SFO", "JFK", '21:20:00', '06:20:00', '16:00:00);
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 442, 1, "JFK", "SFO", '11:30:00', '14:30:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 443, 1, "SFO", "JFK", '21:20:00', '06:20:00', '16:00:00');
