@@ -1,6 +1,3 @@
-Create table file is in the file I have shared on Google Drive.
-Run these INSERT commands.
-
 INSERT INTO Airline (Id, Name) VALUES ("AB", "Air Berlin");
 INSERT INTO Airline (Id, Name) VALUES ("NQ", "Air Japan");
 INSERT INTO Airline (Id, Name) VALUES ("MD", "Air Madagascar");
@@ -43,81 +40,99 @@ INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 225, 1, "111
 INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 226, 1, "1111111");
 INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("B6", 442, 1, "1111111");
 INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("B6", 443, 1, "1111111");
+INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 564, 1, "1111111");
+INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 565, 1, "1111111");
+INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 568, 1, "1111111");
+INSERT INTO Flight (AirlineID, FlightNo, Stops, Days) VALUES ("EK", 569, 1, "1111111");
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (1, "AA", 111, "First", "Boeing 787-9", 2500, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (2, "AA", 111, "Business", "Boeing 787-9", 1800, 22);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (3, "AA", 111, "Premium Economy", "Boeing 787-9", 21, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (4, "AA", 111, "Economy", "Boeing 787-9", 2500, 234);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (5, "B6", 111, "Business", "Airbus A321 neo", 1800, 16);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (6, "B6", 111, "Economy", "Airbus A321 neo", 1000, 143);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (7, "MD", 1337, "Business", "Airbus A340-300", 1800, 30);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (8, "MD", 1337, "Premium Economy", "Airbus A340-300", 1500, 21);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (9, "MD", 1337, "Economy", "Airbus A340-300", 900, 224);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (1, "AA", 111, "First", "Boeing 787-9", 2500, 8, 4);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (2, "AA", 111, "Business", "Boeing 787-9", 1800, 22, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (3, "AA", 111, "Premium Economy", "Boeing 787-9", 2100, 8, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (4, "AA", 111, "Economy", "Boeing 787-9", 2500, 234, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (5, "B6", 111, "Business", "Airbus A321 neo", 1800, 16, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (6, "B6", 111, "Economy", "Airbus A321 neo", 1000, 143, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (7, "MD", 1337, "Business", "Airbus A340-300", 1800, 30, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (8, "MD", 1337, "Premium Economy", "Airbus A340-300", 1500, 21, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (9, "MD", 1337, "Economy", "Airbus A340-300", 900, 224, 1);
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (10, "AA", 112, "First", "Boeing 787-9", 2500, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (11, "AA", 112, "Business", "Boeing 787-9", 1800, 22);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (12, "AA", 112, "Premium Economy", "Boeing 787-9", 21, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (13, "AA", 112, "Economy", "Boeing 787-9", 2500, 234);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (14, "B6", 112, "Business", "Airbus A321 neo", 1800, 16);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (15, "B6", 112, "Economy", "Airbus A321 neo", 1000, 143);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (16, "MD", 1336, "Business", "Airbus A340-300", 1800, 30);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (17, "MD", 1336, "Premium Economy", "Airbus A340-300", 1500, 21);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (18, "MD", 1336, "Economy", "Airbus A340-300", 900, 224);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (10, "AA", 112, "First", "Boeing 787-9", 2500, 8, 4);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (11, "AA", 112, "Business", "Boeing 787-9", 1800, 22, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (12, "AA", 112, "Premium Economy", "Boeing 787-9", 2100, 8, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (13, "AA", 112, "Economy", "Boeing 787-9", 2500, 234, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (14, "B6", 112, "Business", "Airbus A321 neo", 1800, 16, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (15, "B6", 112, "Economy", "Airbus A321 neo", 1000, 143, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (16, "MD", 1336, "Business", "Airbus A340-300", 1800, 30, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (17, "MD", 1336, "Premium Economy", "Airbus A340-300", 1500, 21, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (18, "MD", 1336, "Economy", "Airbus A340-300", 900, 224, 1);
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (19, "EK", 203, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (20, "EK", 203, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (21, "EK", 203, "Economy", "Airbus A380-800", 700, 399);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (22, "EK", 204, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (23, "EK", 204, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (24, "EK", 204, "Economy", "Airbus A380-800", 700, 399);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (25, "EK", 566, "First", "Boeing 777-300ER", 1200, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (26, "EK", 566, "Business", "Boeing 777-300ER", 900, 42);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (27, "EK", 566, "Economy", "Boeing 777-300ER", 200, 310);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (28, "EK", 567, "First", "Boeing 777-300ER", 1200, 8);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (29, "EK", 567, "Business", "Boeing 777-300ER", 900, 42);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (30, "EK", 567, "Economy", "Boeing 777-300ER", 200, 310);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (19, "EK", 203, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (20, "EK", 203, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (21, "EK", 203, "Economy", "Airbus A380-800", 700, 399, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (22, "EK", 204, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (23, "EK", 204, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (24, "EK", 204, "Economy", "Airbus A380-800", 700, 399, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (25, "EK", 566, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (26, "EK", 566, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (27, "EK", 566, "Economy", "Boeing 777-300ER", 200, 310, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (28, "EK", 567, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (29, "EK", 567, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (30, "EK", 567, "Economy", "Boeing 777-300ER", 200, 310, 1);
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (31, "EK", 215, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (32, "EK", 215, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (33, "EK", 215, "Economy", "Airbus A380-800", 700, 399);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (34, "EK", 216, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (35, "EK", 216, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (36, "EK", 216, "Economy", "Airbus A380-800", 700, 399);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (31, "EK", 215, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (32, "EK", 215, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (33, "EK", 215, "Economy", "Airbus A380-800", 700, 399, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (34, "EK", 216, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (35, "EK", 216, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (36, "EK", 216, "Economy", "Airbus A380-800", 700, 399, 1);
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (37, "EK", 225, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (38, "EK", 225, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (39, "EK", 225, "Economy", "Airbus A380-800", 700, 399);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (40, "EK", 226, "First", "Airbus A380-800", 2500, 14);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (41, "EK", 226, "Business", "Airbus A380-800", 1800, 76);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (42, "EK", 226, "Economy", "Airbus A380-800", 700, 399);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (37, "EK", 225, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (38, "EK", 225, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (39, "EK", 225, "Economy", "Airbus A380-800", 700, 399, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (40, "EK", 226, "First", "Airbus A380-800", 2500, 14, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (41, "EK", 226, "Business", "Airbus A380-800", 1800, 76, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (42, "EK", 226, "Economy", "Airbus A380-800", 700, 399, 1);
 
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (43, "B6", 442, "Business", "Airbus A321 neo", 1800, 16);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (44, "B6", 442, "Economy", "Airbus A321 neo", 1000, 143);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (45, "B6", 443, "Business", "Airbus A321 neo", 1800, 16);
-INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats) VALUES (46, "B6", 443, "Economy", "Airbus A321 neo", 1000, 143);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (43, "B6", 442, "Business", "Airbus A321 neo", 1800, 16, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (44, "B6", 442, "Economy", "Airbus A321 neo", 1000, 143, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (45, "B6", 443, "Business", "Airbus A321 neo", 1800, 16, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (46, "B6", 443, "Economy", "Airbus A321 neo", 1000, 143, 1);
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("AA", 111, 1, "LGA", "LAX", '17:00:00', '20:10:00', '06:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("AA", 111, 2, "LAX", "HND", '21:30:00', '03:00:00', '06:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 111, 1, "SFO", "BOS", '19:30:00', '04:50:00', '05:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 111, 2, "BOS", "LHR", '06:00:00', '12:15:00', '05:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("MD", 1337, 1, "JFK", "TNR", '23:00:00', '11:00:00', '08:00:00');
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (47, "EK", 564, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (48, "EK", 564, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (49, "EK", 564, "Economy", "Boeing 777-300ER", 200, 310, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (50, "EK", 565, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (51, "EK", 565, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (52, "EK", 565, "Economy", "Boeing 777-300ER", 200, 310, 1);
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("AA", 112, 1, "HND", "LAX", '09:00:00', '14:10:00', '06:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("AA", 112, 2, "LAX", "LGA", '15:30:00', '23:50:00', '06:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 112, 1, "LHR", "BOS", '14:30:00', '17:20:00', '05:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 112, 2, "BOS", "SFO", '19:00:00', '23:00:00', '05:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("MD", 1336, 1, "TNR", "JFK", '13:00:00', '18:50:00', '08:00:00');
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (53, "EK", 568, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (54, "EK", 568, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (55, "EK", 568, "Economy", "Boeing 777-300ER", 200, 310, 1);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (56, "EK", 569, "First", "Boeing 777-300ER", 1200, 8, 3);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (57, "EK", 569, "Business", "Boeing 777-300ER", 900, 42, 2);
+INSERT INTO Class (Id, AirlineId, FlightNo, Name, Aircraft, Fare, Seats, ClassRank) VALUES (58, "EK", 569, "Economy", "Boeing 777-300ER", 200, 310, 1);
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 566, 1, "DXB", "BLR", '13:30:00', '19:00:00', '04:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 567, 1, "BLR", "DXB", '20:00:00', '23:10:00', '04:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 203, 1, "DXB", "JFK", '02:30:00', '08:15:00', '14:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 204, 1, "JFK", "DXB", '10:40:00', '08:40:00', '14:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("AA", 111, 1, "LGA", "LAX", '17:00:00', '20:10:00', '06:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("AA", 111, 2, "LAX", "HND", '21:30:00', '03:00:00', '06:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 111, 1, "SFO", "BOS", '19:30:00', '04:50:00', '05:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 111, 2, "BOS", "LHR", '06:00:00', '12:15:00', '05:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("MD", 1337, 1, "JFK", "TNR", '23:00:00', '11:00:00', '08:00:00');
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 215, 1, "DXB", "LAX", '08:30:00', '12:45:00', '16:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 216, 1, "LAX", "DXB", '15:20:00', '07:40:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("AA", 112, 1, "HND", "LAX", '09:00:00', '14:10:00', '06:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("AA", 112, 2, "LAX", "LGA", '15:30:00', '23:50:00', '06:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 112, 1, "LHR", "BOS", '14:30:00', '17:20:00', '05:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 112, 2, "BOS", "SFO", '19:00:00', '23:00:00', '05:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("MD", 1336, 1, "TNR", "JFK", '13:00:00', '18:50:00', '08:00:00');
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 225, 1, "DXB", "SFO", '08:20:00', '13:05:00', '16:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("EK", 226, 1, "SFO", "DXB", '15:40:00', '07:25:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 566, 1, "DXB", "BLR", '13:30:00', '19:00:00', '04:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 567, 1, "BLR", "DXB", '20:00:00', '23:10:00', '04:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 203, 1, "DXB", "JFK", '02:30:00', '08:15:00', '14:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 204, 1, "JFK", "DXB", '10:40:00', '08:40:00', '14:00:00');
 
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 442, 1, "JFK", "SFO", '11:30:00', '14:30:00', '16:00:00');
-INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure) VALUES ("B6", 443, 1, "SFO", "JFK", '21:20:00', '06:20:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 215, 1, "DXB", "LAX", '08:30:00', '12:45:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 216, 1, "LAX", "DXB", '15:20:00', '07:40:00', '16:00:00');
+
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 225, 1, "DXB", "SFO", '08:20:00', '13:05:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("EK", 226, 1, "SFO", "DXB", '15:40:00', '07:25:00', '16:00:00');
+
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 442, 1, "JFK", "SFO", '11:30:00', '14:30:00', '16:00:00');
+INSERT INTO Leg (AirlineID, FlightNo, LegId, Origin, Destination, Arrival, Departure, Duration) VALUES ("B6", 443, 1, "SFO", "JFK", '21:20:00', '06:20:00', '16:00:00');
