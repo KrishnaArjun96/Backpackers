@@ -7,16 +7,49 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+<link rel="stylesheet" href="login.css"/>
 <head>
     <title>Login</title>
 </head>
 <body>
 
-<h1>Login</h1>
-<form action="/login" method="post">
-    username: <input type="text" name="username" width="25"/>
-    password: <input type="password" name="password" width="25"/>
-    <input type="submit" value="Login"/>
-</form>
+<div>
+    <div class="ui middle aligned center aligned grid" style="position: absolute; top:25%;left:50%; transform: translateX(-50%); width: 350px">
+        <div class="column">
+            <h2 class="ui image header">
+                <div class="ui orange header">
+                    Log-in to your account
+                </div>
+            </h2>
+            <form action="/login" method="post" class="ui large form">
+                <div class="ui stacked secondary  segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <input class="ui orange button" type="submit" value="Login"/>
+                </div>
+
+                <div class="ui error message"></div>
+
+            </form>
+
+            <div class="ui message">
+                New to us? <a href="" style="color: #E07B53">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

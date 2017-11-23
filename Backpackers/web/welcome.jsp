@@ -9,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <head>
     <title>Welcome</title>
 </head>
@@ -24,6 +25,9 @@
     returning: <input type="date" name="returning" width="25"/>
     <input type="submit" value="Search"/>
 </form>
+
+
+
 
 <%--<c:out value="Airlines using JSTL"/>
 
@@ -43,28 +47,9 @@
     </c:forEach>
     </tbody>
 </table>
-
 <br>
+--%>
 
-<c:out value="Airlines without using JSTL"/>
-<table>
-    <thead>
-    <tr>
-        <td>Id</td>
-        <td>Name</td>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        ArrayList<Airline> airlines = (ArrayList<Airline>) request.getAttribute("airlines");
-        for(int i=0; i<airlines.size(); i++) { %>
-        <tr>
-            <td><%=airlines.get(i).getId()%></td>
-            <td><%=airlines.get(i).getName()%></td>
-        </tr>
-        <% } %>
-    </tbody>
-</table>--%>
 
 </body>
 </html>
