@@ -10,14 +10,16 @@ public class Leg implements java.io.Serializable {
     Airport destination;
     String departure;
     String arrival;
+    String duration;
 
-    public Leg(Flight flight, String legId, Airport origin, Airport destination, String departure, String arrival) {
+    public Leg(Flight flight, String legId, Airport origin, Airport destination, String departure, String arrival, String duration) {
         this.flight = flight;
         this.legId = legId;
         this.origin = origin;
         this.destination = destination;
         this.departure = departure;
         this.arrival = arrival;
+        this.duration = duration;
     }
 
     public Flight getFlight() {
@@ -66,5 +68,13 @@ public class Leg implements java.io.Serializable {
 
     public void setArrival(String arrival) {
         this.arrival = arrival;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }
