@@ -1,5 +1,6 @@
 package webapp;
 
+import Classes.Data;
 import Classes.ExecQuery;
 import JavaBeans.*;
 import JavaBeans.Connection;
@@ -27,7 +28,6 @@ public class Search extends HttpServlet {
         String startDate = request.getParameter("departing");
         Airport origin = findAirport(user_origin);
         Airport destination = findAirport(user_destination);
-
         ArrayList<ArrayList<Airport>> allPaths = CONNECTIONS.getAllPaths(origin, destination);
         ArrayList<Path> paths = new ArrayList<>();
         for(ArrayList<Airport> path: allPaths) {
@@ -47,23 +47,34 @@ public class Search extends HttpServlet {
             ArrayList<ArrayList<Leg>> result = generateAllLegs(path);
             for(ArrayList<Leg> set: result) {
                 Option newOption = new Option();
-                for(Leg leg: set) newOption.getLegs().add(leg);
+                int totalTime = 0;
+                for(Leg leg: set) {
+                    newOption.getLegs().add(leg);
+                    totalTime += getTimeDuration(leg.getDuration());
+                }
+                newOption.setTotalDuration(totalTime);
                 try {
                     if(validateOption(newOption, startDate))
+                        for(int i=0; i<newOption.getLayovers().length; i++) newOption.setTotalDuration(newOption.getTotalDuration() + newOption.getLayovers()[i]);
                         options.add(newOption);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
         }
-
         if(options.size() > 0) {
             int index = 1;
             for (Option option : options) {
-                System.out.println("Option: " + index);
+                System.out.println("Option: " + index + "\t" + convertTimeFormat(option.getTotalDuration()));
+                int dateIndex = 0, layoverIndex = 0;
                 for (Leg leg : option.getLegs()) {
-                    System.out.println("\t" + leg.getOrigin().getId() + ": " + leg.getDeparture() + "\t" + leg.getDestination().getId() + ": " + leg.getArrival());
+                    System.out.print("\t" + option.getDates()[dateIndex] + "\t" + leg.getOrigin().getId() + ": " + leg.getDeparture() + "\t" + leg.getDestination().getId() + ": " + leg.getArrival());
+                    if(layoverIndex < option.getLayovers().length) System.out.println("\tLayover at " + leg.getDestination().getCity() + " for " + convertTimeFormat(option.getLayovers()[layoverIndex]));
+                    else System.out.println();
+                    layoverIndex++;
+                    dateIndex++;
                 }
+                index++;
             }
         }
         else System.out.println("NO FLIGHTS FOUND ON THE SELECTED DATE!");
@@ -74,6 +85,25 @@ public class Search extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    public static String convertTimeFormat(int time) {
+        String hours = String.valueOf(time/60);
+        String minutes = String.valueOf(time%60);
+        while(hours.length() < 2) {
+            hours = "0".concat(hours);
+        }
+        while(minutes.length() < 2) {
+            minutes = "0".concat(minutes);
+        }
+        return hours.concat(":").concat(minutes);
+    }
+
+    public static int getTimeDuration(String time) {
+        String timeParse[] = time.split(":");
+        int hour = Integer.parseInt(timeParse[0]);
+        int minute = Integer.parseInt(timeParse[1]);
+        return (hour*60) + minute;
     }
 
     public static ArrayList<ArrayList<Leg>> generateAllLegs(Path path) {
@@ -89,19 +119,148 @@ public class Search extends HttpServlet {
             }
             result.add(toAdd);
         }
-
         return result;
+    }
+
+    public static boolean isLeap(String yearStr) {
+        int year = Integer.parseInt(yearStr);
+        return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+    }
+
+    public static String getDateString(int[] components) {
+        String year = String.valueOf(components[0]);
+        while(year.length() < 4){
+            year = "0".concat(year);
+        }
+        String month = String.valueOf(components[1]);
+        while(month.length() < 2) {
+            month = "0".concat(month);
+        }
+        String date = String.valueOf(components[2]);
+        while(date.length() < 2) {
+            date = "0".concat(date);
+        }
+
+        return year.concat("-").concat(month).concat("-").concat(date);
+    }
+
+    public static String getNextDay(String date) {
+        String nextDate;
+        String[] components = date.split("-");
+        int[] newDateComponents = new int[3];
+        switch(Integer.parseInt(components[1])){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+                if(Integer.parseInt(components[2]) == 31) {
+                    newDateComponents[0] = Integer.parseInt(components[0]);
+                    newDateComponents[1] = Integer.parseInt(components[1]) + 1;
+                    newDateComponents[2] = 1;
+                }
+                else {
+                    newDateComponents[0] = Integer.parseInt(components[0]);
+                    newDateComponents[1] = Integer.parseInt(components[1]);
+                    newDateComponents[2] = Integer.parseInt(components[2]) + 1;
+                }
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(Integer.parseInt(components[2]) == 30) {
+                    newDateComponents[0] = Integer.parseInt(components[0]);
+                    newDateComponents[1] = Integer.parseInt(components[1]) + 1;
+                    newDateComponents[2] = 1;
+                }
+                else {
+                    newDateComponents[0] = Integer.parseInt(components[0]);
+                    newDateComponents[1] = Integer.parseInt(components[1]);
+                    newDateComponents[2] = Integer.parseInt(components[2]) + 1;
+                }
+                break;
+            case 2:
+                if(isLeap(components[0])) {
+                    if(Integer.parseInt(components[2]) == 29) {
+                        newDateComponents[0] = Integer.parseInt(components[0]);
+                        newDateComponents[1] = Integer.parseInt(components[1]) + 1;
+                        newDateComponents[2] = 1;
+                    }
+                    else {
+                        newDateComponents[0] = Integer.parseInt(components[0]);
+                        newDateComponents[1] = Integer.parseInt(components[1]);
+                        newDateComponents[2] = Integer.parseInt(components[2]) + 1;
+                    }
+                }
+                else {
+                    if(Integer.parseInt(components[2]) == 28) {
+                        newDateComponents[0] = Integer.parseInt(components[0]);
+                        newDateComponents[1] = Integer.parseInt(components[1]) + 1;
+                        newDateComponents[2] = 1;
+                    }
+                    else {
+                        newDateComponents[0] = Integer.parseInt(components[0]);
+                        newDateComponents[1] = Integer.parseInt(components[1]);
+                        newDateComponents[2] = Integer.parseInt(components[2]) + 1;
+                    }
+                }
+                break;
+            case 12:
+                if(Integer.parseInt(components[2]) == 31) {
+                    newDateComponents[0] = Integer.parseInt(components[0]) + 1;
+                    newDateComponents[1] = 1;
+                    newDateComponents[2] = 1;
+                }
+                else {
+                    newDateComponents[0] = Integer.parseInt(components[0]);
+                    newDateComponents[1] = Integer.parseInt(components[1]);
+                    newDateComponents[2] = Integer.parseInt(components[2]) + 1;
+                }
+                break;
+            default:
+                break;
+        }
+        return getDateString(newDateComponents);
     }
 
     public static boolean validateOption(Option option, String date) throws ParseException {
         if(!isFlightOperational(option.getLegs().get(0).getFlight(), date)) return false;
-        String current_date = date;
+        String travelDate = date;
+        String[] dates = new String[option.getLegs().size()];
+        int[] layovers = new int[option.getLegs().size()-1];
+        dates[0] = travelDate;
         for(int i=1; i<option.getLegs().size(); i++) {
             if(!isFlightOperational(option.getLegs().get(i-1).getFlight(), date)) return false;
             Leg trip1 = option.getLegs().get(i-1);
             Leg trip2 = option.getLegs().get(i);
-            if(!timeCheck(trip1.getArrival(), trip2.getDeparture())) return false;
+            if(timeCheck(trip1.getDeparture(), trip1.getArrival()) < 0) travelDate = getNextDay(travelDate);
+            int layover = timeCheck(trip1.getArrival(), trip2.getDeparture());
+            if(layover < 60) {
+                layover = Math.abs(timeCheck("24:00:00", trip1.getArrival()));
+                int days = 0;
+                for(;;) {
+                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate))) {
+                        layover += Math.abs(timeCheck(trip2.getDeparture(), "00:00:00"));
+                        layovers[i-1] = layover;
+                        dates[i] = travelDate;
+                        break;
+                    }
+                    else {
+                        travelDate = getNextDay(travelDate);
+                        days++;
+                    }
+                }
+                if(days > 2) layovers[i-1] = layovers[i-1]*((days-2)*24*60);
+            }
+            else {
+                layovers[i-1] = Math.abs(layover);
+                dates[i] = travelDate;
+            }
         }
+        option.setLayovers(layovers);
+        option.setDates(dates);
         return true;
     }
 
@@ -117,7 +276,7 @@ public class Search extends HttpServlet {
         return false;
     }
 
-    public static boolean timeCheck(String time1, String time2) throws ParseException {
+    public static int timeCheck(String time1, String time2) throws ParseException {
         String startTimeParse[] = time1.split(":");
         String endTimeParse[] = time2.split(":");
         int firstHour = Integer.parseInt(startTimeParse[0]);
@@ -126,8 +285,6 @@ public class Search extends HttpServlet {
         int secondMinute = Integer.parseInt(endTimeParse[1]);
         int durationHour = secondHour - firstHour;
         int durationMinutes = secondMinute - firstMinute;
-        if(durationHour > 1) return true;
-        else if(durationHour==1 && durationMinutes >=45) return true;
-        return false;
+        return durationHour*60 + durationMinutes;
     }
 }

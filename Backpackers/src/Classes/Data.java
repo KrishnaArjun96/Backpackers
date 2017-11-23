@@ -107,28 +107,12 @@ public final class Data {
             String destination = rs_leg.getString(5);
             String departure = rs_leg.getString(6);
             String arrival = rs_leg.getString(7);
+            String duration = rs_leg.getString(8);
 
             Flight flight = findFlight(airline_id, String.valueOf(flightNo));
-            Leg newLeg = new Leg(flight, String.valueOf(leg_id), findAirport(origin), findAirport(destination), departure, arrival);
+            Leg newLeg = new Leg(flight, String.valueOf(leg_id), findAirport(origin), findAirport(destination), departure, arrival, duration);
             LEGS.add(newLeg);
             CONNECTIONS.addDestinationToNode(findAirport(origin), findAirport(destination));
         }
-    }
-
-    //THIS IS A HELPER METHOD TO GET THE DAYS OF OPERATIONS.
-    public static char[] daysOperating(int days) {
-        char[] daysArr = new char[7];
-        int index = 6;
-        while(days != 0) {
-            int digit = days % 10;
-            daysArr[index] = (char)('0' + digit);
-            days = days/10;
-            index--;
-        }
-        while(index >= 0) {
-            daysArr[index] = '0';
-            index--;
-        }
-        return daysArr;
     }
 }

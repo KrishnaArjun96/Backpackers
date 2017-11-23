@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public class Option {
     ArrayList<Leg> legs;
+    int totalDuration;
+    int[] layoves;
+    String[] dates;
     //MORE ATTRIBUTES TO FOLLOW.
 
     public Option() {
@@ -19,5 +22,29 @@ public class Option {
 
     public void setLegs(ArrayList<Leg> legs) {
         this.legs = legs;
+    }
+
+    public int getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(int totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    public int[] getLayovers() {
+        return layoves;
+    }
+
+    public void setLayovers(int[] layoves) {
+        this.layoves = layoves;
+    }
+
+    public String[] getDates() {
+        return dates;
+    }
+
+    public void setDates(String[] dates) {
+        this.dates = dates;
     }
 }
