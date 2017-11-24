@@ -44,7 +44,7 @@
 
 <form action="/Search" method="post">
     <div class="ui form">
-        <div class="four fields">
+        <div class="two fields">
             <div class="field">
                 <label>Source</label>
                 <input type="text" placeholder="Source">
@@ -53,6 +53,8 @@
                 <label>Destination</label>
                 <input type="text" placeholder="Destination">
             </div>
+        </div>
+        <div class="three fields">
             <div class="field">
                 <label>Departing</label>
                 <input type="date" name="departing">
@@ -61,9 +63,29 @@
                 <label>Return Date</label>
                 <input type="date" name="returning"/>
             </div>
+            <div class="field" id="class">
+                <label>Preferred class</label>
+                <select class="ui selection dropdown">
+                    <option value="none">Preferred Class</option>
+                    <option value="eco">Economy</option>
+                    <option value="bus">Business</option>
+                    <option value="fc">First Class</option>
+                </select>
+            </div>
         </div>
+
         <br>
-        <input class="ui orange button" type="submit" value="Search"/>
+
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" name="flex">
+                <label>Flexible dates</label>
+            </div>
+        </div>
+        <div class="field">
+            <input style="position: relative; top:20px;" class="ui large orange button" type="submit"
+                   value="Search"/>
+        </div>
     </div>
 </form>
 
