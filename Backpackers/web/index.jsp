@@ -10,6 +10,7 @@
 <html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <link rel="stylesheet" href="index.css">
+<script src="index.js"></script>
 <head>
     <title>Welcome!</title>
 </head>
@@ -41,63 +42,43 @@
 
 <br><br>
 
-<div class="ui form">
-    <div class="four fields">
-        <div class="field">
-            <label>Source</label>
-            <input type="text" placeholder="Source">
+<form action="/Search" method="post">
+    <div class="ui form">
+        <div class="four fields">
+            <div class="field">
+                <label>Source</label>
+                <input type="text" placeholder="Source">
+            </div>
+            <div class="field">
+                <label>Destination</label>
+                <input type="text" placeholder="Destination">
+            </div>
+            <div class="field">
+                <label>Departing</label>
+                <input type="date" name="departing">
+            </div>
+            <div class="field" id="retDate">
+                <label>Return Date</label>
+                <input type="date" name="returning"/>
+            </div>
         </div>
-        <div class="field">
-            <label>Destination</label>
-            <input type="text" placeholder="Destination">
-        </div>
-        <div class="field">
-            <label>Departing</label>
-            <input type="date" name="departing">
-        </div>
-        <div class="field" id="retDate">
-            <label>Return Date</label>
-            <input type="date" name="returning"/>
-        </div>
+        <br>
+        <input class="ui orange button" type="submit" value="Search"/>
     </div>
-</div>
+</form>
 
 
 <%--<div class="outerbox">--%>
-    <%--<form action="/Search" method="post">--%>
-        <%--source: <input type="text" name="source" width="25"/>--%>
-        <%--destination: <input type="text" name="destination" width="25"/>--%>
-        <%--departing: <input type="date" name="departing" width="25"/>--%>
-        <%--<div id="retDate">--%>
-        <%--returning: <input type="date" name="returning" width="25"/>--%>
-        <%--</div>--%>
-        <%--<input type="submit" value="Search"/>--%>
-    <%--</form>--%>
+<%--<form action="/Search" method="post">--%>
+<%--source: <input type="text" name="source" width="25"/>--%>
+<%--destination: <input type="text" name="destination" width="25"/>--%>
+<%--departing: <input type="date" name="departing" width="25"/>--%>
+<%--<div id="retDate">--%>
+<%--returning: <input type="date" name="returning" width="25"/>--%>
 <%--</div>--%>
-
-<script>
-    var cur = "round";
-
-    function changeButton(changeTo){
-        if(cur != changeTo){
-            document.getElementById(cur).className = "ui button"
-            document.getElementById(changeTo).className = "ui orange button";
-            changeUI(changeTo);
-        }
-    }
-
-    function changeUI(changeTo){
-        if(changeTo == "one"){
-            document.getElementById('retDate').style.display = "none";
-        }
-        else{
-            document.getElementById('retDate').style.display = "block";
-        }
-        cur = changeTo;
-    }
-
-</script>
-
+<%--<input type="submit" value="Search"/>--%>
+<%--</form>--%>
+<%--</div>--%>
 
 </body>
 </html>
