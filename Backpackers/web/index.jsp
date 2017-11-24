@@ -1,5 +1,7 @@
 <%@ page import="Classes.Data" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="JavaBeans.Airport" %>
+<%@ page import="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl" %><%--
   Created by IntelliJ IDEA.
   User: Rahul
   Date: 11/01/17
@@ -28,7 +30,7 @@
 %>
 
 
-<%--for(Airport airport: AIRPORTS) {--%>
+<%--for(Airport airport: Data.AIRPORTS) {--%>
 <%--System.out.println(airport.toString());--%>
 <%--}--%>
 
@@ -47,11 +49,11 @@
         <div class="four fields">
             <div class="field">
                 <label>Source</label>
-                <input type="text" placeholder="Source">
+                <input type="text" placeholder="Source" name="source">
             </div>
             <div class="field">
                 <label>Destination</label>
-                <input type="text" placeholder="Destination">
+                <input type="text" placeholder="Destination" name="destination">
             </div>
             <div class="field">
                 <label>Departing</label>

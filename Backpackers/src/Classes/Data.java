@@ -20,7 +20,6 @@ public final class Data {
     public static ArrayList<Airport> AIRPORTS;
     public static ArrayList<Airline> AIRLINES;
     public static ArrayList<Leg> LEGS;
-
     public static Graph CONNECTIONS;
 
     //REFRESHES THE LIST WITH NO ELEMENTS.
@@ -55,7 +54,6 @@ public final class Data {
             Flight newFlight = new Flight(airline, flightNumber, Integer.parseInt(rs_flight.getString(3)), getDays(rs_flight.getString(4)));
             return newFlight;
         }
-
         return null;
     }
 
