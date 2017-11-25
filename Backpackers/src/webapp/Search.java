@@ -56,21 +56,31 @@ public class Search extends HttpServlet {
                 try {
                     if(validateOption(newOption, startDate))
                         for(int i=0; i<newOption.getLayovers().length; i++) newOption.setTotalDuration(newOption.getTotalDuration() + newOption.getLayovers()[i]);
-                        newOption.updateTotalFare();
-                        newOption.updateAirlines();
                         options.add(newOption);
                 } catch (ParseException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }
+        if(options.size() > 0) {
+            int index = 1;
+            for (Option option : options) {
+                System.out.println("Option: " + index + "\t" + convertTimeFormat(option.getTotalDuration()));
+                int dateIndex = 0, layoverIndex = 0;
+                for (Leg leg : option.getLegs()) {
+                    System.out.print("\t" + option.getDates()[dateIndex] + "\t" + leg.getOrigin().getId() + ": " + leg.getDeparture() + "\t" + leg.getDestination().getId() + ": " + leg.getArrival());
+                    if(layoverIndex < option.getLayovers().length) System.out.println("\tLayover at " + leg.getDestination().getCity() + " for " + convertTimeFormat(option.getLayovers()[layoverIndex]));
+                    else System.out.println();
+                    layoverIndex++;
+                    dateIndex++;
+                }
+                index++;
+            }
+        }
+        else System.out.println("NO FLIGHTS FOUND ON THE SELECTED DATE!");
 
-        request.setAttribute("options", options);
-        request.setAttribute("optionCount", options.size());
+        request.setAttribute("paths", allPaths);
+        request.setAttribute("pathCount", allPaths.size());
         request.getRequestDispatcher("/searchResults.jsp").forward(request, response);
     }
 
