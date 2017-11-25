@@ -48,7 +48,7 @@ public class Graph {
         else {
             for(Airport apt: nodes.get(originIndex).getDestinations()) {
                 int i = findIndex(apt);
-                if(!visited[i]) getAllPathsHelper(i, destinationIndex, visited, path, allPaths);
+                if(!visited[i] && i >= 0) getAllPathsHelper(i, destinationIndex, visited, path, allPaths);
             }
         }
 
