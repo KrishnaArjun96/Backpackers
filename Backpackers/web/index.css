@@ -2,20 +2,6 @@ body{
     margin: 30px;
 }
 
-h1{
+.orngHeader{
     color: #e05d0f;
-}
-
-.outerbox{
-    background-color: #d3c4a6;
-    width: 95%;
-    border: 5px solid #E07B53;
-    padding: 20px 20px;
-    margin: 25px;
-}
-
-
-
-input {
-    margin: 20px;
 }

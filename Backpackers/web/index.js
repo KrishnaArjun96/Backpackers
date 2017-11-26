@@ -17,3 +17,4 @@ function changeUI(changeTo) {
     }
     cur = changeTo;
 }
+
