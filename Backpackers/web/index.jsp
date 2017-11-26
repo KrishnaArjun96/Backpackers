@@ -1,5 +1,7 @@
 <%@ page import="Classes.Data" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="JavaBeans.Airport" %>
+<%@ page import="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl" %><%--
   Created by IntelliJ IDEA.
   User: Rahul
   Date: 11/01/17
@@ -70,6 +72,13 @@
 
 <h1 class="orngHeader">Backpackers</h1>
 
+
+<%--for(Airport airport: Data.AIRPORTS) {--%>
+<%--System.out.println(airport.toString());--%>
+<%--}--%>
+
+<h1>Backpackers</h1>
+
 <div class="ui buttons">
     <button id="round" class="ui orange button" onclick="changeButton('round')">Roundtrip</button>
     <button id="one" class="ui button" onclick="changeButton('one')">One way</button>
@@ -83,11 +92,11 @@
         <div class="two fields">
             <div class="field">
                 <label>Source</label>
-                <input type="text" placeholder="Source">
+                <input type="text" placeholder="Source" name="source">
             </div>
             <div class="field">
                 <label>Destination</label>
-                <input type="text" placeholder="Destination">
+                <input type="text" placeholder="Destination" name="destination">
             </div>
         </div>
         <div class="three fields">
