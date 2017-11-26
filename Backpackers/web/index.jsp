@@ -18,52 +18,6 @@
 <link rel="stylesheet" href="index.css">
 <script src="index.js"></script>
 
-<script>
-    var index = 0;
-    var items_list = ["multiDivButton0"];
-    function addDiv() {
-        index+=1;
-        var newID = "multiDivButton" + index;
-        if (items_list.length != 0){
-                $("#" + items_list[0]).css('display','inline');
-        }
-        $("#multiDiv").append("<div class=\"four fields\">\n" +
-            "        <div class=\"four field\">\n" +
-            "        <label>Source</label>\n" +
-            "        <input type=\"text\" placeholder=\"Source\">\n" +
-            "        </div>\n" +
-            "        <div class=\"field\">\n" +
-            "        <label>Destination</label>\n" +
-            "        <input type=\"text\" placeholder=\"Destination\">\n" +
-            "        </div>\n" +
-            "        <div class=\"field\">\n" +
-            "        <label>Departing</label>\n" +
-            "        <input type=\"date\" name=\"departing\">\n" +
-            "        </div>\n" +
-            "        <div class=\"field\">\n" +
-            "        <div class=\"ui button\" style=\"margin-top: 25px\" id='" + newID  + "' onclick=\"removeDiv('" + newID  + "');\">" +
-            "        <i class=\"close icon\"></i>\n" +
-            "        </div>\n" +
-            "        </div>\n" +
-            "        </div>");
-        items_list.push(newID);
-    }
-    function removeDiv(idToRemove) {
-//        alert(items_list.toString());
-//        alert(idToRemove);
-        var x = items_list.indexOf(idToRemove.toString());
-//        alert(x);
-        items_list.splice(x,1);
-        $("#" +idToRemove).parent().parent().remove();
-        if (items_list.length == 1){
-                $("#" + items_list[0]).css('display','none');
-        }
-//        alert(items_list.toString());
-//        alert(items_list.length);
-    }
-
-</script>
-
 <head>
     <title>Welcome!</title>
 </head>
@@ -76,8 +30,6 @@
 <%--for(Airport airport: Data.AIRPORTS) {--%>
 <%--System.out.println(airport.toString());--%>
 <%--}--%>
-
-<h1>Backpackers</h1>
 
 <div class="ui buttons">
     <button id="round" class="ui orange button" onclick="changeButton('round')">Roundtrip</button>
@@ -111,7 +63,7 @@
 
         </div>
 
-        <div id="multiDiv" style="position: relative;top: 10px;">
+        <div id="multiDiv" style="position: relative;top: 10px; display:none;">
             <div id="header" style="height: 15px;width: 200px">
                 <h2 class="orngHeader" style="position: relative;float: left;width: 90px">Trips</h2>
                 <div class="ui button" style="position: relative;float: left;width: 90px;" onclick="addDiv()">

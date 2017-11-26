@@ -1,4 +1,6 @@
 var cur = "round";
+var index = 0;
+var items_list = ["multiDivButton0"];
 
 function changeButton(changeTo) {
     if (cur != changeTo) {
@@ -11,10 +13,54 @@ function changeButton(changeTo) {
 function changeUI(changeTo) {
     if (changeTo == "one") {
         document.getElementById('retDate').style.display = "none";
+        document.getElementById('multiDiv').style.display = "none";
+    }
+    else if(changeTo == "multi"){
+        document.getElementById('retDate').style.display = "block";
+        document.getElementById('multiDiv').style.display = "block";
     }
     else {
         document.getElementById('retDate').style.display = "block";
+        document.getElementById('multiDiv').style.display = "none";
     }
     cur = changeTo;
+}
+
+function addDiv() {
+    index+=1;
+    var newID = "multiDivButton" + index;
+    if (items_list.length != 0){
+        $("#" + items_list[0]).css('display','inline');
+    }
+    $("#multiDiv").append("<div class=\"four fields\">\n" +
+        "        <div class=\"four field\">\n" +
+        "        <label>Source</label>\n" +
+        "        <input type=\"text\" placeholder=\"Source\">\n" +
+        "        </div>\n" +
+        "        <div class=\"field\">\n" +
+        "        <label>Destination</label>\n" +
+        "        <input type=\"text\" placeholder=\"Destination\">\n" +
+        "        </div>\n" +
+        "        <div class=\"field\">\n" +
+        "        <label>Departing</label>\n" +
+        "        <input type=\"date\" name=\"departing\">\n" +
+        "        </div>\n" +
+        "        <div class=\"field\">\n" +
+        "        <div class=\"ui button\" style=\"margin-top: 25px\" id='" + newID  + "' onclick=\"removeDiv('" + newID  + "');\">" +
+        "        <i class=\"close icon\"></i>\n" +
+        "        </div>\n" +
+        "        </div>\n" +
+        "        </div>");
+    items_list.push(newID);
+}
+
+
+function removeDiv(idToRemove) {
+    var x = items_list.indexOf(idToRemove.toString());
+    items_list.splice(x,1);
+    $("#" +idToRemove).parent().parent().remove();
+    if (items_list.length == 1){
+        $("#" + items_list[0]).css('display','none');
+    }
 }
 
