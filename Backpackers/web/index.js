@@ -14,14 +14,17 @@ function changeUI(changeTo) {
     if (changeTo == "one") {
         document.getElementById('retDate').style.display = "none";
         document.getElementById('multiDiv').style.display = "none";
+        document.getElementById('nonMulti').style.display = "block";
     }
     else if(changeTo == "multi"){
+        document.getElementById('nonMulti').style.display = "none";
         document.getElementById('retDate').style.display = "block";
         document.getElementById('multiDiv').style.display = "block";
     }
     else {
         document.getElementById('retDate').style.display = "block";
         document.getElementById('multiDiv').style.display = "none";
+        document.getElementById('nonMulti').style.display = "block";
     }
     cur = changeTo;
 }
@@ -45,8 +48,8 @@ function addDiv() {
         "        <label>Departing</label>\n" +
         "        <input type=\"date\" name=\"departing\">\n" +
         "        </div>\n" +
-        "        <div class=\"field\">\n" +
-        "        <div class=\"ui button\" style=\"margin-top: 25px\" id='" + newID  + "' onclick=\"removeDiv('" + newID  + "');\">" +
+        "        <div class=\"field\" style=\"margin-top: 25px;\">\n" +
+        "        <div class=\"ui red icon button\" id='" + newID  + "' onclick=\"removeDiv('" + newID  + "');\">" +
         "        <i class=\"close icon\"></i>\n" +
         "        </div>\n" +
         "        </div>\n" +
@@ -63,20 +66,3 @@ function removeDiv(idToRemove) {
         $("#" + items_list[0]).css('display','none');
     }
 }
-
-
-$('#postButton').on('click', function() {
-
-    $.ajax({
-        type: "post",
-        dataType: "application/json",
-        url: "/Search",
-        traditional: true,
-        data: {
-            source: $("#source"),
-            destination: $("#destination")
-        },
-        success: function () {
-        }
-    });
-});

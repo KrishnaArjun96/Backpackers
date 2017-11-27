@@ -32,32 +32,33 @@
 <br><br>
 
 <div class="ui form">
-    <div class="two fields">
-        <div class="field">
-            <label>Source</label>
-            <input type="text" placeholder="Source" name="source">
+    <div id="nonMulti">
+        <div class="two fields">
+            <div class="field">
+                <label>Source</label>
+                <input type="text" placeholder="Source" name="source">
+            </div>
+            <div class="field">
+                <label>Destination</label>
+                <input type="text" placeholder="Destination" name="destination">
+            </div>
         </div>
-        <div class="field">
-            <label>Destination</label>
-            <input type="text" placeholder="Destination" name="destination">
+        <div class="three fields">
+            <div class="field">
+                <label>Departing</label>
+                <input type="date" name="departing">
+            </div>
+            <div class="field" id="retDate">
+                <label>Return Date</label>
+                <input type="date" name="returning"/>
+            </div>
+
         </div>
     </div>
-    <div class="three fields">
-        <div class="field">
-            <label>Departing</label>
-            <input type="date" name="departing">
-        </div>
-        <div class="field" id="retDate">
-            <label>Return Date</label>
-            <input type="date" name="returning"/>
-        </div>
-
-    </div>
-
     <div id="multiDiv" style="position: relative;top: 10px; display:none;">
         <div id="header" style="height: 15px;width: 200px">
             <h2 class="orngHeader" style="position: relative;float: left;width: 90px">Trips</h2>
-            <div class="ui button" style="position: relative;float: left;width: 90px;" onclick="addDiv()">
+            <div class="ui orange icon button" style="position: relative;float: left;" onclick="addDiv()">
                 <i class="add icon"></i>
             </div>
         </div>
@@ -74,10 +75,10 @@
                 <label>Departing</label>
                 <input type="date" name="departing">
             </div>
-            <div class="field">
-                <div onclick="removeDiv('multiDivButton0');" class="ui button" style="margin-top: 25px; display: none"
+            <div class="field" style="margin-top: 35px;">
+                <div onclick="removeDiv('multiDivButton0');" class="ui red icon button" style=" display: none"
                      id="multiDivButton0">
-                    <i style="margin-top: 35px;" class="close icon"></i>
+                    <i class="close icon"></i>
                 </div>
             </div>
         </div>
