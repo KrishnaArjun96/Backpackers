@@ -13,6 +13,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/../../javax.servlet.jsp.jstl-1.2.4.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/../../javax.servlet.jsp.jstl-api-1.2.1.jar" />
           <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="gson-2.6.2" />
         </element>
       </element>
     </root>

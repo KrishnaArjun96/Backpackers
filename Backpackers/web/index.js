@@ -64,3 +64,19 @@ function removeDiv(idToRemove) {
     }
 }
 
+
+$('#postButton').on('click', function() {
+
+    $.ajax({
+        type: "post",
+        dataType: "application/json",
+        url: "/Search",
+        traditional: true,
+        data: {
+            source: $("#source"),
+            destination: $("#destination")
+        },
+        success: function () {
+        }
+    });
+});
