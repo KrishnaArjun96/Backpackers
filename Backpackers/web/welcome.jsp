@@ -14,7 +14,7 @@
     <title>Welcome</title>
 </head>
 <body>
-<h1>Welcome to Backpackers, ${username}</h1>
+<h1>Welcome to Backpackers, ${param.username}</h1>
 
 <br><br>
 

@@ -71,7 +71,7 @@
                 data: JSON.stringify(cred),
                 success: function(data){
                     console.log(data.isValid);
-                    window.location.href = "welcome.jsp";
+                    window.location.href = "welcome.jsp?username="+cred.username;
                 }
             });
 

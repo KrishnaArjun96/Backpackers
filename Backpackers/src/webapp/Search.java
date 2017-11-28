@@ -4,6 +4,8 @@ import Classes.Data;
 import Classes.ExecQuery;
 import JavaBeans.*;
 import JavaBeans.Connection;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,16 @@ import static Classes.Data.*;
 @WebServlet(name = "Search")
 public class Search extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
+//
+//        String user_origin = data.get("source").getAsString();
+//        String user_destination = data.get("destination").getAsString();
+//        String startDate = data.get("depatureDate").getAsString();
+//        String prefClass = data.get("prefClass").getAsString();
+//        int passengers = data.get("noOfPass").getAsInt();
+//        boolean flexible = data.get("flex").getAsBoolean();
+
         String user_origin = request.getParameter("source");
         String user_destination = request.getParameter("destination");
         String startDate = request.getParameter("departing");

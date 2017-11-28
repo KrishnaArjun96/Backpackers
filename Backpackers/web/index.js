@@ -120,16 +120,16 @@ $(function () {
 
         console.log(details);
 
-        // $.ajax({
-        //     type: 'POST',
-        //     url: '/login',
-        //     contentType: 'application/json',
-        //     data: JSON.stringify(cred),
-        //     success: function(data){
-        //         console.log(data.isValid);
-        //         window.location.href = "welcome.jsp";
-        //     }
-        // });
+        $.ajax({
+            type: 'POST',
+            url: '/Search',
+            contentType: 'application/json',
+            data: JSON.stringify(details),
+            success: function(data){
+                console.log(data);
+                window.location.href = "welcome.jsp";
+            }
+        });
 
     });
 });
