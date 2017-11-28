@@ -8,8 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 <link rel="stylesheet" href="index.css">
@@ -36,21 +34,21 @@
         <div class="two fields">
             <div class="field">
                 <label>Source</label>
-                <input type="text" placeholder="Source" name="source">
+                <input id="src" type="text" placeholder="Source" name="source">
             </div>
             <div class="field">
                 <label>Destination</label>
-                <input type="text" placeholder="Destination" name="destination">
+                <input type="text" id="dest" placeholder="Destination" name="destination">
             </div>
         </div>
         <div class="three fields">
             <div class="field">
                 <label>Departing</label>
-                <input type="date" name="departing">
+                <input type="date" id="depatureDate" name="departing">
             </div>
             <div class="field" id="retDate">
                 <label>Return Date</label>
-                <input type="date" name="returning"/>
+                <input type="date" id="returnDate" name="returning"/>
             </div>
 
         </div>
@@ -65,15 +63,15 @@
         <div class="four fields">
             <div class="four field">
                 <label>Source</label>
-                <input type="text" placeholder="Source">
+                <input type="text" placeholder="Source" id="src0">
             </div>
             <div class="field">
                 <label>Destination</label>
-                <input type="text" placeholder="Destination">
+                <input type="text" placeholder="Destination" id="dst0">
             </div>
             <div class="field">
                 <label>Departing</label>
-                <input type="date" name="departing">
+                <input type="date" name="departing" id="time0">
             </div>
             <div class="field" style="margin-top: 35px;">
                 <div onclick="removeDiv('multiDivButton0');" class="ui red icon button" style=" display: none"
@@ -88,7 +86,7 @@
     <div class="three fields" style="position: relative;top: 15px">
         <div class="field" id="class">
             <label>Preferred class</label>
-            <select class="ui selection dropdown">
+            <select id="prefClass" class="ui selection dropdown">
                 <option value="none">Preferred Class</option>
                 <option value="eco">Economy</option>
                 <option value="bus">Business</option>
@@ -97,18 +95,18 @@
         </div>
         <div class="field" style="width: 20%">
             <label>No. of Passengers</label>
-            <select class="ui selection dropdown">
-                <option value="one">1</option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-                <option value="four">4</option>
-                <option value="five">5</option>
-                <option value="six">6</option>
+            <select id="noOfPass" class="ui selection dropdown">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
             </select>
         </div>
         <div class="field" style="margin-left: 15px">
             <label style="margin-top: 5px;">Flexible dates</label>
-            <input id="flex" name="flex" type="checkbox" style="float: left; margin-top: 10px;>">
+            <input id="flex" type="checkbox" style="float: left; margin-top: 10px;">
             <div style="margin-top:10px; margin-left: 25px;">
                 (+/- 3 days)
             </div>
