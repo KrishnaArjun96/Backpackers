@@ -22,5 +22,13 @@
         <url-pattern>/Search</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>employee</servlet-name>
+        <servlet-class>webapp.employee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
 
 </web-app>
