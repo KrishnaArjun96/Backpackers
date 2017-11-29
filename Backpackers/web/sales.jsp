@@ -26,20 +26,14 @@
         <a class="active item">
             <i class="bar chart icon"></i> sales report
         </a>
-        <a class="item">
+        <a class="item" href="flights.jsp">
             <i class="plane icon"></i> flights
         </a>
-        <a class="item">
+        <a class="item" href="reservations.jsp">
             <i class="book icon"></i> Reservations
         </a>
-        <a class="item">
+        <a class="item" href="revenue.jsp">
             <i class="bitcoin icon"></i> Revenue
-        </a>
-        <a class="item">
-            <i class="compass icon"></i> Airport
-        </a>
-        <a class="item">
-            <i class="checked calendar icon"></i> Schedule
         </a>
         <a class="item" style="float: right">
             <i class="power icon"></i>
