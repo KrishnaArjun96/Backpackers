@@ -21,7 +21,7 @@
             <i class="users icon"></i>
             Employees
         </a>
-        <a class="item">
+        <a class="item" href="sales.jsp">
             <i class="bar chart icon"></i> sales report
         </a>
         <a class="item">
