@@ -94,7 +94,7 @@ $(function () {
             details.depatureDate = $('#depatureDate').val();
             details.prefClass = $('#prefClass').val();
             details.noOfPass = $('#noOfPass').val();
-            details.flexible = $('#flex').val();
+            details.flexible = $('#flex').is(":checked");
         } else if (cur === 'round') {
             details.type = cur;
             details.source = $('#src').val();
@@ -105,6 +105,7 @@ $(function () {
             details.noOfPass = $('#noOfPass').val();
             details.flexible = $("#flex").is(":checked");
         } else {
+            details.type = 'multi';
             details.prefClass = $('#prefClass').val();
             details.noOfPass = $('#noOfPass').val();
             details.flexible = $("#flex").is(":checked");

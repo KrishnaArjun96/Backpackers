@@ -5,6 +5,7 @@ import Classes.ExecQuery;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Rahul on 11/21/17.
@@ -71,10 +72,15 @@ public class Option {
         this.totalFare = totalFare;
     }
 
-    public void updateTotalFare() throws SQLException, ClassNotFoundException {
+    public void updateTotalFare(String prefClass) throws SQLException, ClassNotFoundException {
+        String[] classArray = {"eco", "bus", "fc"};
+        ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
+        int classIndex = classArrayList.indexOf(prefClass);
         double totalFare = 0;
         for(Leg leg: this.legs) {
-            ResultSet rs_class = ExecQuery.execQuery("SELECT * FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId=\"" + leg.getFlight().getAirline().getId() + "\" AND ClassRank=1 AND IsVisible=1");
+            int maxRank = ExecQuery.execQuery("SELECT COUNT(*) FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId=\"" + leg.getFlight().getAirline().getId() + "\";").getInt(1);
+            if(maxRank < classIndex) classIndex = maxRank;
+            ResultSet rs_class = ExecQuery.execQuery("SELECT * FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId=\"" + leg.getFlight().getAirline().getId() + "\" AND ClassRank=" + classIndex + " AND IsVisible=1");
             while(rs_class.next()) {
                 totalFare += Double.parseDouble(rs_class.getString(6));
             }

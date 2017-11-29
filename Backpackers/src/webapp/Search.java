@@ -1,10 +1,11 @@
 package webapp;
 
 import Classes.Data;
-import Classes.ExecQuery;
 import JavaBeans.*;
 import JavaBeans.Connection;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
@@ -18,26 +19,72 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 import static Classes.Data.*;
 
 @WebServlet(name = "Search")
 public class Search extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Data.Refresh();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
 
-//        JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-//
-//        String user_origin = data.get("source").getAsString();
-//        String user_destination = data.get("destination").getAsString();
-//        String startDate = data.get("depatureDate").getAsString();
-//        String prefClass = data.get("prefClass").getAsString();
-//        int passengers = data.get("noOfPass").getAsInt();
-//        boolean flexible = data.get("flex").getAsBoolean();
+        ArrayList<ArrayList<Option>> allOptions = new ArrayList<>();
 
-        String user_origin = request.getParameter("source");
-        String user_destination = request.getParameter("destination");
-        String startDate = request.getParameter("departing");
+        if(data.get("type").getAsString().equals("one")) {
+            String user_origin = data.get("source").getAsString();
+            String user_destination = data.get("destination").getAsString();
+            String startDate = data.get("depatureDate").getAsString();
+            String prefClass = data.get("prefClass").getAsString();
+            int passengers = data.get("noOfPass").getAsInt();
+            boolean flexible = data.get("flexible").getAsBoolean();
+
+            ArrayList<Option> options = search(user_origin, user_destination, startDate, prefClass, passengers);
+            allOptions.add(options);
+        }
+        else if(data.get("type").getAsString().equals("round")) {
+            String user_origin = data.get("source").getAsString();
+            String user_destination = data.get("destination").getAsString();
+            String startDate = data.get("depatureDate").getAsString();
+            String returnDate = data.get("returnDate").getAsString();
+            String prefClass = data.get("prefClass").getAsString();
+            int passengers = data.get("noOfPass").getAsInt();
+            boolean flexible = data.get("flexible").getAsBoolean();
+
+            ArrayList<Option> optionsOutBound = search(user_origin, user_destination, startDate, prefClass, passengers);
+            ArrayList<Option> optionsInBound = search(user_destination, user_origin, returnDate, prefClass, passengers);
+
+            allOptions.add(optionsOutBound);
+            allOptions.add(optionsInBound);
+        }
+        else if(data.get("type").getAsString().equals("multi")) {
+            String prefClass = data.get("prefClass").getAsString();
+            int passengers = data.get("noOfPass").getAsInt();
+            JsonArray trips = data.get("trips").getAsJsonArray();
+            for(JsonElement trip: trips) {
+                JsonObject tripData = new Gson().fromJson(trip, JsonObject.class);
+                String origin = tripData.get("source").getAsString();
+                String destination = tripData.get("destination").getAsString();
+                String date = tripData.get("date").getAsString();
+
+                ArrayList<Option> options = search(origin, destination, date, prefClass, passengers);
+                allOptions.add(options);
+            }
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(new Gson().toJson(allOptions));
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    public static ArrayList<Option> search(String user_origin, String user_destination, String date, String prefClass, int passengers) {
         Airport origin = findAirport(user_origin);
         Airport destination = findAirport(user_destination);
         ArrayList<ArrayList<Airport>> allPaths = CONNECTIONS.getAllPaths(origin, destination);
@@ -66,10 +113,10 @@ public class Search extends HttpServlet {
                 }
                 newOption.setTotalDuration(totalTime);
                 try {
-                    if(validateOption(newOption, startDate)) {
+                    if(validateOption(newOption, date, passengers, prefClass)) {
                         for (int i = 0; i < newOption.getLayovers().length; i++)
                             newOption.setTotalDuration(newOption.getTotalDuration() + newOption.getLayovers()[i]);
-                        newOption.updateTotalFare();
+                        newOption.updateTotalFare(prefClass);
                         newOption.updateAirlines();
                     }
                     options.add(newOption);
@@ -83,12 +130,7 @@ public class Search extends HttpServlet {
             }
         }
 
-        request.setAttribute("options", options);
-        request.setAttribute("optionCount", options.size());
-        request.getRequestDispatcher("/searchResults.jsp").forward(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return options;
     }
 
     public static String convertTimeFormat(int time) {
@@ -149,7 +191,6 @@ public class Search extends HttpServlet {
     }
 
     public static String getNextDay(String date) {
-        String nextDate;
         String[] components = date.split("-");
         int[] newDateComponents = new int[3];
         switch(Integer.parseInt(components[1])){
@@ -229,7 +270,87 @@ public class Search extends HttpServlet {
         return getDateString(newDateComponents);
     }
 
-    public static boolean validateOption(Option option, String date) throws ParseException {
+    public static String getPrevDay(String date) {
+        String[] components = date.split("-");
+        int[] prevDateComponents = new int[3];
+        switch(Integer.parseInt(components[1])){
+            case 2:
+            case 4:
+            case 6:
+            case 8:
+            case 9:
+            case 11:
+                if(Integer.parseInt(components[2]) == 1) {
+                    prevDateComponents[0] = Integer.parseInt(components[0]);
+                    prevDateComponents[1] = Integer.parseInt(components[1]) - 1;
+                    prevDateComponents[2] = 31;
+                }
+                else {
+                    prevDateComponents[0] = Integer.parseInt(components[0]);
+                    prevDateComponents[1] = Integer.parseInt(components[1]);
+                    prevDateComponents[2] = Integer.parseInt(components[2]) - 1;
+                }
+                break;
+            case 5:
+            case 7:
+            case 10:
+            case 12:
+                if(Integer.parseInt(components[2]) == 30) {
+                    prevDateComponents[0] = Integer.parseInt(components[0]);
+                    prevDateComponents[1] = Integer.parseInt(components[1]) - 1;
+                    prevDateComponents[2] = 31;
+                }
+                else {
+                    prevDateComponents[0] = Integer.parseInt(components[0]);
+                    prevDateComponents[1] = Integer.parseInt(components[1]);
+                    prevDateComponents[2] = Integer.parseInt(components[2]) - 1;
+                }
+                break;
+            case 3:
+                if(isLeap(components[0])) {
+                    if(Integer.parseInt(components[2]) == 1) {
+                        prevDateComponents[0] = Integer.parseInt(components[0]);
+                        prevDateComponents[1] = Integer.parseInt(components[1]) - 1;
+                        prevDateComponents[2] = 29;
+                    }
+                    else {
+                        prevDateComponents[0] = Integer.parseInt(components[0]);
+                        prevDateComponents[1] = Integer.parseInt(components[1]);
+                        prevDateComponents[2] = Integer.parseInt(components[2]) - 1;
+                    }
+                }
+                else {
+                    if(Integer.parseInt(components[2]) == 28) {
+                        prevDateComponents[0] = Integer.parseInt(components[0]);
+                        prevDateComponents[1] = Integer.parseInt(components[1]) - 1;
+                        prevDateComponents[2] = 28;
+                    }
+                    else {
+                        prevDateComponents[0] = Integer.parseInt(components[0]);
+                        prevDateComponents[1] = Integer.parseInt(components[1]);
+                        prevDateComponents[2] = Integer.parseInt(components[2]) - 1;
+                    }
+                }
+                break;
+            case 1:
+                if(Integer.parseInt(components[2]) == 1) {
+                    prevDateComponents[0] = Integer.parseInt(components[0]) + 1;
+                    prevDateComponents[1] = 12;
+                    prevDateComponents[2] = 31;
+                }
+                else {
+                    prevDateComponents[0] = Integer.parseInt(components[0]);
+                    prevDateComponents[1] = Integer.parseInt(components[1]);
+                    prevDateComponents[2] = Integer.parseInt(components[2]) - 1;
+                }
+                break;
+            default:
+                break;
+        }
+        return getDateString(prevDateComponents);
+    }
+
+    public static boolean validateOption(Option option, String date, int passengers, String prefClass) throws ParseException {
         if(!isFlightOperational(option.getLegs().get(0).getFlight(), date)) return false;
         String travelDate = date;
         String[] dates = new String[option.getLegs().size()];
@@ -245,7 +366,7 @@ public class Search extends HttpServlet {
                 layover = Math.abs(timeCheck("24:00:00", trip1.getArrival()));
                 int days = 0;
                 for(;;) {
-                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate))) {
+                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate)) && !checkIfSeatsPresent(passengers, prefClass)) {
                         layover += Math.abs(timeCheck(trip2.getDeparture(), "00:00:00"));
                         layovers[i-1] = layover;
                         dates[i] = travelDate;
@@ -265,6 +386,11 @@ public class Search extends HttpServlet {
         }
         option.setLayovers(layovers);
         option.setDates(dates);
+        return true;
+    }
+
+    public static boolean checkIfSeatsPresent(int passengers, String prefClass) {
+        //@todo
         return true;
     }
 
