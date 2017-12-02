@@ -78,6 +78,7 @@ public class Search extends HttpServlet {
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
+        System.out.println(new Gson().toJson(allOptions));
         response.getWriter().write(new Gson().toJson(allOptions));
     }
 
@@ -360,13 +361,14 @@ public class Search extends HttpServlet {
             if(!isFlightOperational(option.getLegs().get(i-1).getFlight(), date)) return false;
             Leg trip1 = option.getLegs().get(i-1);
             Leg trip2 = option.getLegs().get(i);
-            if(timeCheck(trip1.getDeparture(), trip1.getArrival()) < 0) travelDate = getNextDay(travelDate);
+            if(timeCheck(trip1.getDeparture(), trip1.getArrival()) < 0)
+                travelDate = getNextDay(travelDate);
             int layover = timeCheck(trip1.getArrival(), trip2.getDeparture());
             if(layover < 60) {
                 layover = Math.abs(timeCheck("24:00:00", trip1.getArrival()));
                 int days = 0;
                 for(;;) {
-                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate)) && !checkIfSeatsPresent(passengers, prefClass)) {
+                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate)) && checkIfSeatsPresent(passengers, prefClass)) {
                         layover += Math.abs(timeCheck(trip2.getDeparture(), "00:00:00"));
                         layovers[i-1] = layover;
                         dates[i] = travelDate;
