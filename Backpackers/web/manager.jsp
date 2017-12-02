@@ -47,51 +47,93 @@
         <button id="delete" class="ui button" onclick="changeButton('delete')">Delete</button>
     </div>
 
-    <div class="ui form" style="margin: 10px">
+    <div class="ui form" style="margin: 20px">
         <div id="empAdd">
-            <div class="three fields">
-                <div class="field">
-                    <label>SSN</label>
-                    <input type="text" id="ssn">
-                </div>
-                <div class="field">
-                    <label>Name</label>
-                    <input type="text" id="name"/>
-                </div>
-            </div>
-            <div class="three fields">
-                <div class="field">
-                    <label>Start date</label>
-                    <input type="date" id="startDate">
-                </div>
-                <div class="field">
-                    <label>Role</label>
-                    <input type="text" id="role"/>
+
+            <div class="field">
+                <div class="three fields">
+                    <div class="four wide field">
+                        <label>First Name</label>
+                        <input type="text" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="three wide field">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="three wide field">
+                        <label>SSN</label>
+                        <input type="text" id="ssn" placeholder="SSN">
+                    </div>
                 </div>
             </div>
-            <div class="three fields">
-                <div class="field">
-                    <label>Wage</label>
-                    <div class="ui right labeled input">
-                        <label for="wage" class="ui label">$</label>
-                        <input type="text" placeholder="Amount" id="wage">
+
+            <div class="field">
+                <label>Address</label>
+                <div class="ten wide field">
+                    <input type="text" id="address" placeholder="Street">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="two fields">
+                    <div class="three wide field">
+                        <input type="text" id="city" placeholder="City">
+                    </div>
+                    <div class="two wide field">
+                        <input type="text" id="state" placeholder="State">
+                    </div>
+                    <div class="three wide field">
+                        <input type="text" id="country" placeholder="Country">
+                    </div>
+                    <div class="two wide field">
+                        <input type="text" id="zip" placeholder="Zip Code">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="field">
+                <div class="four fields">
+                    <div class="three wide field">
+                        <label>Phone Number</label>
+                        <input type="text" id="phone" placeholder="Phone Number">
+                    </div>
+                    <div class="three wide field">
+                        <div class="field">
+                            <label>Start date</label>
+                            <input id="startDate" type="date">
+                        </div>
+                    </div>
+                    <div class="two wide field">
+                        <div class="field">
+                            <label>Wage</label>
+                            <div class="ui right labeled input">
+                                <label for="wage" class="ui label">$</label>
+                                <input type="text" placeholder="Amount" id="wage">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="two wide field">
+                        <label>Role</label>
+                        <input type="text" id="role"/>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="empDel" style="display: none">
-            <div class="three fields">
-                <div class="field">
-                    <label>SSN</label>
-                    <input type="text" id="ssnDel">
+            <div id="empDel" style="display: none">
+                <div class="three fields">
+                    <div class="field">
+                        <label>SSN</label>
+                        <input type="text" id="ssnDel">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
-        <input id="postButton" class="ui large orange button" type="submit"
-               value="Add"/>
+            <br>
+            <input id="postButton" class="ui large orange button" type="submit"
+                   value="Add"/>
+        </div>
     </div>
 </div>
 
