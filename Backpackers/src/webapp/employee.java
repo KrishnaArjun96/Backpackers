@@ -16,25 +16,27 @@ import java.sql.SQLException;
 @WebServlet(name = "employee")
 public class employee extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
         System.out.println("In servlet");
         String ssn = data.get("ssn").getAsString();
-        String firstName = data.get("first_name").getAsString();
-        String lastName = data.get("last_name").getAsString();
+        String firstName = data.get("firstName").getAsString();
+        String lastName = data.get("lastName").getAsString();
         String address = data.get("address").getAsString();
         String city = data.get("city").getAsString();
         String state = data.get("state").getAsString();
         String country = data.get("country").getAsString();
-        String zipCode = data.get("zipCode").getAsString();
+        String zipCode = data.get("zip").getAsString();
         String phone = data.get("phone").getAsString();
         String startDate = data.get("startDate").getAsString();
+        String role = data.get("role").getAsString();
         int wage = data.get("wage").getAsInt();
+        System.out.println(city);
 
         try {
             ExecQuery.execQuery("INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (" + firstName + "," + lastName + "," + address + "," + city + "," + state + "," + country + "," + zipCode + "," + phone + ")");
             String personId = ExecQuery.execQuery("SELECT PersonId FROM Person WHERE FirstName=\"" + firstName + "\" AND LastName=\"" + lastName + "\" AND Address=\"" + address + "\" AND City=\"" + phone + "\" AND State=\"" + state + "\" AND Country=\"" + country + "\" AND ZipCode=\"" + zipCode + "\" AND Phone=\"" + phone + "\"").getString(1);
-            ExecQuery.execQuery("INSERT INTO Employee (PersonId, SSN, StateDate, Role, WageHourly) VALUES (" + personId + "," + ssn + "," + startDate + ", Employee," + wage + ")");
+            ExecQuery.execQuery("INSERT INTO Employee (PersonId, SSN, StateDate, Role, WageHourly) VALUES (" + personId + "," + ssn + "," + startDate + "," + role + "," + wage + ")");
         } catch (Exception e) {
             JsonObject resultSet = new JsonObject();
             resultSet.addProperty("success", false);
