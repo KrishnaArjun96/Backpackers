@@ -46,10 +46,17 @@ $(function () {
 
         if (cur === 'add' || cur === 'edit') {
             details.ssn = $('#ssn').val();
-            details.name = $('#name').val();
+            details.firstName = $('#firstName').val();
+            details.lastName = $('#lastName').val();
             details.startDate = $('#startDate').val();
             details.role = $('#role').val();
             details.wage = $('#wage').val();
+            details.address = $('#address').val();
+            details.city = $('#city').val();
+            details.state = $('#state').val();
+            details.country = $('#country').val();
+            details.zip = $('#zip').val();
+            details.phone = $('#phone').val();
 
             if(cur === 'edit'){
                 reqType = "PUT";

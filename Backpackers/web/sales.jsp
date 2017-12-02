@@ -44,7 +44,7 @@
 <h1 style="color: #E07B53;margin: 20px">Enter a month and a year.</h1>
 
 <div class="ui grid" style="margin: 20px">
-    <div class="two wide column">
+    <div class="three wide column">
         <select class="ui search selection dropdown" id="search-select">
             <option value="">Month</option>
             <option value="AL">January</option>
@@ -61,7 +61,7 @@
             <option value="HI">December</option>
         </select>
     </div>
-    <div class="two wide column">
+    <div class="three wide column">
         <div class="ui input">
             <input type="text" id="year" placeholder="Year">
         </div>
