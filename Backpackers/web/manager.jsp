@@ -22,10 +22,10 @@
             Employees
         </a>
         <a class="item" href="sales.jsp">
-            <i class="bar chart icon"></i> sales report
+            <i class="bar chart icon"></i> Sales Report
         </a>
         <a class="item" href="flights.jsp">
-            <i class="plane icon"></i> flights
+            <i class="plane icon"></i> Flights
         </a>
         <a class="item" href="reservations.jsp">
             <i class="book icon"></i> Reservations

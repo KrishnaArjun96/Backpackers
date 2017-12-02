@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<script src="manager.js"></script>
+<script src="flights.js"></script>
 <head>
     <title>Flights</title>
 </head>
@@ -23,10 +23,10 @@
             Employees
         </a>
         <a class="item" href="sales.jsp">
-            <i class="bar chart icon"></i> sales report
+            <i class="bar chart icon"></i> Sales Report
         </a>
         <a class="active item">
-            <i class="plane icon"></i> flights
+            <i class="plane icon"></i> Flights
         </a>
         <a class="item" href="reservations.jsp">
             <i class="book icon"></i> Reservations
