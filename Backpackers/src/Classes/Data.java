@@ -79,6 +79,13 @@ public final class Data {
         return legs;
     }
 
+    public static int getLegId(Leg leg) throws SQLException, ClassNotFoundException {
+        ResultSet rs = ExecQuery.execQuery("SELECT LegId FROM Leg WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND Origin='" + leg.getOrigin().getId() + "' AND Destination='" + leg.getDestination().getId() + "'");
+        int legId = 0;
+        while(rs.next()) legId = rs.getInt(1);
+        return legId;
+    }
+
     //THIS METHOD CLEANS THE MASTER LISTS AND ADDS DATA FROM THE DB.
     public static void Refresh() throws SQLException, ClassNotFoundException {
         initData();

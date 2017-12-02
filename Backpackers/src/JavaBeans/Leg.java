@@ -1,5 +1,12 @@
 package JavaBeans;
 
+import Classes.ExecQuery;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Rahul on 11/11/17.
  */

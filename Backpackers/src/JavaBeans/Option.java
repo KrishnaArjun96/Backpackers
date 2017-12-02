@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static Classes.Data.getLegId;
+
 /**
  * Created by Rahul on 11/21/17.
  */
@@ -75,12 +77,14 @@ public class Option {
     public void updateTotalFare(String prefClass) throws SQLException, ClassNotFoundException {
         String[] classArray = {"eco", "bus", "fc"};
         ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
-        int classIndex = classArrayList.indexOf(prefClass);
+        int classIndex = classArrayList.indexOf(prefClass) + 1;
         double totalFare = 0;
         for(Leg leg: this.legs) {
-            System.out.println("SELECT COUNT(*) FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "'");
             ResultSet rs = ExecQuery.execQuery("SELECT COUNT(*) FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "'");
-            int maxRank = rs.getInt(1);
+            int maxRank = 0;
+            while(rs.next()) {
+                maxRank = rs.getInt(1);
+            }
             if(maxRank < classIndex) classIndex = maxRank;
             ResultSet rs_class = ExecQuery.execQuery("SELECT * FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND ClassRank=" + classIndex + " AND IsVisible=1");
             while(rs_class.next()) {

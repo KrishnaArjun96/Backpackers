@@ -1,6 +1,7 @@
 package webapp;
 
 import Classes.Data;
+import Classes.ExecQuery;
 import JavaBeans.*;
 import JavaBeans.Connection;
 import com.google.gson.Gson;
@@ -351,7 +352,7 @@ public class Search extends HttpServlet {
         return getDateString(prevDateComponents);
     }
 
-    public static boolean validateOption(Option option, String date, int passengers, String prefClass) throws ParseException {
+    public static boolean validateOption(Option option, String date, int passengers, String prefClass) throws ParseException, SQLException, ClassNotFoundException {
         if(!isFlightOperational(option.getLegs().get(0).getFlight(), date)) return false;
         String travelDate = date;
         String[] dates = new String[option.getLegs().size()];
@@ -368,7 +369,7 @@ public class Search extends HttpServlet {
                 layover = Math.abs(timeCheck("24:00:00", trip1.getArrival()));
                 int days = 0;
                 for(;;) {
-                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate)) && checkIfSeatsPresent(passengers, prefClass)) {
+                    if(isFlightOperational(trip2.getFlight(), travelDate) && (!date.equals(travelDate)) && checkIfSeatsPresent(trip1, passengers, prefClass, travelDate)) {
                         layover += Math.abs(timeCheck(trip2.getDeparture(), "00:00:00"));
                         layovers[i-1] = layover;
                         dates[i] = travelDate;
@@ -388,11 +389,6 @@ public class Search extends HttpServlet {
         }
         option.setLayovers(layovers);
         option.setDates(dates);
-        return true;
-    }
-
-    public static boolean checkIfSeatsPresent(int passengers, String prefClass) {
-        //@todo
         return true;
     }
 
@@ -418,5 +414,29 @@ public class Search extends HttpServlet {
         int durationHour = secondHour - firstHour;
         int durationMinutes = secondMinute - firstMinute;
         return durationHour*60 + durationMinutes;
+    }
+
+    public static boolean checkIfSeatsPresent(Leg leg, int passengers, String prefClass, String travelDate) throws SQLException, ClassNotFoundException {
+        String[] classArray = {"eco", "bus", "fc"};
+        ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
+        int classIndex = classArrayList.indexOf(prefClass) + 1;
+        ResultSet rs = ExecQuery.execQuery("SELECT COUNT(*) FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "'");
+        int maxRank = 0;
+        while (rs.next()) {
+            maxRank = rs.getInt(1);
+        }
+        if (maxRank < classIndex) classIndex = maxRank;
+        ResultSet rs_class = ExecQuery.execQuery("SELECT Seats FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND ClassRank=" + classIndex + " AND IsVisible=1");
+        int totalSeats = 0;
+        while (rs_class.next()) {
+            totalSeats = rs_class.getInt(1);
+        }
+        ResultSet rs_booked = ExecQuery.execQuery("SELECT COUNT(*) FROM Booking WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND LegId=" + getLegId(leg) + " AND TravelDate='" + travelDate + "'");
+        int totalBooked = 0;
+        while (rs_booked.next()) {
+            totalBooked = rs_booked.getInt(1);
+        }
+        if (passengers > (totalSeats - totalBooked)) return false;
+        return true;
     }
 }
