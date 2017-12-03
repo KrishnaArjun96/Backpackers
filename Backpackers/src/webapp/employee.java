@@ -31,6 +31,8 @@ public class employee extends HttpServlet {
         String startDate = data.get("startDate").getAsString();
         String role = data.get("role").getAsString();
         double wage = data.get("wage").getAsDouble();
+        boolean success = true;
+        String error = "";
         int personId = 0;
         try {
             String exec = "INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (?,?,?,?,?,?,?,?)";
@@ -56,18 +58,23 @@ public class employee extends HttpServlet {
             pstmt.setDouble(5, wage);
             pstmt.executeUpdate();
 
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", true);
-            response.getWriter().write(new Gson().toJson(resultSet));
         } catch (Exception e) {
+            error = e.toString();
             try {
                 if(personId != 0)
                     ExecQuery.execQuery("DELETE FROM Person WHERE Id=" + personId);
             } catch (Exception e1) {}
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", false);
-            response.getWriter().write(new Gson().toJson(resultSet));
+            success = false;
         }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        JsonObject resultSet = new JsonObject();
+        resultSet.addProperty("success", success);
+        if(!success){
+            resultSet.addProperty("error", error);
+        }
+        response.getWriter().write(new Gson().toJson(resultSet));
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

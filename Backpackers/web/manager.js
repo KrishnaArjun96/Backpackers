@@ -75,7 +75,11 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(details),
             success: function(data){
-                console.log(data);
+                if(data.success){
+                    alert("Success: "+details.firstName+" has been "+ cur +"ed.");
+                }else{
+                    alert("Failed: "+data.error);
+                }
             }
         });
 

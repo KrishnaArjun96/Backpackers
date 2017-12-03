@@ -112,9 +112,9 @@ $(function () {
             details.trips = [];
             for (var i = 0; i < source_list.length; i++) {
                 details.trips.push({
-                    source: $('#'+source_list[i]).val(),
-                    destination: $('#'+dst_list[i]).val(),
-                    date: $('#'+time_list[i]).val()
+                    source: $('#' + source_list[i]).val(),
+                    destination: $('#' + dst_list[i]).val(),
+                    date: $('#' + time_list[i]).val()
                 });
             }
         }
@@ -126,9 +126,8 @@ $(function () {
             url: '/Search',
             contentType: 'application/json',
             data: JSON.stringify(details),
-            success: function(data){
+            success: function (data) {
                 console.log(data);
-                window.location.href = "welcome.jsp";
             }
         });
 
