@@ -86,6 +86,14 @@ public final class Data {
         return legId;
     }
 
+    public static ArrayList<Leg> getLegs(Flight flight) {
+        ArrayList<Leg> legs = new ArrayList<>();
+        for(Leg leg: LEGS) {
+            if(leg.getFlight().equals(flight)) legs.add(leg);
+        }
+        return legs;
+    }
+
     //THIS METHOD CLEANS THE MASTER LISTS AND ADDS DATA FROM THE DB.
     public static void Refresh() throws SQLException, ClassNotFoundException {
         initData();
