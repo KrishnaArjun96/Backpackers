@@ -9,7 +9,7 @@ function getFlights() {
                 $('#flightTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
                     var days = [];
-                    for(var j=0;j<7;j++){
+                    for (var j = 0; j < 7; j++) {
                         days[j] = parseInt(data[i].days.charAt(j)) ? "\"large green checkmark icon\"" : "\"large red remove icon\"";
                     }
 
@@ -48,15 +48,35 @@ function getFlights() {
 }
 
 
+function filter() {
+    var input, filter, table, tr;
+    input = document.getElementById("filter");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("flightTable");
+    tr = table.getElementsByTagName("tr");
 
-(function($) {
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 0; i < tr.length; i++) {
+        var src = tr[i].getElementsByTagName("td")[1];
+        var dest = tr[i].getElementsByTagName("td")[2];
+        if (src || dest) {
+            if (src.innerHTML.toUpperCase().indexOf(filter) > -1 || dest.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+(function ($) {
     $.tablesort = function ($table, settings) {
         var self = this;
         this.$table = $table;
         this.$thead = this.$table.find('thead');
         this.settings = $.extend({}, $.tablesort.defaults, settings);
         this.$sortCells = this.$thead.length > 0 ? this.$thead.find('th:not(.no-sort)') : this.$table.find('th:not(.no-sort)');
-        this.$sortCells.on('click.tablesort', function() {
+        this.$sortCells.on('click.tablesort', function () {
             self.sort($(this));
         });
         this.index = null;
@@ -66,7 +86,7 @@ function getFlights() {
 
     $.tablesort.prototype = {
 
-        sort: function(th, direction) {
+        sort: function (th, direction) {
             var start = new Date(),
                 self = this,
                 table = this.$table,
@@ -76,7 +96,7 @@ function getFlights() {
                 sortBy = th.data().sortBy,
                 sortedMap = [];
 
-            var unsortedValues = cells.map(function(idx, cell) {
+            var unsortedValues = cells.map(function (idx, cell) {
                 if (sortBy)
                     return (typeof sortBy === 'function') ? sortBy($(th), $(cell), self) : sortBy;
                 return ($(this).data().sortValue != null ? $(this).data().sortValue : $(this).text());
@@ -102,10 +122,9 @@ function getFlights() {
             self.$table.css("display");
             // Run sorting asynchronously on a timeout to force browser redraw after
             // `tablesort:start` callback. Also avoids locking up the browser too much.
-            setTimeout(function() {
+            setTimeout(function () {
                 self.$sortCells.removeClass(self.settings.asc + ' ' + self.settings.desc);
-                for (var i = 0, length = unsortedValues.length; i < length; i++)
-                {
+                for (var i = 0, length = unsortedValues.length; i < length; i++) {
                     sortedMap.push({
                         index: i,
                         cell: cells[i],
@@ -114,11 +133,11 @@ function getFlights() {
                     });
                 }
 
-                sortedMap.sort(function(a, b) {
+                sortedMap.sort(function (a, b) {
                     return self.settings.compare(a.value, b.value) * direction;
                 });
 
-                $.each(sortedMap, function(i, entry) {
+                $.each(sortedMap, function (i, entry) {
                     rowsContainer.append(entry.row);
                 });
 
@@ -131,13 +150,13 @@ function getFlights() {
             }, unsortedValues.length > 2000 ? 200 : 10);
         },
 
-        log: function(msg) {
-            if(($.tablesort.DEBUG || this.settings.debug) && console && console.log) {
+        log: function (msg) {
+            if (($.tablesort.DEBUG || this.settings.debug) && console && console.log) {
                 console.log('[tablesort] ' + msg);
             }
         },
 
-        destroy: function() {
+        destroy: function () {
             this.$sortCells.off('click.tablesort');
             this.$table.data('tablesort', null);
             return null;
@@ -151,7 +170,7 @@ function getFlights() {
         debug: $.tablesort.DEBUG,
         asc: 'sorted ascending',
         desc: 'sorted descending',
-        compare: function(a, b) {
+        compare: function (a, b) {
             if (a > b) {
                 return 1;
             } else if (a < b) {
@@ -162,12 +181,12 @@ function getFlights() {
         }
     };
 
-    $.fn.tablesort = function(settings) {
+    $.fn.tablesort = function (settings) {
         var table, sortable, previous;
-        return this.each(function() {
+        return this.each(function () {
             table = $(this);
             previous = table.data('tablesort');
-            if(previous) {
+            if (previous) {
                 previous.destroy();
             }
             table.data('tablesort', new $.tablesort(table, settings));

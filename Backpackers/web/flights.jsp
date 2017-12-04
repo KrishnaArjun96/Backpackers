@@ -40,7 +40,11 @@
     </div>
 </div>
 
-<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 50px; width: 90%;">
+<div class="ui input" style="margin: 20px">
+    <input id="filter" onkeyup="filter()" type="text" placeholder="Enter Airport ID...">
+</div>
+
+<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 20px; width: 90%;">
     <thead>
     <tr>
         <th rowspan="2" class="center aligned">Flight</th>
