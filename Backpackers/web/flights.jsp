@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<table class="ui orange celled structured table" id="flightTable" style="margin: 20px; width: 95%;">
+<table class="ui orange celled structured table" id="flightTable" style="margin: 50px; width: 90%;">
     <thead>
     <tr>
         <th rowspan="2" class="center aligned">Flight</th>
@@ -61,38 +61,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>EK 203</td>
-        <td>DXB</td>
-        <td>JFK</td>
-        <td>14:00</td>
-        <td>5</td>
-        <td class="center aligned">
-            <i class="large green checkmark icon"></i>
-        </td>
-        <td></td>
-        <td class="center aligned">
-            <i class="large green checkmark icon"></i>
-        </td>
-        <td class="center aligned">
-            <i class="large green checkmark icon"></i>
-        </td>
-        <td></td>
-        <td class="center aligned">
-            <i class="large green checkmark icon"></i>
-        </td>
-        <td></td>
-    </tr>
     </tbody>
 </table>
-
-
-<script>
-
-
-
-
-</script>
-
 </body>
 </html>
