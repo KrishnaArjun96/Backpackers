@@ -1,17 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  User: krishna
-  Date: 11/7/17
-  Time: 10:05 PM
+  User: varun
+  Date: 12/1/17
+  Time: 12:24 AM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <link rel="stylesheet" href="login.css"/>
 <head>
-    <title>Login</title>
+    <title>Register</title>
 </head>
 <body>
 
@@ -20,7 +21,7 @@
         <div class="column">
             <h2 class="ui image header">
                 <div class="ui orange header">
-                    Log-in to your account
+                    Create a new account
                 </div>
             </h2>
             <form class="ui large form">
@@ -28,7 +29,19 @@
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" id="email" placeholder="Email">
+                            <input type="text" id="firstname" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" id="lastname" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="inbox icon"></i>
+                            <input type="text" id="email" placeholder="Email Address">
                         </div>
                     </div>
                     <div class="field">
@@ -37,43 +50,42 @@
                             <input type="password" id="password" placeholder="Password">
                         </div>
                     </div>
-                    <input class="ui orange button" id="login" value="Login"/>
+                    <input class="ui orange button" id="register" value="Register"/>
                 </div>
 
                 <div class="ui error message"></div>
 
             </form>
 
-            <div class="ui message">
-                New to us? <a href="register.jsp" style="color: #E07B53">Register</a>
-            </div>
         </div>
     </div>
 </div>
+
 
 <script>
 
     $(function() {
 
-        $("#login").on('click', function() {
-
+        $("#register").on('click', function() {
             var cred = {
+                firstname:$('#firstname').val(),
+                lastname:$('#lastname').val(),
                 email: $('#email').val(),
-                password: $('#password').val()
+                password: $('#password').val(),
             };
-
+            console.log(cred);
             $.ajax({
                 type: 'POST',
-                url: '/Login',
+                url: '/Register',
                 contentType: 'application/json',
                 data: JSON.stringify(cred),
                 success: function(data){
-                    if(data.isValid)
-                        window.location.href = "welcome.jsp?firstname="+data.FirstName;
-                    else{
-
-                    }
-
+                    console.log(data.isValid);
+                    window.location.href = "login.jsp";
+                },
+                failure: function (data) {
+                    console.log(data.isValid);
+                    window.location.href = "register.jsp";
                 }
             });
 
@@ -87,3 +99,4 @@
 
 </body>
 </html>
+

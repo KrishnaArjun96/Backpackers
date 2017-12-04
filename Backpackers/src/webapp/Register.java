@@ -9,38 +9,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "Login")
-public class Login extends HttpServlet {
+@WebServlet(name = "Register")
+public class Register extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
-
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-
+        String firstname = data.get("firstname").getAsString();
+        String lastname = data.get("lastname").getAsString();
         String email = data.get("email").getAsString();
         String password = data.get("password").getAsString();
-        Map<String,Object> map = new HashMap<>();
+
+
         try{
-            String exec = "SELECT FirstName FROM Accounts WHERE email=? and password=?";
+            String exec = "INSERT INTO Accounts (Email, FirstName, LastName, Password) VALUES (?,?,?,?)";
             PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
             pstmt.setString(1, email);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                String username = rs.getString(1);
-                map.put("isValid",true);
-                map.put("FirstName",username);
-            }else{
-                map.put("isValid",false);
-            }
+            pstmt.setString(2, firstname);
+            pstmt.setString(3, lastname);
+            pstmt.setString(4, password);
+            pstmt.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("isValid",true);
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(new Gson().toJson(map));
