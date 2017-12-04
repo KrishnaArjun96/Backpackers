@@ -90,7 +90,8 @@ public class employee extends HttpServlet {
         String phone = data.get("phone").getAsString();
         String role = data.get("role").getAsString();
         double wage = data.get("wage").getAsDouble();
-
+        boolean success = true;
+        String error = "";
         int personId = 0;
         try {
             ResultSet rs_employee = ExecQuery.execQuery("SELECT * FROM Employee WHERE SSN='" + ssn + "'");
@@ -170,14 +171,19 @@ public class employee extends HttpServlet {
                 pstmt.setInt(3, personId);
                 pstmt.executeUpdate();
             }
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", true);
-            response.getWriter().write(new Gson().toJson(resultSet));
         } catch (Exception e) {
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", false);
-            response.getWriter().write(new Gson().toJson(resultSet));
+            error = e.toString();
+            success = false;
         }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        JsonObject resultSet = new JsonObject();
+        resultSet.addProperty("success", success);
+        if(!success){
+            resultSet.addProperty("error", error);
+        }
+        response.getWriter().write(new Gson().toJson(resultSet));
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -185,20 +191,38 @@ public class employee extends HttpServlet {
         // data param is only the ssn of the employee
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
         String ssn = data.get("ssn").getAsString();
+        boolean success = true;
+        String error = "";
+        int personId = 0;
 
         try {
-            String personId = ExecQuery.execQuery("SELECT PersonId FROM Employee WHERE SSN='" + ssn + "'").getString(1);
-            ExecQuery.execQuery("DELETE FROM Employee WHERE SSN='" + ssn + "' AND PersonId=" + personId);
-            ExecQuery.execQuery("DELETE FROM Person WHERE Id=" + personId);
+            ResultSet rs_employee = ExecQuery.execQuery("SELECT PersonId FROM Employee WHERE SSN='" + ssn + "'");
+            while (rs_employee.next()) {
+                personId = rs_employee.getInt(1);
+            }
+            String exec = "DELETE FROM Employee WHERE SSN=? AND PersonId=?";
+            PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+            pstmt.setString(1, ssn);
+            pstmt.setInt(2, personId);
+            pstmt.executeUpdate();
+            exec = "DELETE FROM Person WHERE Id=?";
+            pstmt = ExecQuery.insertIntoTable(exec);
+            pstmt.setInt(1, personId);
+            pstmt.executeUpdate();
 
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", true);
-            response.getWriter().write(new Gson().toJson(resultSet));
         } catch (Exception e) {
-            JsonObject resultSet = new JsonObject();
-            resultSet.addProperty("success", false);
-            response.getWriter().write(new Gson().toJson(resultSet));
+            error = e.toString();
+            success = false;
         }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        JsonObject resultSet = new JsonObject();
+        resultSet.addProperty("success", success);
+        if(!success){
+            resultSet.addProperty("error", error);
+        }
+        response.getWriter().write(new Gson().toJson(resultSet));
     }
 
 }
