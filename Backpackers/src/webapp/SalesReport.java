@@ -26,8 +26,6 @@ public class SalesReport  extends HttpServlet {
         String year = data.get("year").getAsString();
         String date = month.concat(" ").concat(year);
         try {
-            ExecQuery.execQuery("IF EXISTS(DROP VIEW sales_report)");
-            ExecQuery.execQuery("CREATE VIEW sales_report AS SELECT ResrNo AS 'Reservation #', concat(MONTH(BookingDate), \' \', YEAR(BookingDate)) AS 'Date', (BookingFee + Fare) AS 'Sale', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId) AS 'Representative' FROM Reservation;");
             ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Date=\"" + date + "\"");
             JsonArray resultSet = new JsonArray();
             while(rs_sales.next()) {
