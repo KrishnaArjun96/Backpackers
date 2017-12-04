@@ -40,16 +40,28 @@
     </div>
 </div>
 
-<div style="margin: 20px">
-    <div class="ui buttons" name="type">
-        <button id="all" class="ui orange button" onclick="changeButton('all')">All</button>
-        <button id="ma" class="ui button" onclick="changeButton('ma')">Most Active</button>
-        <button id="airport" class="ui button" onclick="changeButton('airport')">Airport</button>
-        <button id="status" class="ui button" onclick="changeButton('status')">Status</button>
-    </div>
-</div>
-
-
-
+<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 50px; width: 90%;">
+    <thead>
+    <tr>
+        <th rowspan="2" class="center aligned">Flight</th>
+        <th rowspan="2" class="center aligned">Source</th>
+        <th rowspan="2" class="center aligned">Destination</th>
+        <th rowspan="2" class="center aligned">Duration</th>
+        <th rowspan="2" class="center aligned">Operating days</th>
+        <th colspan="7" class="center aligned">Days</th>
+    </tr>
+    <tr>
+        <th class="center aligned">Monday</th>
+        <th class="center aligned">Tuesday</th>
+        <th class="center aligned">Wednesday</th>
+        <th class="center aligned">Thursday</th>
+        <th class="center aligned">Friday</th>
+        <th class="center aligned">Saturday</th>
+        <th class="center aligned">Sunday</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 </body>
 </html>
