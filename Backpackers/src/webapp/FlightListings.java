@@ -57,9 +57,7 @@ public class FlightListings extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(flights));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
