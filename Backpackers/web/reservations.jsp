@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<script src="manager.js"></script>
+<script src="reservations.js"></script>
 <head>
     <title>Flights</title>
 </head>
@@ -42,11 +42,40 @@
 
 <div style="margin: 20px">
     <div class="ui buttons" name="type">
-        <button id="fno" class="ui orange button" onclick="changeButton('all')">Flight Number</button>
-        <button id="cn" class="ui button" onclick="changeButton('cn')">Customer Name</button>
-        <button id="cof" class="ui button" onclick="changeButton('cof')">Customers On Flight</button>
+        <button id="flightNo" class="ui orange button" onclick="changeButton('flightNo')">Flight Number</button>
+        <button id="customerName" class="ui button" onclick="changeButton('customerName')">Customer Name</button>
+        <button id="customerOnFlight" class="ui button" onclick="changeButton('customerOnFlight')">Customers On Flight</button>
     </div>
 </div>
+
+<div class="ui form" style="margin: 20px" id="fl">
+    <div class="fields">
+        <div class="field">
+            <label>Flight Number</label>
+            <input type="text" placeholder="Flight Number" id="flightNoInput">
+        </div>
+        <div class="field">
+            <label>Date</label>
+            <input type="date" id="date" id="date">
+        </div>
+        <div class="field">
+            <button class="ui orange button" id="flightNoButton" style="position: relative; top: 20px;">Go</button>
+        </div>
+    </div>
+</div>
+
+<div class="ui form" style="margin: 20px; display: none" id="cus" >
+    <div class="fields">
+        <div class="field">
+            <label>Customer Name</label>
+            <input type="text" placeholder="Customer Name" id="name">
+        </div>
+        <div class="field">
+            <button class="ui orange button" id="cusNameButton" style="position: relative; top: 20px;">Go</button>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
