@@ -31,4 +31,13 @@
         <url-pattern>/employee</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>flights</servlet-name>
+        <servlet-class>webapp.FlightListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flights</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
 </web-app>

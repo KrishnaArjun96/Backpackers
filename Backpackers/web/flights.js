@@ -1,5 +1,7 @@
 var cur = 'all';
 
+$(window).on('load', getFlights());
+
 function changeButton(changeTo) {
 
     if (cur != changeTo) {
@@ -7,23 +9,15 @@ function changeButton(changeTo) {
         document.getElementById(changeTo).className = "ui orange button";
         cur = changeTo;
     }
+}
 
-    // if (changeTo === "all") {
-    //     document.getElementById('empAdd').style.display = "block";
-    //     document.getElementById('empDel').style.display = "none";
-    //     document.getElementById('postButton').value = "Add";
-    //     cur = "all";
-    // } else if (changeTo === "ma") {
-    //     document.getElementById('empAdd').style.display = "block";
-    //     document.getElementById('empDel').style.display = "none";
-    //     document.getElementById('postButton').value = "Edit";
-    //     cur = "ma";
-    // } else if (changeTo === 'airport') {
-    //     document.getElementById('empAdd').style.display = "none";
-    //     document.getElementById('empDel').style.display = "block";
-    //     document.getElementById('postButton').value = "Delete";
-    //     cur = "airport";
-    // } else {
-    //
-    // }
+function getFlights() {
+    console.log("aking ajaj call");
+    $.ajax({
+        type: 'GET',
+        url: "/flights",
+        success: function (data) {
+            console.log(data);
+        }
+    });
 }

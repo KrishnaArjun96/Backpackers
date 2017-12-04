@@ -30,6 +30,7 @@ public class FlightListings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JsonArray flights = new JsonArray();
         try {
+            System.out.println("HERE");
             ResultSet rs_flights = ExecQuery.execQuery("SELECT * FROM Flight");
             while(rs_flights.next()) {
                 Flight flight = new Flight(findAirline(rs_flights.getString(2)), rs_flights.getString(1), rs_flights.getInt(3), getDays(rs_flights.getString(4)));
