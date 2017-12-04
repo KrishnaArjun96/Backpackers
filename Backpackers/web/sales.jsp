@@ -43,34 +43,35 @@
 
 <h1 style="color: #E07B53;margin: 20px">Enter a month and a year.</h1>
 
-<div class="ui grid" style="margin: 20px">
-    <div class="three wide column">
-        <select class="ui search selection dropdown" id="search-select">
-            <option value="">Month</option>
-            <option value="AL">January</option>
-            <option value="AK">February</option>
-            <option value="AZ">March</option>
-            <option value="AR">April</option>
-            <option value="CA">May</option>
-            <option value="CO">June</option>
-            <option value="CT">July</option>
-            <option value="DE">August</option>
-            <option value="DC">September</option>
-            <option value="FL">October</option>
-            <option value="GA">November</option>
-            <option value="HI">December</option>
-        </select>
-    </div>
-    <div class="three wide column">
-        <div class="ui input">
-            <input type="text" id="year" placeholder="Year">
+<div class="ui form" style="margin: 20px">
+    <div class="field">
+        <div class="three fields">
+            <div class="three wide field">
+                <select class="ui search selection dropdown" id="search-select">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="two wide field">
+                <input type="text" id="year" placeholder="Year">
+            </div>
+            <div class="one wide field">
+                <input id="goButton" class="ui medium orange button" type="submit"
+                       value="Go"/>
+            </div>
         </div>
     </div>
-    <div class="one wide column">
-        <button class="ui orange button" id="goButton">Go</button>
-    </div>
 </div>
-
 
 <script>
     $('.ui.orange.tiered.menu')
@@ -91,7 +92,7 @@
             var year = $('#year').val();
             $.ajax({
                 type: 'GET',
-                url: '/salesReport?month='+month+'&year='+year,
+                url: '/salesReport?month=' + month + '&year=' + year,
                 success: function (data) {
                     console.log(data);
                 }
