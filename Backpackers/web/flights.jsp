@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<table class="ui orange celled structured table" id="flightTable" style="margin: 50px; width: 90%;">
+<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 50px; width: 90%;">
     <thead>
     <tr>
         <th rowspan="2" class="center aligned">Flight</th>
