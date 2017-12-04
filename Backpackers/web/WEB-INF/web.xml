@@ -40,4 +40,13 @@
         <url-pattern>/flights</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>revenue</servlet-name>
+        <servlet-class>webapp.Revenue</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>revenue</servlet-name>
+        <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+
 </web-app>
