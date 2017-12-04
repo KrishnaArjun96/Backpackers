@@ -22,11 +22,11 @@ import java.sql.SQLException;
 public class SalesReport  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String month = data.get("month").getAsString();
-        String year = data.get("year").getAsString();
+        String month = request.getParameter("month");
+        String year = request.getParameter("year");
         String date = month.concat(" ").concat(year);
         try {
-            ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Date=\"" + date + "\"");
+            ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Month=" + month + " AND Year=" + year);
             JsonArray resultSet = new JsonArray();
             while(rs_sales.next()) {
                 String bookingDate = rs_sales.getString(1);

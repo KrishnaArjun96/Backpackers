@@ -92,7 +92,7 @@
             var year = $('#year').val();
             $.ajax({
                 type: 'GET',
-                url: '/salesReport?month=' + month + '&year=' + year,
+                url: '/sales?month=' + month + '&year=' + year,
                 success: function (data) {
                     console.log(data);
                 }
