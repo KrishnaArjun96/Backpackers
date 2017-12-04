@@ -28,6 +28,13 @@ import static Classes.Data.getLegs;
 @WebServlet(name = "flightListing")
 public class FlightListings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            Data.Refresh();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         JsonArray flights = new JsonArray();
         try {
             System.out.println("HERE");
