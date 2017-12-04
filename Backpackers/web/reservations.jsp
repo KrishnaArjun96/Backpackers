@@ -12,7 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 <script src="reservations.js"></script>
 <head>
-    <title>Flights</title>
+    <title>Reservations</title>
 </head>
 <body>
 

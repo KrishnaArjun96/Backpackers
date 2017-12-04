@@ -10,8 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+<script src="revenue.js"></script>
 <head>
-    <title>Flights</title>
+    <title>Revenue</title>
 </head>
 <body>
 
@@ -39,12 +40,24 @@
     </div>
 </div>
 
-<div style="margin: 20px">
-    <div class="ui buttons" name="type">
-        <button id="flight" class="ui orange button" onclick="changeButton('flight')">Flight</button>
-        <button id="city" class="ui button" onclick="changeButton('city')">City</button>
-        <button id="airport" class="ui button" onclick="changeButton('airport')">Customer</button>
-        <button id="cr" class="ui button" onclick="changeButton('cr')">Customer Representative</button>
+<div class="ui form" style="margin: 20px" id="fl">
+    <div class="fields">
+        <div class="three wide field">
+            <label>Choose Type:</label>
+            <select class="ui search selection dropdown" id="search-select">
+                <option value="flightNo">Flight Number</option>
+                <option value="city">City</option>
+                <option value="customer">Customer</option>
+                <option value="customerRep">Customer Representative</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Enter Value:</label>
+            <input type="text" id="value">
+        </div>
+        <div class="field">
+            <button class="ui orange button" id="goButton" style="position: relative; top: 20px;">Go</button>
+        </div>
     </div>
 </div>
 
