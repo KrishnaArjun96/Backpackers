@@ -93,19 +93,22 @@ public final class Data {
         return legs;
     }
 
+    public static ArrayList<Leg> findLegs(String origin, String destination, String flight) {
+        ArrayList<Leg> legs = new ArrayList<>();
+        for(Leg leg: LEGS) {
+            String legFlight = leg.getFlight().getAirline().getId().concat(" ").concat(leg.getFlight().getFlightNo());
+            if(leg.getOrigin().getId().equals(origin) && leg.getDestination().getId().equals(destination) && legFlight.equals(flight)) {
+                legs.add(leg);
+            }
+        }
+        return legs;
+    }
+
     public static int getLegId(Leg leg) throws SQLException, ClassNotFoundException {
         ResultSet rs = ExecQuery.execQuery("SELECT LegId FROM Leg WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND Origin='" + leg.getOrigin().getId() + "' AND Destination='" + leg.getDestination().getId() + "'");
         int legId = 0;
         while(rs.next()) legId = rs.getInt(1);
         return legId;
-    }
-
-    public static ArrayList<Leg> getLegs(Flight flight) {
-        ArrayList<Leg> legs = new ArrayList<>();
-        for(Leg leg: LEGS) {
-            if(leg.getFlight().equals(flight)) legs.add(leg);
-        }
-        return legs;
     }
 
     //THIS METHOD CLEANS THE MASTER LISTS AND ADDS DATA FROM THE DB.
