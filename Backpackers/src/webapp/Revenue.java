@@ -80,24 +80,20 @@ public class Revenue extends HttpServlet {
                     resultSet.addProperty("revenue", revenue);
                     jarray.add(resultSet);
                 }
-                /*ResultSet rs_max = ExecQuery.execQuery("SELECT Customer, MAX(Revenue) FROM revenue_customer");
+                ResultSet rs_max = ExecQuery.execQuery("SELECT Customer, MAX(Revenue) FROM revenue_customer");
                 double max_revenue = 0;
                 String customer_max = "";
                 while(rs_max.next()) {
                     customer_max = rs_max.getString(1);
                     max_revenue = rs_max.getDouble(2);
                 }
-                JsonObject max_customer = new JsonObject();
-                max_customer.addProperty("max_customer_name", customer_max);
-                max_customer.addProperty("max_customer_revenue", max_revenue);
                 JsonObject result = new JsonObject();
-
-                result.addProperty("results", jarray.toString());
-                result.addProperty("max", max_customer.toString());
-                response.getWriter().write(result.toString());*/
+                result.addProperty("name", customer_max);
+                result.addProperty("value", max_revenue);
+                result.addProperty("table", jarray.toString());
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-                response.getWriter().write(new Gson().toJson(jarray));
+                response.getWriter().write(new Gson().toJson(result));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
@@ -118,24 +114,32 @@ public class Revenue extends HttpServlet {
                     resultSet.addProperty("revenue", revenue);
                     jarray.add(resultSet);
                 }
-                /*ResultSet rs_max = ExecQuery.execQuery("SELECT Customer, MAX(Revenue) FROM Rep_Revenue");
+                ResultSet rs_max = ExecQuery.execQuery("SELECT Representative, SSN, MAX(Revenue) FROM Rep_Revenue");
                 double max_revenue = 0;
                 String rep_max = "";
                 while(rs_max.next()) {
                     rep_max = rs_max.getString(1);
                     max_revenue = rs_max.getDouble(2);
                 }
-                JsonObject max_customer = new JsonObject();
+                /*JsonObject max_customer = new JsonObject();
                 max_customer.addProperty("max_rep_name", rep_max);
                 max_customer.addProperty("max_rep_revenue", max_revenue);
                 JsonObject result = new JsonObject();
 
                 result.addProperty("results", jarray.toString());
                 result.addProperty("max", max_customer.toString());
-                response.getWriter().write(result.toString());*/
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-                response.getWriter().write(new Gson().toJson(jarray));
+                response.getWriter().write(result.toString());*/
+
+                JsonObject result = new JsonObject();
+                result.addProperty("name", rep_max);
+                result.addProperty("value", max_revenue);
+                result.addProperty("table", jarray.toString());
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+                response.getWriter().write(new Gson().toJson(result));
+
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
