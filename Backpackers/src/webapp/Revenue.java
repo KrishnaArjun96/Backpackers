@@ -113,7 +113,7 @@ public class Revenue extends HttpServlet {
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
                     String rep = rs.getString(1);
-                    double revenue = rs.getDouble(2);
+                    double revenue = rs.getDouble(3);
                     JsonObject resultSet = new JsonObject();
                     resultSet.addProperty("rep", rep);
                     resultSet.addProperty("revenue", revenue);
