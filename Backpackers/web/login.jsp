@@ -40,9 +40,10 @@
                     <input class="ui orange button" id="login" value="Login"/>
                 </div>
 
-                <div class="ui error message"></div>
 
             </form>
+
+                <div class="ui error message" id="errorValue" style="display:none"> </div>
 
             <div class="ui message">
                 New to us? <a href="register.jsp" style="color: #E07B53">Register</a>
@@ -69,9 +70,11 @@
                 data: JSON.stringify(cred),
                 success: function(data){
                     if(data.isValid)
-                        window.location.href = "welcome.jsp?firstname="+data.FirstName;
+                        window.location.href = "welcome.jsp?firstname="+data.user;
                     else{
-
+                        var errorDiv = document.getElementById('errorValue');
+                        errorDiv.style.display ="block";
+                        errorDiv.innerHTML = data.errorValue;
                     }
 
                 }
