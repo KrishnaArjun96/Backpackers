@@ -88,7 +88,7 @@ public class ReservationListings extends HttpServlet {
             try {
                 String flight = request.getParameter("flightNo");
                 String date = request.getParameter("date");
-                String exec = "SELECT * FROM customer_reservations WHERE Flight='" + flight + "' AND TravelDate='"+ date + "' ORDER BY LegId, Passenger;";
+                String exec = "SELECT * FROM customer_reservations WHERE Flight='" + flight + "' AND TravelDate='"+ date + "' ORDER BY BookingId, Passenger;";
                 System.out.println(exec);
                 ResultSet rs = ExecQuery.execQuery(exec);
                 JsonArray jarray = new JsonArray();

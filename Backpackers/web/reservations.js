@@ -7,13 +7,22 @@ function changeButton(changeTo) {
         document.getElementById(changeTo).className = "ui orange button";
     }
 
-    if (changeTo === "flightNo" || changeTo === "customerOnFlight") {
+    if (changeTo === "flightNo") {
         document.getElementById('fl').style.display = "block";
-        document.getElementById('cus').style.display = "none";
-        cur = (changeTo === "flightNo" ) ? "flightNo" : "customerOnFlight";
-    } else {
+        document.getElementById('cn').style.display = "none";
+        document.getElementById('cof').style.display = "none";
+        cur = "flightNo";
+    }
+    else if (changeTo === "customerOnFlight") {
         document.getElementById('fl').style.display = "none";
-        document.getElementById('cus').style.display = "block";
+        document.getElementById('cn').style.display = "none";
+        document.getElementById('cof').style.display = "block";
+        cur = "customerOnFlight";
+    }
+    else {
+        document.getElementById('fl').style.display = "none";
+        document.getElementById('cn').style.display = "block";
+        document.getElementById('cof').style.display = "none";
         cur = "customerName";
     }
 }
@@ -37,7 +46,16 @@ $(function () {
             type: 'GET',
             url: '/reservations?name=' + $('#name').val() + '&type=' + cur,
             success: function (data) {
-                console.log("HERE"+data);
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#customerTable tbody').append('<tr>\n' +
+                            '        <td class="center aligned">' + data[i].resrNo + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].flight + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].rep + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].bookingDate + '</td>\n' +
+                            '    </tr>');
+                    }
+                });
             }
         });
     });
@@ -45,9 +63,8 @@ $(function () {
     $("#flightNoButton").on('click', function () {
         $.ajax({
             type: 'GET',
-            url: '/reservations?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
+            url: '/reservations?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#datefl').val() + '&type=' + cur,
             success: function (data) {
-                console.log(typeof (data));
                 $(document).ready(function () {
                     for (var i = 0; i < data.length; i++) {
                         $('#flightTable tbody').append('<tr>\n' +
@@ -55,6 +72,27 @@ $(function () {
                             '        <td class="center aligned">' + data[i].bookingId + '</td>\n' +
                             '        <td class="center aligned">' + data[i].bookingDate + '</td>\n' +
                             '        <td class="center aligned">' + data[i].rep + '</td>\n' +
+                            '    </tr>');
+                    }
+                });
+            }
+        });
+    });
+
+    $("#cusOnFlButton").on('click', function () {
+        console.log($('#cusFlightNoInput').val());
+        $.ajax({
+            type: 'GET',
+            url: '/reservations?flightNo=' + $('#cusFlightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
+            success: function (data) {
+
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#cusFlightTable tbody').append('<tr>\n' +
+                            '        <td class="center aligned">' + data[i].resrNo + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].passenger + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].travelDate + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].travelClass + '</td>\n' +
                             '    </tr>');
                     }
                 });

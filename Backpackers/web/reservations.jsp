@@ -49,46 +49,91 @@
     </div>
 </div>
 
-<div class="ui form" style="margin: 20px" id="fl">
-    <div class="fields">
-        <div class="field">
-            <label>Flight Number</label>
-            <input type="text" placeholder="Flight Number" id="flightNoInput">
-        </div>
-        <div class="field">
-            <label>Date</label>
-            <input type="date" id="date" id="date">
-        </div>
-        <div class="field">
-            <button class="ui orange button" id="flightNoButton" style="position: relative; top: 20px;">Go</button>
-        </div>
-    </div>
-</div>
-
-<div class="ui form" style="margin: 20px; display: none" id="cus">
-    <div class="fields">
-        <div class="field">
-            <label>Customer Name</label>
-            <input type="text" placeholder="Customer Name" id="name">
-        </div>
-        <div class="field">
-            <button class="ui orange button" id="cusNameButton" style="position: relative; top: 20px;">Go</button>
+<div id="fl" style="margin: 20px">
+    <div class="ui form">
+        <div class="fields">
+            <div class="field">
+                <label>Flight Number</label>
+                <input type="text" placeholder="Flight Number" id="flightNoInput">
+            </div>
+            <div class="field">
+                <label>Date</label>
+                <input type="date" id="datefl">
+            </div>
+            <div class="field">
+                <button class="ui orange button" id="flightNoButton" style="position: relative; top: 20px;">Go</button>
+            </div>
         </div>
     </div>
+    <table class="ui sortable orange celled structured table" id="flightTable" style="margin: 20px; width: 90%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Reservation Number</th>
+            <th rowspan="2" class="center aligned">Booking ID</th>
+            <th rowspan="2" class="center aligned">Booking Date</th>
+            <th rowspan="2" class="center aligned">Customer Representative</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 
-<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 20px; width: 90%;">
-    <thead>
-    <tr>
-        <th rowspan="2" class="center aligned">Reservation Number</th>
-        <th rowspan="2" class="center aligned">Booking ID</th>
-        <th rowspan="2" class="center aligned">Booking Date</th>
-        <th rowspan="2" class="center aligned">Customer Representative</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div id="cn" style="margin: 20px; display: none">
+    <div class="ui form">
+        <div class="fields">
+            <div class="field">
+                <label>Customer Name</label>
+                <input type="text" placeholder="Customer Name" id="name">
+            </div>
+            <div class="field">
+                <button class="ui orange button" id="cusNameButton" style="position: relative; top: 20px;">Go</button>
+            </div>
+        </div>
+    </div>
+    <table class="ui sortable orange celled structured table" id="customerTable" style="margin: 20px; width: 90%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Reservation Number</th>
+            <th rowspan="2" class="center aligned">Flight</th>
+            <th rowspan="2" class="center aligned">Customer Representative</th>
+            <th rowspan="2" class="center aligned">Booking Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div id="cof" style="margin: 20px;  display: none;">
+    <div class="ui form">
+        <div class="fields">
+            <div class="field">
+                <label>Flight Number</label>
+                <input type="text" placeholder="Flight Number" id="cusFlightNoInput">
+            </div>
+            <div class="field">
+                <label>Date</label>
+                <input type="date" id="date" id="date">
+            </div>
+            <div class="field">
+                <button class="ui orange button" id="cusOnFlButton" style="position: relative; top: 20px;">Go</button>
+            </div>
+        </div>
+    </div>
+    <table class="ui sortable orange celled structured table" id="cusFlightTable" style="margin: 20px; width: 90%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Reservation Number</th>
+            <th rowspan="2" class="center aligned">Passenger</th>
+            <th rowspan="2" class="center aligned">Travel Date</th>
+            <th rowspan="2" class="center aligned">Travel Class</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
 
 </body>
