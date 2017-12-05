@@ -22,28 +22,43 @@ public class Register extends HttpServlet {
         String lastname = data.get("lastname").getAsString();
         String email = data.get("email").getAsString();
         String password = data.get("password").getAsString();
-
-
-        try{
-            String exec = "INSERT INTO Accounts (Email, FirstName, LastName, Password) VALUES (?,?,?,?)";
-            PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
-            pstmt.setString(1, email);
-            pstmt.setString(2, firstname);
-            pstmt.setString(3, lastname);
-            pstmt.setString(4, password);
-            pstmt.executeUpdate();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        boolean containsError=false;
+        String errorValue = null;
         Map<String,Object> map = new HashMap<>();
-        map.put("isValid",true);
+        String username = null;
+        if(email==null||email.length()==0||password==null||password.length()==0||
+                firstname==null||firstname.length()==0||lastname==null||lastname.length()==0) {
+            containsError = true;
+            errorValue = "One or more fields are missing.";
+        }else{
+            try{
+                String exec = "INSERT INTO Accounts (Email, FirstName, LastName, Password) VALUES (?,?,?,?)";
+                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                pstmt.setString(1, email);
+                pstmt.setString(2, firstname);
+                pstmt.setString(3, lastname);
+                pstmt.setString(4, password);
+                pstmt.executeUpdate();
+
+            }catch (SQLException e) {
+                containsError = true;
+                errorValue = e.toString();
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                containsError = true;
+                errorValue = e.toString();
+                e.printStackTrace();
+            }
+        }
+        if(containsError==true){
+            map.put("isValid",false);
+            map.put("errorValue",errorValue);
+        }else{
+            map.put("isValid",true);
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(new Gson().toJson(map));
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {

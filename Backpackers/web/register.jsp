@@ -24,39 +24,40 @@
                     Create a new account
                 </div>
             </h2>
-            <form class="ui large form">
-                <div class="ui stacked secondary  segment">
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" id="firstname" placeholder="First Name">
+            <div class="ui form">
+                <form class="ui large form">
+                    <div class="ui stacked secondary  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" id="firstname" placeholder="First Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" id="lastname" placeholder="Last Name">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" id="lastname" placeholder="Last Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="inbox icon"></i>
-                            <input type="text" id="email" placeholder="Email Address">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="inbox icon"></i>
+                                <input type="text" id="email" placeholder="Email Address">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="password" id="password" placeholder="Password">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" id="password" placeholder="Password">
+                            </div>
                         </div>
+                        <div class="ui orange button" id="register" value="Register">Register</div>
                     </div>
-                    <input class="ui orange button" id="register" value="Register"/>
-                </div>
 
-                <div class="ui error message"></div>
+                    <div class="ui error message" id="errorValue" style="display:none"> </div>
 
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -80,13 +81,15 @@
                 contentType: 'application/json',
                 data: JSON.stringify(cred),
                 success: function(data){
-                    console.log(data.isValid);
-                    window.location.href = "login.jsp";
+                    if(data.isValid)
+                        window.location.href = "login.jsp";
+                    else{
+                        var errorDiv = document.getElementById('errorValue');
+                        errorDiv.style.display ="block";
+                        errorDiv.innerHTML = data.errorValue;
+                    }
+
                 },
-                failure: function (data) {
-                    console.log(data.isValid);
-                    window.location.href = "register.jsp";
-                }
             });
 
         });

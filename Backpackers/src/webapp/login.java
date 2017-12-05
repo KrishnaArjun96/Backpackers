@@ -45,7 +45,6 @@ public class Login extends HttpServlet {
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     username = rs.getString(1);
-                    System.out.println(username);
                 }else{
                     containsError = true;
                     errorValue = "Email or Password incorrect";
@@ -60,9 +59,6 @@ public class Login extends HttpServlet {
             }
         }
         if(containsError==true){
-            user = new UserAccount();
-            user.setEmail(email);
-            user.setPassword(password);
             map.put("FirstName",username);
             map.put("isValid",false);
             map.put("errorValue",errorValue);

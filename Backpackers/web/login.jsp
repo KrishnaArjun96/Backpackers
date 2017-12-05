@@ -70,7 +70,7 @@
                 data: JSON.stringify(cred),
                 success: function(data){
                     if(data.isValid)
-                        window.location.href = "welcome.jsp?firstname="+data.user;
+                        window.location.href = "welcome.jsp?firstname="+data.FirstName;
                     else{
                         var errorDiv = document.getElementById('errorValue');
                         errorDiv.style.display ="block";
