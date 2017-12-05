@@ -29,12 +29,12 @@ public class SalesReport  extends HttpServlet {
             ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Month=" + month + " AND Year=" + year);
             JsonArray resultSet = new JsonArray();
             while(rs_sales.next()) {
-                String bookingDate = rs_sales.getString(1);
-                String sale = rs_sales.getString(2);
-                String rep = rs_sales.getString(3);
+                String resr = rs_sales.getString(1);
+                String sale = rs_sales.getString(4);
+                String rep = rs_sales.getString(5);
 
                 JsonObject json = new JsonObject();
-                json.addProperty("bookingDate", bookingDate);
+                json.addProperty("resr", resr);
                 json.addProperty("sale", sale);
                 json.addProperty("rep", rep);
                 resultSet.add(json);
