@@ -46,6 +46,8 @@ public class SalesReport  extends HttpServlet {
         } catch (Exception e) {
             JsonObject resultSet = new JsonObject();
             resultSet.addProperty("success", false);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
     }

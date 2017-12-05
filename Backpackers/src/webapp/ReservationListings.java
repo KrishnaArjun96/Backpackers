@@ -34,8 +34,8 @@ public class ReservationListings extends HttpServlet {
                     String travelDate = rs.getString(5);
                     String rep = rs.getString(6);
                     JsonObject resultSet = new JsonObject();
-                    resultSet.addProperty("resr", bookingId);
-                    resultSet.addProperty("bookingId", resr);
+                    resultSet.addProperty("resr", resr);
+                    resultSet.addProperty("bookingId", bookingId);
                     resultSet.addProperty("bookingDate", bookingDate);
                     resultSet.addProperty("travelDate", travelDate);
                     resultSet.addProperty("rep", rep);
@@ -88,19 +88,17 @@ public class ReservationListings extends HttpServlet {
             try {
                 String flight = request.getParameter("flightNo");
                 String date = request.getParameter("date");
-                String exec = "SELECT * FROM customer_reservations WHERE Flight='" + flight + "' AND TravelDate='"+ date + "' ORDER BY BookingId, Passenger;";
+                String exec = "SELECT DISTINCT Reservation, Passenger, TravelDate, BookingDate FROM customer_reservations WHERE Flight='" + flight + "' AND TravelDate='"+ date + "' ORDER BY BookingId, Passenger;";
                 System.out.println(exec);
                 ResultSet rs = ExecQuery.execQuery(exec);
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
-                    String resrNo = rs.getString(3);
-                    String legId = rs.getString(4);
-                    String travelDate = rs.getString(5);
-                    String passenger = rs.getString(8);
-                    String travelClass = rs.getString(9);
+                    String resrNo = rs.getString(1);
+                    String travelDate = rs.getString(3);
+                    String passenger = rs.getString(4);
+                    String travelClass = rs.getString(2);
                     JsonObject resultSet = new JsonObject();
                     resultSet.addProperty("resrNo", resrNo);
-                    resultSet.addProperty("booking", legId);
                     resultSet.addProperty("travelDate", travelDate);
                     resultSet.addProperty("travelClass", travelClass);
                     resultSet.addProperty("passenger", passenger);
