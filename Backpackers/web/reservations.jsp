@@ -44,7 +44,8 @@
     <div class="ui buttons" name="type">
         <button id="flightNo" class="ui orange button" onclick="changeButton('flightNo')">Flight Number</button>
         <button id="customerName" class="ui button" onclick="changeButton('customerName')">Customer Name</button>
-        <button id="customerOnFlight" class="ui button" onclick="changeButton('customerOnFlight')">Customers On Flight</button>
+        <button id="customerOnFlight" class="ui button" onclick="changeButton('customerOnFlight')">Customers On Flight
+        </button>
     </div>
 </div>
 
@@ -64,7 +65,7 @@
     </div>
 </div>
 
-<div class="ui form" style="margin: 20px; display: none" id="cus" >
+<div class="ui form" style="margin: 20px; display: none" id="cus">
     <div class="fields">
         <div class="field">
             <label>Customer Name</label>
@@ -75,6 +76,19 @@
         </div>
     </div>
 </div>
+
+<table class="ui sortable orange celled structured table" id="flightTable" style="margin: 20px; width: 90%;">
+    <thead>
+    <tr>
+        <th rowspan="2" class="center aligned">Reservation Number</th>
+        <th rowspan="2" class="center aligned">Booking ID</th>
+        <th rowspan="2" class="center aligned">Booking Date</th>
+        <th rowspan="2" class="center aligned">Customer Representative</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
 
 </body>

@@ -47,6 +47,9 @@ $(function () {
             type: 'GET',
             url: '/reservations?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
             success: function (data) {
+
+
+
                 console.log(data)
             }
         });
