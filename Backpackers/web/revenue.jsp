@@ -84,6 +84,7 @@
 </div>
 
 <div id="cus" style="display: none">
+    <h2 id="cusId" style="margin: 20px"></h2>
     <table class="ui sortable orange celled structured table" id="cusTable" style="margin: 20px; width: 40%;">
         <thead>
         <tr>
@@ -97,6 +98,7 @@
 </div>
 
 <div id="cusRep" style="display: none">
+    <h2 id="cusRepId" style="margin: 20px"></h2>
     <table class="ui sortable orange celled structured table" id="cusRepTable" style="margin: 20px; width: 40%;">
         <thead>
         <tr>

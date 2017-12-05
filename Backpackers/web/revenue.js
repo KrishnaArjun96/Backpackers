@@ -5,10 +5,8 @@ function getFlights() {
         type: 'GET',
         url: "/revenue?type=flightNo",
         success: function (data) {
-            console.log(data);
             $(document).ready(function () {
                 for (var i = 0; i < data.length; i++) {
-
                     $('#fnoTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].flight + '</td>\n' +
                         '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
@@ -22,7 +20,6 @@ function getFlights() {
         type: 'GET',
         url: "/revenue?type=city",
         success: function (data) {
-            console.log(data);
             $(document).ready(function () {
                 for (var i = 0; i < data.length; i++) {
 
@@ -39,12 +36,13 @@ function getFlights() {
         type: 'GET',
         url: "/revenue?type=customer",
         success: function (data) {
-            console.log(data);
+            document.getElementById('cusId').innerHTML='Max revenue by '+data.name+': $'+data.value;
+            var table = JSON.parse(data.table);
             $(document).ready(function () {
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < table.length; i++) {
                     $('#cusTable tbody').append('<tr>\n' +
-                        '        <td class="center aligned">' + data[i].customerName + '</td>\n' +
-                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned">' + table[i].customerName + '</td>\n' +
+                        '        <td class="center aligned"> $' + table[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
@@ -55,13 +53,13 @@ function getFlights() {
         type: 'GET',
         url: "/revenue?type=customerRep",
         success: function (data) {
-            console.log(data);
+            document.getElementById('cusRepId').innerHTML='Max revenue by '+data.name+': $'+data.value;
+            var table = JSON.parse(data.table);
             $(document).ready(function () {
-                for (var i = 0; i < data.length; i++) {
-
+                for (var i = 0; i < table.length ; i++) {
                     $('#cusRepTable tbody').append('<tr>\n' +
-                        '        <td class="center aligned">' + data[i].rep + '</td>\n' +
-                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned">' + table[i].rep + '</td>\n' +
+                        '        <td class="center aligned"> $' + table[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
