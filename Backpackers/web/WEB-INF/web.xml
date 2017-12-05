@@ -58,4 +58,13 @@
         <url-pattern>/sales</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>reservations</servlet-name>
+        <servlet-class>webapp.ReservationListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reservations</servlet-name>
+        <url-pattern>/reservations</url-pattern>
+    </servlet-mapping>
+
 </web-app>
