@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<script src="manager.js"></script>
+<script src="sales.js"></script>
 <head>
     <title>Sales Report</title>
 </head>
@@ -73,34 +73,18 @@
     </div>
 </div>
 
-<script>
-    $('.ui.orange.tiered.menu')
-        .on('click', '.item', function () {
-            if (!$(this).hasClass('dropdown')) {
-                $(this)
-                    .addClass('active')
-                    .siblings('.item')
-                    .removeClass('active');
-            }
-        });
-    $('#search-select').dropdown();
-
-
-    $(function () {
-        $("#goButton").on('click', function () {
-            var month = $('#search-select').val();
-            var year = $('#year').val();
-            $.ajax({
-                type: 'GET',
-                url: '/sales?month=' + month + '&year=' + year,
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-        });
-    });
-
-</script>
+<table class="ui sortable orange celled structured table" id="salesTable" style="margin: 20px; width: 70%;">
+    <thead>
+    <tr>
+        <th rowspan="2" class="center aligned">Reservation number</th>
+        <th rowspan="2" class="center aligned">Representative</th>
+        <th rowspan="2" class="center aligned">Date</th>
+        <th rowspan="2" class="center aligned">Sale</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
 </body>
 </html>
