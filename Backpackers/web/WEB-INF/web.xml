@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    
+
     <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>webapp.login</servlet-class>
@@ -13,5 +13,58 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>webapp.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>employee</servlet-name>
+        <servlet-class>webapp.employee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>flights</servlet-name>
+        <servlet-class>webapp.FlightListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flights</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>revenue</servlet-name>
+        <servlet-class>webapp.Revenue</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>revenue</servlet-name>
+        <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>sales</servlet-name>
+        <servlet-class>webapp.SalesReport</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sales</servlet-name>
+        <url-pattern>/sales</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>reservations</servlet-name>
+        <servlet-class>webapp.ReservationListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reservations</servlet-name>
+        <url-pattern>/reservations</url-pattern>
+    </servlet-mapping>
 
 </web-app>
