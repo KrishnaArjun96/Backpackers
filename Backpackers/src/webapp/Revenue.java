@@ -119,7 +119,7 @@ public class Revenue extends HttpServlet {
                 String rep_max = "";
                 while(rs_max.next()) {
                     rep_max = rs_max.getString(1);
-                    max_revenue = rs_max.getDouble(2);
+                    max_revenue = rs_max.getDouble(3);
                 }
                 /*JsonObject max_customer = new JsonObject();
                 max_customer.addProperty("max_rep_name", rep_max);
