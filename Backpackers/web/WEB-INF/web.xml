@@ -41,21 +41,30 @@
     </servlet-mapping>
 
     <servlet>
-<<<<<<< Updated upstream
         <servlet-name>revenue</servlet-name>
         <servlet-class>webapp.Revenue</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>revenue</servlet-name>
         <url-pattern>/revenue</url-pattern>
-=======
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>sales</servlet-name>
         <servlet-class>webapp.SalesReport</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>sales</servlet-name>
         <url-pattern>/sales</url-pattern>
->>>>>>> Stashed changes
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>reservations</servlet-name>
+        <servlet-class>webapp.ReservationListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reservations</servlet-name>
+        <url-pattern>/reservations</url-pattern>
     </servlet-mapping>
 
 </web-app>

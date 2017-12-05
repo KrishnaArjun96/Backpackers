@@ -18,23 +18,26 @@ import java.sql.ResultSet;
 @WebServlet(name = "reservationListing")
 public class ReservationListings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String option = data.get("option").getAsString();
-        if(option.equals("flight")) {
+        String option = request.getParameter("type");
+        if(option.equals("flightNo")) {
             try {
-                ExecQuery.execQuery("IF EXISTS(DROP VIEW reservations_flight)");
-                ExecQuery.execQuery("CREATE VIEW reservations_flight AS SELECT DISTINCT concat(F.AirlineID, ' ', F.FlightNo) AS 'Flight', R.ResrNo AS 'Reservation #', R.BookingDate AS 'Date', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND E.SSN = R.RepSSN) AS 'Representative' FROM Reservation R, Flight F, Leg I WHERE F.AirlineID = I.AirlineID AND F.FlightNo = I.FlightNo AND I.ResrNo = R.ResrNo;");
-                //SELECT * FROM reservations_flight WHERE Flight = 'AA 111';
-                String flight = data.get("flight").getAsString();
-                ResultSet rs = ExecQuery.execQuery("SELECT * FROM reservations_flight WHERE Flight = '" + flight + "'");
+                String flight = request.getParameter("flightNo");
+                String date = request.getParameter("date");
+                System.out.println(flight + " " + date);
+                String[] dates = date.split("-");
+                ResultSet rs = ExecQuery.execQuery("SELECT * FROM reservations_flight WHERE Flight = '" + flight + "' AND TravelDate='" + date + "'");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
                     String resr = rs.getString(2);
-                    String date = rs.getString(3);
-                    String rep = rs.getString(4);
+                    String bookingId = rs.getString(3);
+                    String bookingDate = rs.getString(4);
+                    String travelDate = rs.getString(5);
+                    String rep = rs.getString(6);
                     JsonObject resultSet = new JsonObject();
-                    resultSet.addProperty("resr", resr);
-                    resultSet.addProperty("date", date);
+                    resultSet.addProperty("resr", bookingId);
+                    resultSet.addProperty("bookingId", resr);
+                    resultSet.addProperty("bookingDate", bookingDate);
+                    resultSet.addProperty("travelDate", travelDate);
                     resultSet.addProperty("rep", rep);
                     jarray.add(resultSet);
                 }
@@ -45,22 +48,22 @@ public class ReservationListings extends HttpServlet {
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
-        else if(option.equals("customer")) {
-            //@todo
-            /*try {
-                ExecQuery.execQuery("IF EXISTS(DROP VIEW reservations_customer)");
-                ExecQuery.execQuery("CREATE VIEW reservations_customer AS SELECT DISTINCT C.AccountNo AS 'AccountNo', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE P.Id = C.Id AND R.AccountNo = C.AccountNo) AS 'Customer', concat(F.AirlineID, ' ', F.FlightNo) AS 'Flight', R.ResrNo AS 'Reservation #', R.ResrDate AS 'Date', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.id AND E.SSN = R.RepSSN) AS 'Representative', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, ReservationPassenger RP WHERE RP.Id = P.Id AND RP.AccountNo = C.AccountNo) AS 'Passenger' FROM Flight F, Includes I, Reservation R, ReservationPassenger RP, Person P, Passenger Pax, Customer C WHERE R.AccountNo = C.AccountNo AND I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo AND I.ResrNo = R.ResrNo ORDER BY R.ResrNo;");
-                //SELECT * FROM reservations_flight WHERE Flight = 'AA 111';
-                String flight = data.get("flight").getAsString();
-                ResultSet rs = ExecQuery.execQuery("SELECT * FROM reservations_customer WHERE Flight = '" + flight + "'");
+        else if(option.equals("customerName")) {
+            try {
+                String customer = request.getParameter("name");
+                ResultSet rs = ExecQuery.execQuery("SELECT * FROM reservations_customer WHERE Customer='" + customer + "'");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
-                    String resr = rs.getString(2);
-                    String date = rs.getString(3);
-                    String rep = rs.getString(4);
+                    String customerName = rs.getString(1);
+                    String flight = rs.getString(2);
+                    String resrNo = rs.getString(3);
+                    String bookingDate = rs.getString(4);
+                    String rep = rs.getString(5);
                     JsonObject resultSet = new JsonObject();
-                    resultSet.addProperty("resr", resr);
-                    resultSet.addProperty("date", date);
+                    resultSet.addProperty("customerName", customerName);
+                    resultSet.addProperty("flight", flight);
+                    resultSet.addProperty("resrNo", resrNo);
+                    resultSet.addProperty("bookingDate", bookingDate);
                     resultSet.addProperty("rep", rep);
                     jarray.add(resultSet);
                 }
@@ -69,7 +72,38 @@ public class ReservationListings extends HttpServlet {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
                 response.getWriter().write(new Gson().toJson(resultSet));
-            }*/
+            }
+        }
+
+        else if(option.equals("customerOnFlight")) {
+            //SELECT * FROM customer_reservations;
+            try {
+                String flight = request.getParameter("flightNo");
+                String date = request.getParameter("date");
+                String exec = "SELECT * FROM customer_reservations WHERE Flight='" + flight + "' AND TravelDate='"+ date + "' ORDER BY LegId, Passenger;";
+                System.out.println(exec);
+                ResultSet rs = ExecQuery.execQuery(exec);
+                JsonArray jarray = new JsonArray();
+                while(rs.next()) {
+                    String resrNo = rs.getString(3);
+                    String legId = rs.getString(4);
+                    String travelDate = rs.getString(5);
+                    String passenger = rs.getString(8);
+                    String travelClass = rs.getString(9);
+                    JsonObject resultSet = new JsonObject();
+                    resultSet.addProperty("resrNo", resrNo);
+                    resultSet.addProperty("booking", legId);
+                    resultSet.addProperty("travelDate", travelDate);
+                    resultSet.addProperty("travelClass", travelClass);
+                    resultSet.addProperty("passenger", passenger);
+                    jarray.add(resultSet);
+                }
+                response.getWriter().write(new Gson().toJson(jarray));
+            } catch (Exception e) {
+                JsonObject resultSet = new JsonObject();
+                resultSet.addProperty("success", false);
+                response.getWriter().write(new Gson().toJson(resultSet));
+            }
         }
 
     }
