@@ -50,6 +50,11 @@
 </div>
 
 <div id="fno">
+
+    <div class="ui input" style="margin: 20px">
+        <input id="filterFlNo" onkeyup="filter('filterFlNo','fnoTable')" type="text" placeholder="Enter Airport ID...">
+    </div>
+
     <table class="ui sortable orange celled structured table" id="fnoTable" style="margin: 20px; width: 40%;">
         <thead>
         <tr>
@@ -63,6 +68,9 @@
 </div>
 
 <div id="city" style="display: none">
+    <div class="ui input" style="margin: 20px">
+        <input id="filterCity" onkeyup="filter('filterCity','cityTable')" type="text" placeholder="Enter City...">
+    </div>
     <table class="ui sortable orange celled structured table" id="cityTable" style="margin: 20px; width: 40%; ">
         <thead>
         <tr>

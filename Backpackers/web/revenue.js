@@ -7,12 +7,11 @@ function getFlights() {
         success: function (data) {
             console.log(data);
             $(document).ready(function () {
-                //$('#fnoTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
 
                     $('#fnoTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].flight + '</td>\n' +
-                        '        <td class="center aligned">' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
@@ -25,12 +24,11 @@ function getFlights() {
         success: function (data) {
             console.log(data);
             $(document).ready(function () {
-                //$('#cityTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
 
                     $('#cityTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].city + '</td>\n' +
-                        '        <td class="center aligned">' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
@@ -43,11 +41,10 @@ function getFlights() {
         success: function (data) {
             console.log(data);
             $(document).ready(function () {
-                //$('#cusTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
                     $('#cusTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].customerName + '</td>\n' +
-                        '        <td class="center aligned">' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
@@ -60,18 +57,16 @@ function getFlights() {
         success: function (data) {
             console.log(data);
             $(document).ready(function () {
-                //$('#cusRepTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
 
                     $('#cusRepTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].rep + '</td>\n' +
-                        '        <td class="center aligned">' + data[i].revenue + '</td>\n' +
+                        '        <td class="center aligned"> $' + data[i].revenue + '</td>\n' +
                         '    </tr>');
                 }
             });
         }
     });
-
 }
 
 
@@ -114,18 +109,23 @@ function changeButton(changeTo) {
     }
 }
 
+function filter(inputName, tbName) {
+    var input, filter, table, tr;
+    input = document.getElementById(inputName);
+    filter = input.value.toUpperCase();
+    table = document.getElementById(tbName);
+    tr = table.getElementsByTagName("tr");
 
-$(function () {
-
-    $("#goButton").on('click', function () {
-        $.ajax({
-            type: 'GET',
-            url: '/revenue?value=' + $('#value').val() + '&type=' + $('#search-select').val(),
-            success: function (data) {
-                console.log(data)
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 0; i < tr.length; i++) {
+        var val = tr[i].getElementsByTagName("td")[0];
+        if (val) {
+            if (val.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
             }
-        });
-    });
-
-});
+        }
+    }
+}
 
