@@ -8,18 +8,27 @@ function changeButton(changeTo) {
     }
 
     if (changeTo === "flightNo") {
+        $(document).ready(function() {
+            $('#flightTable').find("tr:gt(0)").remove();
+        });
         document.getElementById('fl').style.display = "block";
         document.getElementById('cn').style.display = "none";
         document.getElementById('cof').style.display = "none";
         cur = "flightNo";
     }
     else if (changeTo === "customerOnFlight") {
+        $(document).ready(function() {
+            $('#cusFlightTable').find("tr:gt(0)").remove();
+        });
         document.getElementById('fl').style.display = "none";
         document.getElementById('cn').style.display = "none";
         document.getElementById('cof').style.display = "block";
         cur = "customerOnFlight";
     }
     else {
+        $(document).ready(function() {
+            $("#customerTable").find("tr:gt(0)").remove();
+        });
         document.getElementById('fl').style.display = "none";
         document.getElementById('cn').style.display = "block";
         document.getElementById('cof').style.display = "none";
