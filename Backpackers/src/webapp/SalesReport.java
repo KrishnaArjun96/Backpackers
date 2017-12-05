@@ -32,11 +32,13 @@ public class SalesReport  extends HttpServlet {
                 String resr = rs_sales.getString(1);
                 String sale = rs_sales.getString(4);
                 String rep = rs_sales.getString(5);
+                String bookingDate = rs_sales.getString(6);
 
                 JsonObject json = new JsonObject();
                 json.addProperty("resr", resr);
                 json.addProperty("sale", sale);
                 json.addProperty("rep", rep);
+                json.addProperty("date", bookingDate);
                 resultSet.add(json);
             }
             response.setContentType("application/json");
