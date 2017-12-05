@@ -21,3 +21,21 @@ Backpackers/\.idea/libraries/mysql_connector_java_5_1_44_bin\.xml
 Backpackers/\.idea/dataSources/a4909662-ddbe-486b-9151-18199037e065/_metadata_/
 
 Backpackers/\.idea/dataSources/a4909662-ddbe-486b-9151-18199037e065/_src_/schema/backpackers\.zip
+
+Backpackers/lib/javax\.annotation\.jar
+
+Backpackers/lib/javax\.ejb\.jar
+
+Backpackers/lib/javax\.jms\.jar
+
+Backpackers/lib/javax\.persistence\.jar
+
+Backpackers/lib/javax\.resource\.jar
+
+Backpackers/lib/javax\.servlet\.jar
+
+Backpackers/lib/javax\.servlet\.jsp\.jar
+
+Backpackers/lib/javax\.servlet\.jsp\.jstl\.jar
+
+Backpackers/lib/javax\.transaction\.jar
