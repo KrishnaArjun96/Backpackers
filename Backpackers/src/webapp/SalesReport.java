@@ -43,20 +43,10 @@ public class SalesReport  extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             System.out.println(resultSet.toString());
             response.getWriter().write(new Gson().toJson(resultSet));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            JsonObject resultSet = new JsonObject();
+            resultSet.addProperty("success", false);
+            response.getWriter().write(new Gson().toJson(resultSet));
         }
     }
-
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Update a record
-    }
-
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-
 }
