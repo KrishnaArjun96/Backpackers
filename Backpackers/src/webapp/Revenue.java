@@ -19,7 +19,6 @@ public class Revenue extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // This is a get request, so we will just get values from query params(from the URL)
         String type = request.getParameter("type");
-        String value = request.getParameter("value");
 
         if(type.equals("flightNo")) {
             try {

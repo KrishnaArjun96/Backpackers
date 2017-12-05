@@ -40,27 +40,65 @@
     </div>
 </div>
 
-<div class="ui form" style="margin: 20px" id="fl">
-    <div class="fields">
-        <div class="three wide field">
-            <label>Choose Type:</label>
-            <select class="ui search selection dropdown" id="search-select">
-                <option value="flightNo">Flight Number</option>
-                <option value="city">City</option>
-                <option value="customer">Customer</option>
-                <option value="customerRep">Customer Representative</option>
-            </select>
-        </div>
-        <div class="field">
-            <label>Enter Value:</label>
-            <input type="text" id="value">
-        </div>
-        <div class="field">
-            <button class="ui orange button" id="goButton" style="position: relative; top: 20px;">Go</button>
-        </div>
+<div style="margin: 20px">
+    <div class="ui buttons" name="type">
+        <button id="fnoBut" class="ui orange button" onclick="changeButton('fnoBut')">Flight Number</button>
+        <button id="cityBut" class="ui button" onclick="changeButton('cityBut')">City</button>
+        <button id="cusBut" class="ui button" onclick="changeButton('cusBut')">Customer Name</button>
+        <button id="cusRepBut" class="ui button" onclick="changeButton('cusRepBut')">Customer Representative</button>
     </div>
 </div>
 
+<div id="fno">
+    <table class="ui sortable orange celled structured table" id="fnoTable" style="margin: 20px; width: 40%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Flight Number</th>
+            <th rowspan="2" class="center aligned">revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
+<div id="city" style="display: none">
+    <table class="ui sortable orange celled structured table" id="cityTable" style="margin: 20px; width: 40%; ">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">City</th>
+            <th rowspan="2" class="center aligned">Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div id="cus" style="display: none">
+    <table class="ui sortable orange celled structured table" id="cusTable" style="margin: 20px; width: 40%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Customer</th>
+            <th rowspan="2" class="center aligned">Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div id="cusRep" style="display: none">
+    <table class="ui sortable orange celled structured table" id="cusRepTable" style="margin: 20px; width: 40%;">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Customer Representative</th>
+            <th rowspan="2" class="center aligned">Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
