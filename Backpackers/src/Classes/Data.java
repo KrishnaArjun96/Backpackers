@@ -69,6 +69,20 @@ public final class Data {
         return days_op;
     }
 
+    public static ArrayList<Airport> getDestinations(String flight) {
+        String[] flightComponents = flight.split(" ");
+        String airlineCode = flightComponents[0];
+        String flightNo = flightComponents[1];
+        ArrayList<Airport> destinations = new ArrayList<>();
+        for(Leg leg: LEGS) {
+            if(leg.getFlight().getAirline().getId().equals(airlineCode) && leg.getFlight().getFlightNo().equals(flightNo))
+                destinations.add(leg.getDestination());
+
+        }
+
+        return destinations;
+    }
+
     public static ArrayList<Leg> findLegs(String origin, String destination) {
         ArrayList<Leg> legs = new ArrayList<>();
         for(Leg leg: LEGS) {

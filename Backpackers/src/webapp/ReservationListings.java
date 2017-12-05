@@ -41,10 +41,14 @@ public class ReservationListings extends HttpServlet {
                     resultSet.addProperty("rep", rep);
                     jarray.add(resultSet);
                 }
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
@@ -67,10 +71,14 @@ public class ReservationListings extends HttpServlet {
                     resultSet.addProperty("rep", rep);
                     jarray.add(resultSet);
                 }
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
@@ -98,10 +106,14 @@ public class ReservationListings extends HttpServlet {
                     resultSet.addProperty("passenger", passenger);
                     jarray.add(resultSet);
                 }
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }

@@ -31,6 +31,9 @@ public class MailList extends HttpServlet {
                 resultSet.addProperty("email", email);
                 jarray.add(resultSet);
             }
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(new Gson().toJson(jarray));
         } catch (Exception e) {
             JsonObject resultSet = new JsonObject();
             resultSet.addProperty("success", false);

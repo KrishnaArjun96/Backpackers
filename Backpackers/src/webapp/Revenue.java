@@ -33,10 +33,14 @@ public class Revenue extends HttpServlet {
                     resultSet.addProperty("revenue", revenue);
                     jarray.add(resultSet);
                 }
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
@@ -52,10 +56,14 @@ public class Revenue extends HttpServlet {
                     resultSet.addProperty("revenue", revenue);
                     jarray.add(resultSet);
                 }
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
@@ -88,10 +96,14 @@ public class Revenue extends HttpServlet {
                 result.addProperty("results", jarray.toString());
                 result.addProperty("max", max_customer.toString());
                 response.getWriter().write(result.toString());*/
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
@@ -122,10 +134,14 @@ public class Revenue extends HttpServlet {
                 result.addProperty("results", jarray.toString());
                 result.addProperty("max", max_customer.toString());
                 response.getWriter().write(result.toString());*/
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(jarray));
             } catch (Exception e) {
                 JsonObject resultSet = new JsonObject();
                 resultSet.addProperty("success", false);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
         }
