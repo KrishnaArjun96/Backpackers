@@ -37,7 +37,7 @@ $(function () {
             type: 'GET',
             url: '/reservations?name=' + $('#name').val() + '&type=' + cur,
             success: function (data) {
-                console.log(data)
+                console.log("HERE"+data);
             }
         });
     });
@@ -47,14 +47,19 @@ $(function () {
             type: 'GET',
             url: '/reservations?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
             success: function (data) {
-
-
-
-                console.log(data)
+                console.log(typeof (data));
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#flightTable tbody').append('<tr>\n' +
+                            '        <td class="center aligned">' + data[i].resr + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].bookingId + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].bookingDate + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].rep + '</td>\n' +
+                            '    </tr>');
+                    }
+                });
             }
         });
     });
-
-
 });
 
