@@ -18,12 +18,14 @@ public class Option {
     int[] layovers;
     String[] dates;
     ArrayList<Airline> airlines;
+    ArrayList<Integer> classes;
     double totalFare;
     //MORE ATTRIBUTES TO FOLLOW.
 
     public Option() {
         legs = new ArrayList<>();
         airlines = new ArrayList<>();
+        classes = new ArrayList<>();
     }
 
     public ArrayList<Leg> getLegs() {
@@ -74,6 +76,14 @@ public class Option {
         this.totalFare = totalFare;
     }
 
+    public ArrayList<Integer> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(ArrayList<Integer> classes) {
+        this.classes = classes;
+    }
+
     public void updateTotalFare(String prefClass) throws SQLException, ClassNotFoundException {
         String[] classArray = {"eco", "bus", "fc"};
         ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
@@ -89,6 +99,7 @@ public class Option {
             ResultSet rs_class = ExecQuery.execQuery("SELECT * FROM Class WHERE FlightNo=" + leg.getFlight().getFlightNo() + " AND AirlineId='" + leg.getFlight().getAirline().getId() + "' AND ClassRank=" + classIndex + " AND IsVisible=1");
             while(rs_class.next()) {
                 totalFare += Double.parseDouble(rs_class.getString(6));
+                this.classes.add(rs_class.getInt(1));
             }
         }
         this.setTotalFare(totalFare);

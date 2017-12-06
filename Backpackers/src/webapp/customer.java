@@ -43,7 +43,7 @@ public class customer extends HttpServlet {
 
         try {
             String exec = "INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (?,?,?,?,?,?,?,?)";
-            PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+            PreparedStatement pstmt = ExecQuery.updateTable(exec);
             pstmt.setString(1, firstName);
             pstmt.setString(2, lastName);
             pstmt.setString(3, address);
@@ -58,7 +58,7 @@ public class customer extends HttpServlet {
             while(rs_set.next()) personId = rs_set.getInt(1);
 
             exec = "INSERT INTO Customer (PersonId, UserId, JoinDate, CardNo, SeatPref, MealPref, Rating) VALUES (?,?,?,?,?,?,?)";
-            pstmt = ExecQuery.insertIntoTable(exec);
+            pstmt = ExecQuery.updateTable(exec);
 
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
             Date now = new Date();
@@ -117,63 +117,63 @@ public class customer extends HttpServlet {
 
             if(firstName != null) {
                 String exec = "UPDATE Person SET FirstName=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, firstName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(lastName != null) {
                 String exec = "UPDATE Person SET LastName=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, lastName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(address != null) {
                 String exec = "UPDATE Person SET Address=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, address);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(city != null) {
                 String exec = "UPDATE Person SET City=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, city);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(state != null) {
                 String exec = "UPDATE Person SET State=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, state);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(country != null) {
                 String exec = "UPDATE Person SET Country=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, country);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(zipCode != null) {
                 String exec = "UPDATE Person SET ZipCode=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, zipCode);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(phone != null) {
                 String exec = "UPDATE Person SET Phone=? WHERE Id=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, phone);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
             if(cardNo != "") {
                 String exec = "UPDATE Customer SET CardNo=? WHERE UserId=? AND PersonId=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, cardNo);
                 pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
@@ -181,7 +181,7 @@ public class customer extends HttpServlet {
             }
             if(seatPrf != "") {
                 String exec = "UPDATE Customer SET SeatPref=? WHERE UserId=? AND PersonId=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, seatPrf);
                 pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
@@ -189,7 +189,7 @@ public class customer extends HttpServlet {
             }
             if(mealPref != "") {
                 String exec = "UPDATE Customer SET MealPref=? WHERE UserId=? AND PersonId=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, mealPref);
                 pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
@@ -197,7 +197,7 @@ public class customer extends HttpServlet {
             }
             if(rate != 0) {
                 String exec = "UPDATE Customer SET Rating=? WHERE UserId=? AND PersonId=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setInt(1, rate);
                 pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
@@ -231,12 +231,12 @@ public class customer extends HttpServlet {
                 personId = rs_customer.getInt(1);
             }
             String exec = "DELETE FROM Customer WHERE UserId=? AND PersonId=?";
-            PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+            PreparedStatement pstmt = ExecQuery.updateTable(exec);
             pstmt.setString(1, user);
             pstmt.setInt(2, personId);
             pstmt.executeUpdate();
             exec = "DELETE FROM Person WHERE Id=?";
-            pstmt = ExecQuery.insertIntoTable(exec);
+            pstmt = ExecQuery.updateTable(exec);
             pstmt.setInt(1, personId);
             pstmt.executeUpdate();
 

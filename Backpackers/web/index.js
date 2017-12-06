@@ -119,7 +119,7 @@ $(function () {
             }
         }
 
-        console.log(details);
+        //console.log(details);
 
         $.ajax({
             type: 'POST',
@@ -127,7 +127,8 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(details),
             success: function (data) {
-                console.log(data);
+                sessionStorage.setItem('results', JSON.stringify(data));
+                window.location.href = "search.jsp";
             }
         });
 

@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
+
 /**
  * Created by Rahul on 12/04/17.
  */

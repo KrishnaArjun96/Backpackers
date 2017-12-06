@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
+
 @WebServlet(name = "Revenue")
 public class Revenue extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,6 +26,10 @@ public class Revenue extends HttpServlet {
 
         if(type.equals("flightNo")) {
             try {
+                if(viewExists("revenue_flight")) {
+                    dropView("revenue_flight");
+                    createView("revenue_flight", "SELECT DISTINCT concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', ((SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo GROUP BY I.AirlineId AND I.FlightNo)*(R.BookingFee + R.Fare)) AS 'Flight Revenue' FROM Flight F, Booking I, Reservation R WHERE F.FlightNo = I.FlightNo AND F.AirlineId = I.AirlineId AND I.ResrNo = R.ResrNo;");
+                }
                 ResultSet rs = ExecQuery.execQuery("SELECT * FROM revenue_flight");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
@@ -45,6 +53,10 @@ public class Revenue extends HttpServlet {
         }
         else if(type.equals("city")) {
             try {
+                if(viewExists("revenue_city")) {
+                    dropView("revenue_city");
+                    createView("revenue_city", "SELECT A.City, SUM(R.BookingFee + R.Fare) AS 'Total revenue' FROM Airport A, Reservation R, Booking I , Leg L WHERE R.ResrNo = I.ResrNo AND I.AirlineId = L.AirlineId AND I.FlightNo = L.FlightNo and A.Id = L.Destination GROUP BY A.City;");
+                }
                 ResultSet rs = ExecQuery.execQuery("SELECT * FROM revenue_city");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
@@ -68,6 +80,10 @@ public class Revenue extends HttpServlet {
         }
         else if(type.equals("customer")) {
             try {
+                if(viewExists("revenue_customer")) {
+                    dropView("revenue_customer");
+                    createView("revenue_customer", "SELECT (SELECT concat(FirstName, ' ', LastName) FROM Person where Id = C.PersonId) AS 'Customer', C.UserId, SUM(R.BookingFee+R.Fare) AS 'Revenue' from Customer C, Reservation R WHERE C.PersonId = R.CustomerId GROUP BY R.CustomerId;");
+                }
                 ResultSet rs = ExecQuery.execQuery("SELECT * FROM revenue_customer");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
@@ -104,6 +120,10 @@ public class Revenue extends HttpServlet {
         }
         else if(type.equals("customerRep")) {
             try {
+                if(viewExists("Rep_Revenue")) {
+                    dropView("Rep_Revenue");
+                    createView("Rep_Revenue", "SELECT (SELECT concat(FirstName, ' ', LastName) FROM Person where Id = E.PersonId) AS 'Representative', E.SSN, SUM(R.BookingFee+R.Fare) AS 'Revenue' from Employee E, Reservation R WHERE E.PersonId = R.EmployeeId AND E.Role='employee' GROUP BY R.EmployeeId;");
+                }
                 ResultSet rs = ExecQuery.execQuery("SELECT * FROM Rep_Revenue");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {

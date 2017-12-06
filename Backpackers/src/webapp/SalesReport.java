@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
+
 /**
  * Created by Rahul on 12/01/17.
  */
@@ -26,6 +30,10 @@ public class SalesReport  extends HttpServlet {
         String year = request.getParameter("year");
         String date = month.concat(" ").concat(year);
         try {
+            if(viewExists("sales_report")) {
+                dropView("sales_report");
+                createView("sales_report", "SELECT ResrNo AS 'Reservation #', MONTH(BookingDate) AS 'Month', YEAR(BookingDate) AS 'Year', (BookingFee + Fare) AS 'Sale', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND EmployeeSSN = E.SSN) AS 'Representative', BookingDate FROM Reservation;");
+            }
             ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Month=" + month + " AND Year=" + year);
             JsonArray resultSet = new JsonArray();
             while(rs_sales.next()) {

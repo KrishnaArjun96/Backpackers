@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
+
 /**
  * Created by Rahul on 12/05/17.
  */
@@ -20,6 +24,10 @@ import java.sql.SQLException;
 public class bestSeller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            if(viewExists("best_seller")) {
+                dropView("best_seller");
+                createView("best_seller", "SELECT concat(F.AirlineId, ' ', F.FlightNo) AS 'Flight', (SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo) AS 'Count' FROM Flight F ORDER BY Count DESC;");
+            }
             ResultSet rs = ExecQuery.execQuery("SELECT * FROM best_seller");
             JsonArray jarray = new JsonArray();
             while(rs.next()) {
