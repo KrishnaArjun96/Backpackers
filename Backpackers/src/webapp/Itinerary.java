@@ -22,7 +22,7 @@ import static Classes.Data.findLegs;
 /**
  * Created by Rahul on 12/04/17.
  */
-@WebServlet(name = "itinerar")
+@WebServlet(name = "itinerary")
 public class Itinerary extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String resr = request.getParameter("resrNo");
@@ -70,7 +70,7 @@ public class Itinerary extends HttpServlet {
                 newJsonPass.addProperty("name", name);
                 newJsonPass.addProperty("seatPref", seatPref);
                 newJsonPass.addProperty("mealPref", mealPref);
-                jsonLegs.add(newJsonPass);
+                jsonPassengers.add(newJsonPass);
             }
             result.addProperty("customer", customer);
             result.addProperty("userId", userId);

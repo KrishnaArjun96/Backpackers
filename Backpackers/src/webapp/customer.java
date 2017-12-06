@@ -14,13 +14,17 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@WebServlet(name = "employee")
-public class employee extends HttpServlet {
-
+/**
+ * Created by Rahul on 12/05/17.
+ */
+@WebServlet(name = "customer")
+public class customer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String ssn = data.get("ssn").getAsString();
+        String userId = data.get("user").getAsString();
         String firstName = data.get("firstName").getAsString();
         String lastName = data.get("lastName").getAsString();
         String address = data.get("address").getAsString();
@@ -29,12 +33,14 @@ public class employee extends HttpServlet {
         String country = data.get("country").getAsString();
         String zipCode = data.get("zip").getAsString();
         String phone = data.get("phone").getAsString();
-        String startDate = data.get("startDate").getAsString();
-        String role = data.get("role").getAsString();
-        double wage = data.get("wage").getAsDouble();
+        String card = data.get("card").getAsString();
+        String seatPref = data.get("seat").getAsString();
+        String mealPref = data.get("meal").getAsString();
+        int rate = data.get("rate").getAsInt();
         boolean success = true;
         String error = "";
         int personId = 0;
+
         try {
             String exec = "INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
@@ -50,13 +56,20 @@ public class employee extends HttpServlet {
             exec = "SELECT Id FROM Person WHERE FirstName='" + firstName + "' AND LastName='" + lastName + "' AND Address='" + address + "' AND City='" + city + "' AND State='" + state + "' AND Country='" + country + "' AND ZipCode='" + zipCode + "' AND Phone='" + phone + "'";
             ResultSet rs_set = ExecQuery.execQuery(exec);
             while(rs_set.next()) personId = rs_set.getInt(1);
-            exec = "INSERT INTO Employee (PersonId, SSN, StartDate, Role, WageHourly) VALUES (?,?,?,?,?)";
+
+            exec = "INSERT INTO Customer (PersonId, UserId, JoinDate, CardNo, SeatPref, MealPref, Rating) VALUES (?,?,?,?,?,?,?)";
             pstmt = ExecQuery.insertIntoTable(exec);
+
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+            Date now = new Date();
+            String joinDate = sdfDate.format(now);
             pstmt.setInt(1, personId);
-            pstmt.setString(2, ssn);
-            pstmt.setString(3, startDate);
-            pstmt.setString(4, role.toLowerCase());
-            pstmt.setDouble(5, wage);
+            pstmt.setString(2, userId);
+            pstmt.setString(3, joinDate);
+            pstmt.setString(4, card);
+            pstmt.setString(5, seatPref);
+            pstmt.setString(6, mealPref);
+            pstmt.setInt(7, rate);
             pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -80,7 +93,6 @@ public class employee extends HttpServlet {
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String ssn = data.get("ssn").getAsString();
         String firstName = data.get("firstName").getAsString();
         String lastName = data.get("lastName").getAsString();
         String address = data.get("address").getAsString();
@@ -89,86 +101,105 @@ public class employee extends HttpServlet {
         String country = data.get("country").getAsString();
         String zipCode = data.get("zip").getAsString();
         String phone = data.get("phone").getAsString();
-        String role = data.get("role").getAsString();
-        double wage = data.get("wage").getAsDouble();
+        String user = data.get("user").getAsString();
+        String cardNo = data.get("card").getAsString();
+        String seatPrf = data.get("seat").getAsString();
+        String mealPref = data.get("meal").getAsString();
+        int rate = data.get("rate").getAsInt();
         boolean success = true;
         String error = "";
         int personId = 0;
         try {
-            ResultSet rs_employee = ExecQuery.execQuery("SELECT * FROM Employee WHERE SSN='" + ssn + "'");
-            while (rs_employee.next()) {
-                personId = rs_employee.getInt(1);
+            ResultSet rs_customer = ExecQuery.execQuery("SELECT * FROM Customer WHERE UserId='" + user + "'");
+            while (rs_customer.next()) {
+                personId = rs_customer.getInt(1);
             }
 
-            if(firstName != "") {
+            if(firstName != null) {
                 String exec = "UPDATE Person SET FirstName=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, firstName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(lastName != "") {
+            if(lastName != null) {
                 String exec = "UPDATE Person SET LastName=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, lastName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(address != "") {
+            if(address != null) {
                 String exec = "UPDATE Person SET Address=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, address);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(city != "") {
+            if(city != null) {
                 String exec = "UPDATE Person SET City=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, city);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(state != "") {
+            if(state != null) {
                 String exec = "UPDATE Person SET State=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, state);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(country != "") {
+            if(country != null) {
                 String exec = "UPDATE Person SET Country=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, country);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(zipCode != "") {
+            if(zipCode != null) {
                 String exec = "UPDATE Person SET ZipCode=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, zipCode);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(phone != "") {
+            if(phone != null) {
                 String exec = "UPDATE Person SET Phone=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
                 pstmt.setString(1, phone);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(role != "") {
-                String exec = "UPDATE Employee SET Role=? WHERE SSN=? AND PersonId=?";
+            if(cardNo != "") {
+                String exec = "UPDATE Customer SET CardNo=? WHERE UserId=? AND PersonId=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
-                pstmt.setString(1, role);
-                pstmt.setString(2, ssn);
+                pstmt.setString(1, cardNo);
+                pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
                 pstmt.executeUpdate();
             }
-            if(wage != 0) {
-                String exec = "UPDATE Employee SET WageHourly=? WHERE SSN=? AND PersonId=?";
+            if(seatPrf != "") {
+                String exec = "UPDATE Customer SET SeatPref=? WHERE UserId=? AND PersonId=?";
                 PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
-                pstmt.setDouble(1, wage);
-                pstmt.setString(2, ssn);
+                pstmt.setString(1, seatPrf);
+                pstmt.setString(2, user);
+                pstmt.setInt(3, personId);
+                pstmt.executeUpdate();
+            }
+            if(mealPref != "") {
+                String exec = "UPDATE Customer SET MealPref=? WHERE UserId=? AND PersonId=?";
+                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                pstmt.setString(1, mealPref);
+                pstmt.setString(2, user);
+                pstmt.setInt(3, personId);
+                pstmt.executeUpdate();
+            }
+            if(rate != 0) {
+                String exec = "UPDATE Customer SET Rating=? WHERE UserId=? AND PersonId=?";
+                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                pstmt.setInt(1, rate);
+                pstmt.setString(2, user);
                 pstmt.setInt(3, personId);
                 pstmt.executeUpdate();
             }
@@ -188,22 +219,20 @@ public class employee extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // delete an employee record
-        // data param is only the ssn of the employee
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String ssn = data.get("ssn").getAsString();
+        String user = data.get("user").getAsString();
         boolean success = true;
         String error = "";
         int personId = 0;
 
         try {
-            ResultSet rs_employee = ExecQuery.execQuery("SELECT PersonId FROM Employee WHERE SSN='" + ssn + "'");
-            while (rs_employee.next()) {
-                personId = rs_employee.getInt(1);
+            ResultSet rs_customer = ExecQuery.execQuery("SELECT PersonId FROM Customer WHERE UserId='" + user + "'");
+            while (rs_customer.next()) {
+                personId = rs_customer.getInt(1);
             }
-            String exec = "DELETE FROM Employee WHERE SSN=? AND PersonId=?";
+            String exec = "DELETE FROM Customer WHERE UserId=? AND PersonId=?";
             PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
-            pstmt.setString(1, ssn);
+            pstmt.setString(1, user);
             pstmt.setInt(2, personId);
             pstmt.executeUpdate();
             exec = "DELETE FROM Person WHERE Id=?";
@@ -228,14 +257,14 @@ public class employee extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ResultSet rs_customer = ExecQuery.execQuery("SELECT * FROM Employee WHERE role='employee'");
+            ResultSet rs_employee = ExecQuery.execQuery("SELECT * FROM Customer");
             JsonArray jsonArray = new JsonArray();
-            while (rs_customer.next()) {
+            while (rs_employee.next()) {
                 JsonObject jsonObject = new JsonObject();
-                String personId = rs_customer.getString(1);
+                String personId = rs_employee.getString(1);
                 ResultSet rs_person = ExecQuery.execQuery("SELECT * FROM Person WHERE Id="+personId);
                 String lName = "", fName = "", address = "", city = "", state = "", country = "";
-                String phone = "", zip = "", ssn = "", startDate = "", wage = "";
+                String phone = "", zip = "", userId = "", joinDate = "", cardNo = "", seatPref = "", mealPref = "", rating = "";
                 while(rs_person.next()) {
                     fName = rs_person.getString(2);
                     lName = rs_person.getString(3);
@@ -246,9 +275,13 @@ public class employee extends HttpServlet {
                     zip = rs_person.getString(8);
                     country = rs_person.getString(9);
                 }
-                ssn = rs_customer.getString(2);
-                startDate = rs_customer.getString(3);
-                wage = rs_customer.getString(5);
+                userId = rs_employee.getString(2);
+                joinDate = rs_employee.getString(3);
+                cardNo = rs_employee.getString(4);
+                seatPref = rs_employee.getString(5);
+                mealPref = rs_employee.getString(6);
+                rating = rs_employee.getString(7);
+
                 jsonObject.addProperty("fName", fName);
                 jsonObject.addProperty("lName", lName);
                 jsonObject.addProperty("address", address);
@@ -257,9 +290,12 @@ public class employee extends HttpServlet {
                 jsonObject.addProperty("country", country);
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("zip", zip);
-                jsonObject.addProperty("ssn", ssn);
-                jsonObject.addProperty("startDate", startDate);
-                jsonObject.addProperty("wage", wage);
+                jsonObject.addProperty("userId", userId);
+                jsonObject.addProperty("joinDate", joinDate);
+                jsonObject.addProperty("cardNo", cardNo);
+                jsonObject.addProperty("seatPref", seatPref);
+                jsonObject.addProperty("mealPref", mealPref);
+                jsonObject.addProperty("rating", rating);
                 jsonArray.add(jsonObject);
             }
             response.setContentType("application/json");

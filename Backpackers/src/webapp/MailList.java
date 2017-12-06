@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Created by Rahul on 12/04/17.
  */
-@WebServlet(name = "mailList")
+@WebServlet(name = "maillist")
 public class MailList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
