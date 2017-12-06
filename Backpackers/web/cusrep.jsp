@@ -20,10 +20,10 @@
         <a class="active item">
             <i class="users icon"></i>Customers
         </a>
-        <a class="item" href="flights.jsp">
+        <a class="item" href="mailingList.jsp">
             <i class="book icon"></i> Mailing Lists
         </a>
-        <a class="item" href="reservations.jsp">
+        <a class="item" href="">
             <i class="plane icon"></i> Flight Suggestions
         </a>
         <a class="item" style="float: right">
