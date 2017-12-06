@@ -37,16 +37,14 @@
                             <input type="password" id="password" placeholder="Password">
                         </div>
                     </div>
-                    <input class="ui orange button" id="login" value="Login"/>
+                    <div class="ui orange button" id="login" value="Login">Login</div>
                 </div>
 
-                <div class="ui error message"></div>
 
             </form>
 
-            <div class="ui message">
-                New to us? <a href="" style="color: #E07B53">Register</a>
-            </div>
+                <div class="ui error message" id="errorValue" style="display:none"> </div>
+
         </div>
     </div>
 </div>
@@ -62,16 +60,25 @@
                 password: $('#password').val()
             };
 
-            console.log(cred);
-
             $.ajax({
                 type: 'POST',
-                url: '/login',
+                url: '/Login',
                 contentType: 'application/json',
                 data: JSON.stringify(cred),
                 success: function(data){
-                    console.log(data.isValid);
-                    window.location.href = "welcome.jsp?username="+cred.username;
+                    if(data.isValid) {
+                        if (data.isManager)
+                            window.location.href = "manager.jsp";
+                        else
+                            window.location.href = "index.jsp";
+                    }
+                    else{
+                        var errorDiv = document.getElementById('errorValue');
+                        errorDiv.style.display ="block";
+                        errorDiv.innerHTML = data.errorValue;
+                        console.log(data.errorValue);
+                    }
+
                 }
             });
 
