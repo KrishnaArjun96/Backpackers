@@ -23,5 +23,28 @@
 </head>
 <body>
 
+<h2 class="ui horizontal divider header" style="margin: 25px">
+    JFK -> DXB
+</h2>
+<div>
+    <div class="ui orange segment" style="margin: 10px; width: 60%">
+        <div class="ui grid">
+            <div class="eight wide column">
+                <h3>Etihad Airways, EY 111</h3>
+                <h4>10:00pm - 10:00am </h4>
+            </div>
+            <div class="six wide column">
+                <h4>Stops: 1</h4>
+                <label>LHW</label>
+            </div>
+            <div class="two wide column">
+                <h3>$ 1,400</h3>
+                <label>Select:  <input type="radio" name="from"/></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
