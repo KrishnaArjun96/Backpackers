@@ -23,7 +23,7 @@
         <a class="item" href="mailingList.jsp">
             <i class="book icon"></i> Mailing Lists
         </a>
-        <a class="item" href="">
+        <a class="item" href="suggestions.jsp">
             <i class="plane icon"></i> Flight Suggestions
         </a>
         <a class="item" style="float: right">
