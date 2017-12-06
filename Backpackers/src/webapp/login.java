@@ -3,7 +3,7 @@ package webapp;
 import Classes.ExecQuery;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+//import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "Login")
-public class Login extends HttpServlet {
+public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
 
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Created by Rahul on 12/04/17.
  */
-@WebServlet(name = "currRes")
+@WebServlet(name = "currResrs")
 public class currResrs extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String customer = request.getParameter("userId");

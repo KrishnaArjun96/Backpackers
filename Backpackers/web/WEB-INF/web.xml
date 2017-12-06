@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>webapp.Login</servlet-class>
+        <servlet-class>webapp.login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -59,12 +59,47 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>reservations</servlet-name>
-        <servlet-class>webapp.ReservationListings</servlet-class>
-    </servlet>
+    <servlet-name>reservations</servlet-name>
+    <servlet-class>webapp.ReservationListings</servlet-class>
+</servlet>
     <servlet-mapping>
         <servlet-name>reservations</servlet-name>
         <url-pattern>/reservations</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>flightsuggestions</servlet-name>
+        <servlet-class>webapp.suggestionsFlight</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flightsuggestions</servlet-name>
+        <url-pattern>/flightsuggestions</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>currResrs</servlet-name>
+        <servlet-class>webapp.currResrs</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>currResrs</servlet-name>
+        <url-pattern>/currResrs</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>itinerary</servlet-name>
+        <servlet-class>webapp.Itinerary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>itinerary</servlet-name>
+        <url-pattern>/itinerary</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>maillist</servlet-name>
+        <servlet-class>webapp.MailList</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>maillist</servlet-name>
+        <url-pattern>/maillist</url-pattern>
+    </servlet-mapping>
 </web-app>

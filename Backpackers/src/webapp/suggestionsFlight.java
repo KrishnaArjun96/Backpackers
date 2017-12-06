@@ -21,7 +21,7 @@ import static Classes.Data.getDestinations;
 /**
  * Created by Rahul on 12/04/17.
  */
-@WebServlet(name = "employee")
+@WebServlet(name = "flightsuggestions")
 public class suggestionsFlight extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userId = request.getParameter("userId");
