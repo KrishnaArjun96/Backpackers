@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 import static Classes.Data.findAirport;
 import static Classes.Data.findLegs;
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
 
 /**
  * Created by Rahul on 12/04/17.
@@ -29,6 +32,10 @@ public class Itinerary extends HttpServlet {
         //SELECT * FROM itinerary WHERE Reservation='111' ORDER BY Booking, Passenger;
         try {
             Data.Refresh();
+            if(viewExists("itinerary")) {
+                dropView("itinerary");
+                createView("itinerary", "SELECT DISTINCT I.ResrNo AS 'Reservation', I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'BookingDate', (R.BookingFee + R.Fare) AS 'Fare', (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', R.UserId, RP.Name AS 'Passenger', RP.SeatPref, RP.MealPref, (SELECT Name FROM Class WHERE Id = I.ClassId) AS 'Class', (SELECT DISTINCT A.City FROM Airport A WHERE A.Id = L.Origin) AS 'Departs', (SELECT DISTINCT A.City FROM Airport A WHERE A.Id = L.Destination) AS 'Arrives' FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Passenger RP ON RP.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.LegId AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY R.ResrNo, I.Id;");
+            }
             ResultSet rs = ExecQuery.execQuery("SELECT * FROM itinerary WHERE Reservation='" + resr + "' GROUP BY Booking");
             JsonObject result = new JsonObject();
             String customer = "";

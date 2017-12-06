@@ -33,14 +33,14 @@ public class login extends HttpServlet {
         }else{
             try{
                 String exec = "SELECT Id FROM Person WHERE Username=? and Password=?";
-                PreparedStatement pstmt = ExecQuery.insertIntoTable(exec);
+                PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, username);
                 pstmt.setString(2, password);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     int personId = rs.getInt(1);
                     String isEmployee = "SELECT FirstName FROM Employee WHERE Id=?";
-                    PreparedStatement pstmt2 = ExecQuery.insertIntoTable(exec);
+                    PreparedStatement pstmt2 = ExecQuery.updateTable(exec);
                     pstmt2.setInt(1, personId);
                     ResultSet rs2 = pstmt.executeQuery();
                     if(rs2.next())

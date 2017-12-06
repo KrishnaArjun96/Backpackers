@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.createView;
+import static Classes.ExecQuery.dropView;
+import static Classes.ExecQuery.viewExists;
+
 /**
  * Created by Rahul on 12/04/17.
  */
@@ -21,6 +25,10 @@ public class currResrs extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String customer = request.getParameter("userId");
         try {
+            if(viewExists("current_reservations_customer")) {
+                dropView("current_reservations_customer");
+                createView("current_reservations_customer", "SELECT DISTINCT (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', R.UserId AS 'UserId', I.ResrNo AS 'Reservation #', I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'Date of Booking', (R.BookingFee + R.Fare) AS 'Fare', concat((SELECT DISTINCT A.City FROM Airport A WHERE A.Id = L.Origin), ' at ', L.Departure) AS 'Departure', concat((SELECT DISTINCT A.City FROM Airport A WHERE A.Id = L.Destination), ' at ', L.Arrival) AS 'Arrival' FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.LegId AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY I.ResrNo, I.Id;");
+            }
             ResultSet rs = ExecQuery.execQuery("SELECT * FROM current_reservations_customer WHERE UserId='" + customer + "' GROUP BY Reservation");
             JsonArray jarray = new JsonArray();
             while(rs.next()) {
