@@ -55,7 +55,7 @@
                     </div>
                     <div class="three wide field">
                         <label>E-Mail</label>
-                        <input type="text" id="email" placeholder="email">
+                        <input type="text" id="email" placeholder="E-Mail">
                     </div>
                 </div>
             </div>

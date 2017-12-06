@@ -5,10 +5,11 @@ function getFlights() {
         type: 'GET',
         url: "/maillist",
         success: function (data) {
+            console.log(data);
             $(document).ready(function () {
                 $('#customerTable').tablesort();
                 for (var i = 0; i < data.length; i++) {
-                    $('#flightTable tbody').append('<tr>\n' +
+                    $('#customerTable tbody').append('<tr>\n' +
                         '        <td class="center aligned">' + data[i].customerName + '</td>\n' +
                         '        <td class="center aligned">' + data[i].email + '</td>\n' +
                         '    </tr>');

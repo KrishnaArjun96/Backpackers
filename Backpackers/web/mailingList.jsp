@@ -37,7 +37,7 @@
     <input id="filter" onkeyup="filter()" type="text" placeholder="Enter Customer Name...">
 </div>
 
-<table class="ui sortable orange celled structured table" id="customerTable" style="margin: 20px; width: 90%;">
+<table class="ui sortable orange celled structured table" id="customerTable" style="margin: 20px; width: 40%;">
     <thead>
     <tr>
         <th rowspan="2" class="center aligned">Customer Name</th>
