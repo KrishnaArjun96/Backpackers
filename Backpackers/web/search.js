@@ -76,7 +76,7 @@ $(function () {
             var arr = radio.split(',');
             choices.push(search[arr[0]][arr[1]]);
         }
-        sessionStorage.setItem('selectedFlights', JSON.stringify(data));
+        sessionStorage.setItem('selectedFlights', JSON.stringify(choices));
         window.location.href = "confirm.jsp";
 
     });

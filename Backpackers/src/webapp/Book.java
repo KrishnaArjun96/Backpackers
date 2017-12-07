@@ -25,7 +25,7 @@ import static webapp.Search.convertTimeFormat;
 /**
  * Created by Rahul on 12/06/17.
  */
-@WebServlet(name = "book")
+@WebServlet(name = "Book")
 public class Book extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject requestData = new Gson().fromJson(request.getReader(), JsonObject.class);
@@ -65,7 +65,7 @@ public class Book extends HttpServlet {
             int resrNo = (int)((Math.random()*900) + 100);
             double fee = totalFare/10;
 
-            String exec = "INSERT INTO Reservation (ResrNo, BookingDate, Fare, BookingFee, EmployeeId, EmployeeSSN, CustomerId, UserId, Status) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String exec = "INSERT INTO Reservation (ResrNo, BookingDate, Fare, BookingFee, EmployeeId, EmployeeSSN, CustomerId, UserId, Status) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = ExecQuery.updateTable(exec);
             pstmt.setInt(1, resrNo);
             pstmt.setDate(2, java.sql.Date.valueOf(getToday()));
