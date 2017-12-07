@@ -14,6 +14,7 @@
 
 <head>
     <title>Best Seller</title>
+    <link rel="icon" href="tabIconCRep.png">
 </head>
 <body>
 
@@ -24,19 +25,19 @@
             Search Flights
         </a>
         <a class="item" href="itenary.jsp">
-            <i class="bar chart icon"></i> Travel Itenary
+            <i class="suitcase chart icon"></i> Travel Itenary
         </a>
         <a class="item" href="cusFlightSug.jsp">
-            <i class="plane icon"></i> Flight Suggestions
+            <i class="globe icon"></i> Flight Suggestions
         </a>
         <a class="item" href="curReservations.jsp">
-            <i class="book icon"></i> Current Reservations
+            <i class="browser icon"></i> Current Reservations
         </a>
         <a class="active item" href="bestSeller.jsp">
-            <i class="bitcoin icon"></i> Best Seller
+            <i class="tags icon"></i> Best Seller
         </a>
         <a class="item" href="resvrHistory.jsp">
-            <i class="book icon"></i> Reservation History
+            <i class="archive icon"></i> Reservation History
         </a>
         <a class="item" style="float: right">
             <i class="power icon"></i>

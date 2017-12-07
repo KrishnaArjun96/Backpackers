@@ -13,6 +13,7 @@
 <script src="cusrep.js"></script>
 <head>
     <title>Customers</title>
+    <link rel="icon" href="tabIconCRep.png">
 </head>
 
 <div class="ui orange tiered menu">

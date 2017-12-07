@@ -13,6 +13,7 @@
 <script src="index.js"></script>
 <head>
     <title>Current Reservations</title>
+    <link rel="icon" href="tabIconCRep.png">
 </head>
 <body>
 
