@@ -43,6 +43,87 @@
     </div>
 </div>
 
+<div class="ui form" style="margin: 20px;">
+    <div class="field">
+        <div class=" two fields">
+            <div class="two wide field">
+                <input type="text" id="resr" placeholder="Reservation Number">
+            </div>
+            <div class="one wide field">
+                <input id="goButton" class="ui medium orange button" type="submit"
+                       value="Go"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin:20px;" id="itr">
+    <h2>You Itenary for resrvation 444 is</h2>
+    <div class="ui raised segment" style="margin:20px;">
+        <h4 class="ui header">A header</h4>
+        <p>"customer": "Jane Smith"</p>
+        <p>"customer": "Jane Smith"</p>
+        <p>"customer": "Jane Smith"</p>
+        <p>"customer": "Jane Smith"</p>
+        <h3>Passengers</h3>
+        <div>
+            <p>{\"name\":\"Celestino Cremin\",\"seatPref\":\"Aisle\",\"mealPref\":\"Vegan\"}</p>
+            <p>{\"name\":\"Elliot Blick\",\"seatPref\":\"window\",\"mealPref\":\"Low Calorie\"}</p>
+            <p>{\"name\":\"Jane Smith\",\"seatPref\":\"window\",\"mealPref\":\"Veg\"}</p>
+        </div>
+        <h3>Legs</h3>
+        <div>
+            <p>{\"flight\":\"EK 567\",\"origin\":\"BLR: Bengaluru, India\",\"destination\":\"DXB: Dubai, United Arab
+                Emirates\",\"departure\":\"20:00:00\",\"arrival\":\"23:10:00\",\"duration\":\"04:00:00\"}</p>
+            <p> {\"flight\":\"EK 203\",\"origin\":\"DXB: Dubai, United Arab Emirates\",\"destination\":\"JFK: New York,
+                United States of
+                America\",\"departure\":\"02:30:00\",\"arrival\":\"08:15:00\",\"duration\":\"14:00:00\"}</p>
+            <p> {\"flight\":\"EK 203\",\"origin\":\"DXB: Dubai, United Arab Emirates\",\"destination\":\"JFK: New York,
+                United States of
+                America\",\"departure\":\"02:30:00\",\"arrival\":\"08:15:00\",\"duration\":\"14:00:00\"},</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#goButton").on('click', function () {
+            var month = $('#search-select').val();
+            var year = $('#year').val();
+            $.ajax({
+                type: 'GET',
+                url: '/sales?month=' + month + '&year=' + year,
+                success: function (data) {
+                    $(document).ready(function () {
+                        $('#itr').empty();
+
+                        $('#itr').append('<h2>You Itenary for resrvation 444 is</h2>\n' +
+                            '    <div class="ui raised segment" style="margin:20px;">\n' +
+                            '        <h4 class="ui header">Customer Info</h4>\n' +
+                            '        <p>Name:'+ data.customer + '</p>\n' +
+                            '        <p>Email:'+ data.userId + '</p>\n' +
+                            '        <p>Travel Class:'+ data.class + '</p>\n' +
+                            '        <p>Booking Date:'+ data.bookingDate + '</p>\n' +
+                            '        <p>Fare: $'+ data.fare + '</p>\n' +
+                            '        <h3>Passengers</h3>\n' +
+                            '        <div>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '        </div>\n' +
+                            '        <h3>Legs</h3>\n' +
+                            '        <div>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '    </div>');
+                    });
+                }
+            });
+        });
+    });
+
+</script>
 
 </body>
 </html>
