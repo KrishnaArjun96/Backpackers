@@ -1,8 +1,3 @@
-<%@ page import="JavaBeans.Airline" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="JavaBeans.Airport" %>
-<%@ page import="JavaBeans.Option" %>
-<%@ page import="static webapp.Search.convertTimeFormat" %>
 <%--
   Created by IntelliJ IDEA.
   User: Rahul
@@ -16,11 +11,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 <script src="search.js"></script>
-<html>
 <head>
     <title>Flight Results</title>
 </head>
 <body>
+
+<button class="ui orange button" id="goButton" style="float: right; top: 0; right: 0; overflow-y:auto; position:fixed; margin: 20px">Go</button>
+
+<div id="result" style="margin: 20px">
+</div>
 
 </body>
 </html>
