@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 import static Classes.ExecQuery.*;
 
-@WebServlet(name = "Revenue")
+@WebServlet(name = "revenue")
 public class Revenue extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // This is a get request, so we will just get values from query params(from the URL)

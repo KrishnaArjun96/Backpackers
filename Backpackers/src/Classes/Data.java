@@ -155,7 +155,7 @@ public final class Data {
             rs_user = ExecQuery.execQuery("SELECT * FROM Customer WHERE PersonId="+personId);
             if(rs_user.next()) user= rs_user.getString(2);
         } catch (Exception e) {
-            e.printStackTrace();
+            return "";
         }
 
         return user;

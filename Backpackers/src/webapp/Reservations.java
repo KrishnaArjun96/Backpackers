@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.Data.getUserId;
 import static Classes.ExecQuery.*;
 
 /**
@@ -21,7 +22,8 @@ import static Classes.ExecQuery.*;
 @WebServlet(name = "reservations")
 public class Reservations extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String customer = request.getParameter("userId");
+        String userName = request.getParameter("userId");
+        String customer = getUserId(userName);
         String type = request.getParameter("type");
         if(type.equals("history")) {
             try {
