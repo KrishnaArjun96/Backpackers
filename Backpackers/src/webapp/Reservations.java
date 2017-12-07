@@ -23,11 +23,11 @@ import static Classes.ExecQuery.*;
 public class Reservations extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("userId");
-        String customer = getUserId(userName);
         String type = request.getParameter("type");
         if(type.equals("history")) {
             try {
                 createConnection();
+                String customer = getUserId(userName);
                 if (viewExists("history")) {
                     dropView("history");
                 }
@@ -65,6 +65,7 @@ public class Reservations extends HttpServlet {
         else if(type.equals("current")) {
             try {
                 createConnection();
+                String customer = getUserId(userName);
                 if (viewExists("current_reservations_customer")) {
                     dropView("current_reservations_customer");
                 }

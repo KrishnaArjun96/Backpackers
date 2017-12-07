@@ -1,11 +1,17 @@
 $(function () {
     $("#cusNameButton").on('click', function () {
-            console.log("HRE");
-            $.ajax({
-                type: 'GET',
-                url: '/flightsuggestions?userId=' + $('#name').val(),
-                success: function (data) {
-                    console.log(data);
+        console.log("HRE");
+        $.ajax({
+            type: 'GET',
+            url: '/flightsuggestions?userId=' + $('#name').val() + '&type=cusrep',
+            success: function (data) {
+                console.log(data);
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data[i]);
+                        console.log(data[i].destinations);
+                        var airports = JSON.parse(data[i].destinations);
+                        var dest = '';
 
                     $(document).ready(function () {
 

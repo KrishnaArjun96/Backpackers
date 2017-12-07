@@ -71,7 +71,7 @@
         var username = sessionStorage.getItem('username');
         $.ajax({
             type: 'GET',
-            url: "/flightsuggestions?userId="+username,
+            url: "/flightsuggestions?userId="+username+"&type=cus",
             success: function (data) {
                 $(document).ready(function () {
 
