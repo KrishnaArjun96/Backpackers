@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div style="margin:20px;">
+<div style="margin:20px;" id="itr">
     <h2>You Itenary for resrvation 444 is</h2>
     <div class="ui raised segment" style="margin:20px;">
         <h4 class="ui header">A header</h4>
@@ -95,15 +95,28 @@
                 url: '/sales?month=' + month + '&year=' + year,
                 success: function (data) {
                     $(document).ready(function () {
-                        $("#salesTable").find("tr:gt(0)").remove();
-                        for (var i = 0; i < data.length; i++) {
-                            $('#salesTable tbody').append('<tr>\n' +
-                                '        <td class="center aligned">' + data[i].resr + '</td>\n' +
-                                '        <td class="center aligned">' + data[i].rep + '</td>\n' +
-                                '        <td class="center aligned">' + data[i].date + '</td>\n' +
-                                '        <td class="center aligned">$' + data[i].sale + '</td>\n' +
-                                '    </tr>');
-                        }
+                        $('#itr').empty();
+
+                        $('#itr').append('<h2>You Itenary for resrvation 444 is</h2>\n' +
+                            '    <div class="ui raised segment" style="margin:20px;">\n' +
+                            '        <h4 class="ui header">Customer Info</h4>\n' +
+                            '        <p>Name:'+ data.customer + '</p>\n' +
+                            '        <p>Email:'+ data.userId + '</p>\n' +
+                            '        <p>Travel Class:'+ data.class + '</p>\n' +
+                            '        <p>Booking Date:'+ data.bookingDate + '</p>\n' +
+                            '        <p>Fare: $'+ data.fare + '</p>\n' +
+                            '        <h3>Passengers</h3>\n' +
+                            '        <div>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '            <p>name:Celestino Cremin seatPref:Aisle mealPref:Vegan</p>\n' +
+                            '        </div>\n' +
+                            '        <h3>Legs</h3>\n' +
+                            '        <div>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '            <p>flight:EK 567 origin:BLR destination:DXB: Dubai departure:20:00:00 arrival:23:10:00 duration:04:00:00</p>\n' +
+                            '    </div>');
                     });
                 }
             });
