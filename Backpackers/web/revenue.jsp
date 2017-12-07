@@ -34,7 +34,7 @@
         <a class="active item">
             <i class="bitcoin icon"></i> Revenue
         </a>
-        <a class="item" style="float: right">
+        <a class="item" style="float: right" href="login.jsp">
             <i class="power icon"></i>
         </a>
     </div>

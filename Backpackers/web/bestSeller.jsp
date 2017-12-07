@@ -39,7 +39,7 @@
         <a class="item" href="resvrHistory.jsp">
             <i class="archive icon"></i> Reservation History
         </a>
-        <a class="item" style="float: right">
+        <a class="item" style="float: right" href="login.jsp">
             <i class="power icon"></i>
         </a>
     </div>
