@@ -13,6 +13,7 @@
 <script src="manager.js"></script>
 <head>
     <title>Manager</title>
+    <link rel="icon" href="tabIconManager.png">
 </head>
 
 <div class="ui orange tiered menu">
