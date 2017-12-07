@@ -18,9 +18,7 @@ import java.util.ArrayList;
 
 import static Classes.Data.findAirport;
 import static Classes.Data.findLegs;
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 /**
  * Created by Rahul on 12/04/17.
@@ -29,8 +27,8 @@ import static Classes.ExecQuery.viewExists;
 public class Itinerary extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String resr = request.getParameter("resrNo");
-        //SELECT * FROM itinerary WHERE Reservation='111' ORDER BY Booking, Passenger;
         try {
+            createConnection();
             Data.Refresh();
             if(viewExists("itinerary")) {
                 dropView("itinerary");
@@ -96,6 +94,6 @@ public class Itinerary extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
-
+        closeConnection();
     }
 }

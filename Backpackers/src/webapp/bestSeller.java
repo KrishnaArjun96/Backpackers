@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 /**
  * Created by Rahul on 12/05/17.
@@ -24,6 +22,7 @@ import static Classes.ExecQuery.viewExists;
 public class bestSeller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            createConnection();
             if(viewExists("best_seller")) {
                 dropView("best_seller");
                 createView("best_seller", "SELECT concat(F.AirlineId, ' ', F.FlightNo) AS 'Flight', (SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo) AS 'Count' FROM Flight F ORDER BY Count DESC;");
@@ -46,5 +45,6 @@ public class bestSeller extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }

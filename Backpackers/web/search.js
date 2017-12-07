@@ -3,6 +3,7 @@
  */
 
 var search = JSON.parse(sessionStorage.getItem('results'));
+console.log(search);
 
 $(window).on('load', getFlights());
 

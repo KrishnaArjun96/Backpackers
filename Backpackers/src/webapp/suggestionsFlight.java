@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static Classes.Data.getDestinations;
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
 
 /**
  * Created by Rahul on 12/04/17.
@@ -26,6 +28,7 @@ public class suggestionsFlight extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userId = request.getParameter("userId");
         try {
+            createConnection();
             Data.Refresh();
             ResultSet rs = ExecQuery.execQuery("SELECT * from personalised WHERE UserId='" + userId + "'");
             JsonArray array = new JsonArray();
@@ -56,5 +59,6 @@ public class suggestionsFlight extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }
