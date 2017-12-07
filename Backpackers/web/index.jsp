@@ -114,7 +114,6 @@
             <div class="field" id="class">
                 <label>Preferred class</label>
                 <select id="prefClass" class="ui selection dropdown">
-                    <option value="none">Preferred Class</option>
                     <option value="eco">Economy</option>
                     <option value="bus">Business</option>
                     <option value="fc">First Class</option>
