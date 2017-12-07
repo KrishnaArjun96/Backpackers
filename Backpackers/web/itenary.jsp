@@ -58,10 +58,6 @@
 </div>
 
 <div style="margin:20px;" id="itr">
-    <h2>Your Itenary for resrvation 444 is</h2>
-    <div class="ui raised segment" style="margin:20px;">
-        
-    </div>
 </div>
 
 <script>
