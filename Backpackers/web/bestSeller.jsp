@@ -42,6 +42,9 @@
         <a class="item" style="float: right" href="login.jsp">
             <i class="power icon"></i>
         </a>
+        <a class="item" style="float: right" href="help.html">
+            Help
+        </a>
     </div>
 </div>
 <div style="margin: 20px;">
