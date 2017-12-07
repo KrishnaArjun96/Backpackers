@@ -18,7 +18,7 @@ import static Classes.ExecQuery.*;
 /**
  * Created by Rahul on 12/05/17.
  */
-@WebServlet(name = "currRes")
+@WebServlet(name = "bestseller")
 public class bestSeller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {

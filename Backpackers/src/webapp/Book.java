@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sun.org.apache.regexp.internal.RE;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +34,9 @@ public class Book extends HttpServlet {
         JsonArray passengers = requestData.get("passengers").getAsJsonArray();
         boolean isAuction = requestData.get("isAuction").getAsBoolean();
         String userName = requestData.get("userName").getAsString();
+
+        boolean success = true;
+        String error = "";
         try {
             createConnection();
             ResultSet rs_user = ExecQuery.execQuery("SELECT Id FROM Person WHERE UserName='" + userName + "'");
@@ -60,7 +62,7 @@ public class Book extends HttpServlet {
                 employeeId = rs_employee.getInt(1);
                 employeeSSN = rs_employee.getString(2);
             }
-            int resrNo = (int)((Math.random()*9000) + 1000);
+            int resrNo = (int)((Math.random()*900) + 100);
             double fee = totalFare/10;
 
             String exec = "INSERT INTO Reservation (ResrNo, BookingDate, Fare, BookingFee, EmployeeId, EmployeeSSN, CustomerId, UserId, Status) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -156,11 +158,18 @@ public class Book extends HttpServlet {
                 pstmt.executeUpdate();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            error = e.toString();
+            success = false;
         }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        JsonObject resultSet = new JsonObject();
+        resultSet.addProperty("success", success);
+        if(!success){
+            resultSet.addProperty("error", error);
+        }
+        response.getWriter().write(new Gson().toJson(resultSet));
         closeConnection();
     }
 

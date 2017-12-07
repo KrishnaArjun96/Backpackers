@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>currResrs</servlet-name>
-        <servlet-class>webapp.currResrs</servlet-class>
+        <servlet-class>webapp.Reservations</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>currResrs</servlet-name>
@@ -101,5 +101,23 @@
     <servlet-mapping>
         <servlet-name>maillist</servlet-name>
         <url-pattern>/maillist</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>bestseller</servlet-name>
+        <servlet-class>webapp.bestSeller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bestseller</servlet-name>
+        <url-pattern>/bestseller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>customer</servlet-name>
+        <servlet-class>webapp.customer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>customer</servlet-name>
+        <url-pattern>/customer</url-pattern>
     </servlet-mapping>
 </web-app>
