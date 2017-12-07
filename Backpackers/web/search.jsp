@@ -16,7 +16,9 @@
 </head>
 <body>
 
-<div id="result">
+<button class="ui orange button" style="float: right; top: 0; right: 0; overflow-y:auto; position:fixed; margin: 20px">Go</button>
+
+<div id="result" style="margin: 20px">
 </div>
 
 </body>
