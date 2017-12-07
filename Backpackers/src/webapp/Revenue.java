@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 @WebServlet(name = "Revenue")
 public class Revenue extends HttpServlet {
@@ -26,6 +24,7 @@ public class Revenue extends HttpServlet {
 
         if(type.equals("flightNo")) {
             try {
+                createConnection();
                 if(viewExists("revenue_flight")) {
                     dropView("revenue_flight");
                     createView("revenue_flight", "SELECT DISTINCT concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', ((SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo GROUP BY I.AirlineId AND I.FlightNo)*(R.BookingFee + R.Fare)) AS 'Flight Revenue' FROM Flight F, Booking I, Reservation R WHERE F.FlightNo = I.FlightNo AND F.AirlineId = I.AirlineId AND I.ResrNo = R.ResrNo;");
@@ -50,9 +49,11 @@ public class Revenue extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
         else if(type.equals("city")) {
             try {
+                createConnection();
                 if(viewExists("revenue_city")) {
                     dropView("revenue_city");
                     createView("revenue_city", "SELECT A.City, SUM(R.BookingFee + R.Fare) AS 'Total revenue' FROM Airport A, Reservation R, Booking I , Leg L WHERE R.ResrNo = I.ResrNo AND I.AirlineId = L.AirlineId AND I.FlightNo = L.FlightNo and A.Id = L.Destination GROUP BY A.City;");
@@ -77,9 +78,11 @@ public class Revenue extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
         else if(type.equals("customer")) {
             try {
+                createConnection();
                 if(viewExists("revenue_customer")) {
                     dropView("revenue_customer");
                     createView("revenue_customer", "SELECT (SELECT concat(FirstName, ' ', LastName) FROM Person where Id = C.PersonId) AS 'Customer', C.UserId, SUM(R.BookingFee+R.Fare) AS 'Revenue' from Customer C, Reservation R WHERE C.PersonId = R.CustomerId GROUP BY R.CustomerId;");
@@ -117,9 +120,11 @@ public class Revenue extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
         else if(type.equals("customerRep")) {
             try {
+                createConnection();
                 if(viewExists("Rep_Revenue")) {
                     dropView("Rep_Revenue");
                     createView("Rep_Revenue", "SELECT (SELECT concat(FirstName, ' ', LastName) FROM Person where Id = E.PersonId) AS 'Representative', E.SSN, SUM(R.BookingFee+R.Fare) AS 'Revenue' from Employee E, Reservation R WHERE E.PersonId = R.EmployeeId AND E.Role='employee' GROUP BY R.EmployeeId;");
@@ -141,16 +146,6 @@ public class Revenue extends HttpServlet {
                     rep_max = rs_max.getString(1);
                     max_revenue = rs_max.getDouble(3);
                 }
-                /*JsonObject max_customer = new JsonObject();
-                max_customer.addProperty("max_rep_name", rep_max);
-                max_customer.addProperty("max_rep_revenue", max_revenue);
-                JsonObject result = new JsonObject();
-
-                result.addProperty("results", jarray.toString());
-                result.addProperty("max", max_customer.toString());
-                response.setContentType("application/json");
-                response.setCharacterEncoding("utf-8");
-                response.getWriter().write(result.toString());*/
 
                 JsonObject result = new JsonObject();
                 result.addProperty("name", rep_max);
@@ -167,6 +162,7 @@ public class Revenue extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
     }
 }

@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 /**
  * Created by Rahul on 12/01/17.
@@ -30,6 +28,7 @@ public class SalesReport  extends HttpServlet {
         String year = request.getParameter("year");
         String date = month.concat(" ").concat(year);
         try {
+            createConnection();
             if(viewExists("sales_report")) {
                 dropView("sales_report");
                 createView("sales_report", "SELECT ResrNo AS 'Reservation #', MONTH(BookingDate) AS 'Month', YEAR(BookingDate) AS 'Year', (BookingFee + Fare) AS 'Sale', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND EmployeeSSN = E.SSN) AS 'Representative', BookingDate FROM Reservation;");
@@ -60,5 +59,6 @@ public class SalesReport  extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }

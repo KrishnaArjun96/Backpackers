@@ -20,12 +20,15 @@ public class Option {
     ArrayList<Airline> airlines;
     ArrayList<Integer> classes;
     double totalFare;
+    String time;
+    ArrayList<String> stops;
     //MORE ATTRIBUTES TO FOLLOW.
 
     public Option() {
         legs = new ArrayList<>();
         airlines = new ArrayList<>();
-        classes = new ArrayList<>();
+        classes = new ArrayList<>();;
+        stops = new ArrayList<>();
     }
 
     public ArrayList<Leg> getLegs() {
@@ -84,6 +87,23 @@ public class Option {
         this.classes = classes;
     }
 
+    public ArrayList<String> getStops() {
+        return stops;
+    }
+
+    public void setStops(ArrayList<String> stops) {
+        this.stops = stops;
+    }
+
+    public String getTime() {
+
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public void updateTotalFare(String prefClass) throws SQLException, ClassNotFoundException {
         String[] classArray = {"eco", "bus", "fc"};
         ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
@@ -110,6 +130,19 @@ public class Option {
             if(!this.getAirlines().contains(leg.getFlight().getAirline())) {
                 this.airlines.add(leg.getFlight().getAirline());
             }
+        }
+    }
+
+    public void updateTime() {
+        String dep = this.getLegs().get(0).getDeparture();
+        String arr = this.getLegs().get(this.getLegs().size() - 1).getArrival();
+        this.time = dep.concat(" - ").concat(arr);
+    }
+
+    public void updateStops() {
+        for(int i=0; i<this.getLegs().size(); i++) {
+            if(i == this.getLegs().size() - 1) return;
+            this.stops.add(this.getLegs().get(i).getDestination().getId());
         }
     }
 }

@@ -15,6 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
+
 @WebServlet(name = "employee")
 public class employee extends HttpServlet {
 
@@ -36,6 +39,7 @@ public class employee extends HttpServlet {
         String error = "";
         int personId = 0;
         try {
+            createConnection();
             String exec = "INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = ExecQuery.updateTable(exec);
             pstmt.setString(1, firstName);
@@ -76,6 +80,7 @@ public class employee extends HttpServlet {
             resultSet.addProperty("error", error);
         }
         response.getWriter().write(new Gson().toJson(resultSet));
+        closeConnection();
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,11 +100,11 @@ public class employee extends HttpServlet {
         String error = "";
         int personId = 0;
         try {
+            createConnection();
             ResultSet rs_employee = ExecQuery.execQuery("SELECT * FROM Employee WHERE SSN='" + ssn + "'");
             while (rs_employee.next()) {
                 personId = rs_employee.getInt(1);
             }
-
             if(firstName != "") {
                 String exec = "UPDATE Person SET FirstName=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
@@ -185,6 +190,7 @@ public class employee extends HttpServlet {
             resultSet.addProperty("error", error);
         }
         response.getWriter().write(new Gson().toJson(resultSet));
+        closeConnection();
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -197,6 +203,7 @@ public class employee extends HttpServlet {
         int personId = 0;
 
         try {
+            createConnection();
             ResultSet rs_employee = ExecQuery.execQuery("SELECT PersonId FROM Employee WHERE SSN='" + ssn + "'");
             while (rs_employee.next()) {
                 personId = rs_employee.getInt(1);
@@ -224,10 +231,12 @@ public class employee extends HttpServlet {
             resultSet.addProperty("error", error);
         }
         response.getWriter().write(new Gson().toJson(resultSet));
+        closeConnection();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            createConnection();
             ResultSet rs_customer = ExecQuery.execQuery("SELECT * FROM Employee WHERE role='employee'");
             JsonArray jsonArray = new JsonArray();
             while (rs_customer.next()) {
@@ -272,5 +281,6 @@ public class employee extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }

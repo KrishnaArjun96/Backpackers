@@ -17,6 +17,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
+
 /**
  * Created by Rahul on 12/05/17.
  */
@@ -42,6 +45,7 @@ public class customer extends HttpServlet {
         int personId = 0;
 
         try {
+            createConnection();
             String exec = "INSERT INTO Person (FirstName, LastName, Address, City, State, Country, ZipCode, Phone) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = ExecQuery.updateTable(exec);
             pstmt.setString(1, firstName);
@@ -89,6 +93,7 @@ public class customer extends HttpServlet {
             resultSet.addProperty("error", error);
         }
         response.getWriter().write(new Gson().toJson(resultSet));
+        closeConnection();
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -110,6 +115,7 @@ public class customer extends HttpServlet {
         String error = "";
         int personId = 0;
         try {
+            createConnection();
             ResultSet rs_customer = ExecQuery.execQuery("SELECT * FROM Customer WHERE UserId='" + user + "'");
             while (rs_customer.next()) {
                 personId = rs_customer.getInt(1);
@@ -226,6 +232,7 @@ public class customer extends HttpServlet {
         int personId = 0;
 
         try {
+            createConnection();
             ResultSet rs_customer = ExecQuery.execQuery("SELECT PersonId FROM Customer WHERE UserId='" + user + "'");
             while (rs_customer.next()) {
                 personId = rs_customer.getInt(1);
@@ -253,10 +260,12 @@ public class customer extends HttpServlet {
             resultSet.addProperty("error", error);
         }
         response.getWriter().write(new Gson().toJson(resultSet));
+        closeConnection();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            createConnection();
             ResultSet rs_employee = ExecQuery.execQuery("SELECT * FROM Customer");
             JsonArray jsonArray = new JsonArray();
             while (rs_employee.next()) {
@@ -308,5 +317,6 @@ public class customer extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }

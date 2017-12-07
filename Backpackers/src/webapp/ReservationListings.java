@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
 
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 /**
  * Created by Rahul on 12/01/17.
@@ -25,6 +23,7 @@ public class ReservationListings extends HttpServlet {
         String option = request.getParameter("type");
         if(option.equals("flightNo")) {
             try {
+                createConnection();
                 String flight = request.getParameter("flightNo");
                 String date = request.getParameter("date");
                 System.out.println(flight + " " + date);
@@ -59,9 +58,11 @@ public class ReservationListings extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
         else if(option.equals("customerName")) {
             try {
+                createConnection();
                 if(viewExists("reservations_customer")) {
                     dropView("reservations_customer");
                     createView("reservations_customer", "SELECT DISTINCT (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE P.Id = C.PersonId AND R.UserId = C.UserId AND C.PersonId = R.CustomerId) AS 'Customer', concat(F.AirlineID, ' ', F.FlightNo) AS 'Flight', R.ResrNo AS 'Reservation', I.Id AS 'Leg', R.BookingDate AS 'Booking Date', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.Id = E.PersonId AND E.SSN = R.EmployeeSSN) AS 'Representative' FROM Flight F, Booking I, Reservation R, Person P, Customer C WHERE R.CustomerId = C.PersonId AND R.UserId = C.UserId AND I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo AND I.ResrNo = R.ResrNo ORDER BY I.ResrNo, I.LegId;");
@@ -93,10 +94,12 @@ public class ReservationListings extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
 
         else if(option.equals("customerOnFlight")) {
             try {
+                createConnection();
                 if(viewExists("customer_reservations")) {
                     dropView("customer_reservations");
                     createView("customer_reservations", "SELECT DISTINCT (SELECT Name FROM Airline WHERE Id = I.AirlineId) AS 'Airline', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.ResrNo AS 'Reservation', I.Id AS 'BookingId', I.TravelDate, R.BookingDate AS 'BookingDate', (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', RP.Name AS 'Passenger', (SELECT C.Name FROM Class C WHERE C.Id = I.ClassId) AS 'Class', RP.MealPref  FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Passenger RP ON RP.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.Legid AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY I.ResrNo, I.Id, RP.Name;");
@@ -129,7 +132,7 @@ public class ReservationListings extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 response.getWriter().write(new Gson().toJson(resultSet));
             }
+            closeConnection();
         }
-
     }
 }

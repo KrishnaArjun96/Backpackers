@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static Classes.Data.LEGS;
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
 
 /**
  * Created by Rahul on 12/01/17.
@@ -24,6 +26,7 @@ import static Classes.Data.LEGS;
 public class FlightListings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            createConnection();
             Data.Refresh();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,6 +51,7 @@ public class FlightListings extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(new Gson().toJson(flights));
+        closeConnection();
     }
 
     public static int countOccurrencesOf(String str, char key) {

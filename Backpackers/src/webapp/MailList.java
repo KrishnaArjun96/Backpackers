@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Classes.ExecQuery.createView;
-import static Classes.ExecQuery.dropView;
-import static Classes.ExecQuery.viewExists;
+import static Classes.ExecQuery.*;
 
 /**
  * Created by Rahul on 12/04/17.
@@ -24,6 +22,7 @@ import static Classes.ExecQuery.viewExists;
 public class MailList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            createConnection();
             ResultSet rs = ExecQuery.execQuery("SELECT (SELECT concat(FirstName, ' ', LastName) FROM Person WHERE Id = C.PersonId) AS 'Customer', C.UserId FROM Customer C");
             JsonArray jarray = new JsonArray();
             while(rs.next()) {
@@ -43,5 +42,6 @@ public class MailList extends HttpServlet {
             resultSet.addProperty("success", false);
             response.getWriter().write(new Gson().toJson(resultSet));
         }
+        closeConnection();
     }
 }

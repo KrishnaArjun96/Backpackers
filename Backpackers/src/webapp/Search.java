@@ -22,11 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static Classes.Data.*;
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
 
 @WebServlet(name = "Search")
 public class Search extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            createConnection();
             Data.Refresh();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,6 +84,8 @@ public class Search extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         System.out.println(new Gson().toJson(allOptions));
         response.getWriter().write(new Gson().toJson(allOptions));
+        System.out.println("WRITTEN...");
+        closeConnection();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,20 +111,22 @@ public class Search extends HttpServlet {
         ArrayList<Option> options = new ArrayList<>();
         for(Path path: paths) {
             ArrayList<ArrayList<Leg>> result = generateAllLegs(path);
-            for(ArrayList<Leg> set: result) {
+            for (ArrayList<Leg> set : result) {
                 Option newOption = new Option();
                 int totalTime = 0;
-                for(Leg leg: set) {
+                for (Leg leg : set) {
                     newOption.getLegs().add(leg);
                     totalTime += getTimeDuration(leg.getDuration());
                 }
                 newOption.setTotalDuration(totalTime);
                 try {
-                    if(validateOption(newOption, date, passengers, prefClass)) {
+                    if (validateOption(newOption, date, passengers, prefClass)) {
                         for (int i = 0; i < newOption.getLayovers().length; i++)
                             newOption.setTotalDuration(newOption.getTotalDuration() + newOption.getLayovers()[i]);
                         newOption.updateTotalFare(prefClass);
                         newOption.updateAirlines();
+                        newOption.updateTime();
+                        newOption.updateStops();
                     }
                     options.add(newOption);
                 } catch (ParseException e) {
@@ -131,7 +138,6 @@ public class Search extends HttpServlet {
                 }
             }
         }
-
         return options;
     }
 
