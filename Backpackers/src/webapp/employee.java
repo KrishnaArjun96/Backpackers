@@ -105,63 +105,63 @@ public class employee extends HttpServlet {
             while (rs_employee.next()) {
                 personId = rs_employee.getInt(1);
             }
-            if(firstName != "") {
+            if(!firstName.equals("")) {
                 String exec = "UPDATE Person SET FirstName=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, firstName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(lastName != "") {
+            if(!lastName.equals("")) {
                 String exec = "UPDATE Person SET LastName=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, lastName);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(address != "") {
+            if(!address.equals("")) {
                 String exec = "UPDATE Person SET Address=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, address);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(city != "") {
+            if(!city.equals("")) {
                 String exec = "UPDATE Person SET City=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, city);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(state != "") {
+            if(!state.equals("")) {
                 String exec = "UPDATE Person SET State=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, state);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(country != "") {
+            if(!country.equals("")) {
                 String exec = "UPDATE Person SET Country=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, country);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(zipCode != "") {
+            if(!zipCode.equals("")) {
                 String exec = "UPDATE Person SET ZipCode=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, zipCode);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(phone != "") {
+            if(!phone.equals("")) {
                 String exec = "UPDATE Person SET Phone=? WHERE Id=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, phone);
                 pstmt.setInt(2, personId);
                 pstmt.executeUpdate();
             }
-            if(role != "") {
+            if(!role.equals("")) {
                 String exec = "UPDATE Employee SET Role=? WHERE SSN=? AND PersonId=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, role);
