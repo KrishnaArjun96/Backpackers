@@ -123,6 +123,7 @@ public class Search extends HttpServlet {
                     if (validateOption(newOption, date, passengers, prefClass)) {
                         for (int i = 0; i < newOption.getLayovers().length; i++)
                             newOption.setTotalDuration(newOption.getTotalDuration() + newOption.getLayovers()[i]);
+                        newOption.setPassengers(passengers);
                         newOption.updateTotalFare(prefClass);
                         newOption.updateAirlines();
                         newOption.updateTime();

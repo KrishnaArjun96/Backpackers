@@ -22,6 +22,7 @@ public class Option {
     double totalFare;
     String time;
     ArrayList<String> stops;
+    int passengers;
     //MORE ATTRIBUTES TO FOLLOW.
 
     public Option() {
@@ -104,6 +105,14 @@ public class Option {
         this.time = time;
     }
 
+    public int getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
+    }
+
     public void updateTotalFare(String prefClass) throws SQLException, ClassNotFoundException {
         String[] classArray = {"eco", "bus", "fc"};
         ArrayList<String> classArrayList = new ArrayList<String>(Arrays.asList(classArray));
@@ -122,7 +131,7 @@ public class Option {
                 this.classes.add(rs_class.getInt(1));
             }
         }
-        this.setTotalFare(totalFare);
+        this.setTotalFare(totalFare*this.passengers);
     }
 
     public void updateAirlines() {
