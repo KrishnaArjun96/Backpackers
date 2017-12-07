@@ -48,15 +48,20 @@ function bookFlight(){
         passengers[i-1]={"name":fullname,"seatPref":seat,"mealPref":mealpref};
     }
     var index = 0;
-
     if(isAuction==true){
         for(var i =0;i<search.length;i++){
             var bid = document.getElementById("bid"+i).value;
-            for(var j=0;j<search[i].stops.length;j++){
-                var splitBid=bid/search[i].stops.length;
-                auctions[index]=splitBid;
-                index++;
+            if(search[i].stops.length>0){
+                for(var j=0;j<search[i].stops.length;j++){
+                    var splitBid=bid/search[i].stops.length;
+                    auctions[index]=splitBid;
+                    index++;
+                }
+            }else{
+                auctions[index++]=bid;
+
             }
+
         }
 
     }
