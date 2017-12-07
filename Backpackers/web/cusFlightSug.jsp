@@ -65,9 +65,10 @@
     $(window).on('load', getFlightSuggestions());
 
     function getFlightSuggestions() {
+        var username = sessionStorage.getItem('username');
         $.ajax({
             type: 'GET',
-            url: "/flightsuggestions?userId=awesomejane@ftw.com",
+            url: "/flightsuggestions?userId="+username,
             success: function (data) {
                 $(document).ready(function () {
 

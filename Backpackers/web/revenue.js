@@ -38,6 +38,7 @@ function getFlights() {
         success: function (data) {
             document.getElementById('cusId').innerHTML='Max revenue by '+data.name+': $'+data.value;
             var table = JSON.parse(data.table);
+            console.log(table);
             $(document).ready(function () {
                 for (var i = 0; i < table.length; i++) {
                     $('#cusTable tbody').append('<tr>\n' +
@@ -55,6 +56,7 @@ function getFlights() {
         success: function (data) {
             document.getElementById('cusRepId').innerHTML='Max revenue by '+data.name+': $'+data.value;
             var table = JSON.parse(data.table);
+            console.log(table);
             $(document).ready(function () {
                 for (var i = 0; i < table.length ; i++) {
                     $('#cusRepTable tbody').append('<tr>\n' +

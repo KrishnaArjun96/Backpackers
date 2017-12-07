@@ -53,7 +53,7 @@ $(function () {
     $("#cusNameButton").on('click', function () {
         $.ajax({
             type: 'GET',
-            url: '/reservations?name=' + $('#name').val() + '&type=' + cur,
+            url: '/reservationListing?name=' + $('#name').val() + '&type=' + cur,
             success: function (data) {
                 $(document).ready(function () {
                     for (var i = 0; i < data.length; i++) {
@@ -72,7 +72,7 @@ $(function () {
     $("#flightNoButton").on('click', function () {
         $.ajax({
             type: 'GET',
-            url: '/reservations?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#datefl').val() + '&type=' + cur,
+            url: '/reservationListing?flightNo=' + $('#flightNoInput').val() + '&date=' + $('#datefl').val() + '&type=' + cur,
             success: function (data) {
                 $(document).ready(function () {
                     for (var i = 0; i < data.length; i++) {
@@ -92,7 +92,7 @@ $(function () {
         console.log($('#cusFlightNoInput').val());
         $.ajax({
             type: 'GET',
-            url: '/reservations?flightNo=' + $('#cusFlightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
+            url: '/reservationListing?flightNo=' + $('#cusFlightNoInput').val() + '&date=' + $('#date').val() + '&type=' + cur,
             success: function (data) {
 
                 $(document).ready(function () {
