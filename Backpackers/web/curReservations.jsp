@@ -46,7 +46,7 @@
 
 
 <div style="margin: 20px;">
-    <h1 style="color: #e05d0f">Best Seller List of Flights.</h1>
+    <h1 style="color: #e05d0f">Current Reservations.</h1>
     <table class="ui sortable orange celled structured table" id="bstTable" style="margin: 20px; width: 40%; ">
         <thead>
         <tr>
