@@ -34,7 +34,7 @@ public class Itinerary extends HttpServlet {
                 dropView("itinerary");
             }
             createView("itinerary", "SELECT DISTINCT I.ResrNo AS 'Reservation', I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'BookingDate', (R.BookingFee + R.Fare) AS 'Fare', (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', R.UserId, RP.Name AS 'Passenger', RP.SeatPref, RP.MealPref, (SELECT Name FROM Class WHERE Id = I.ClassId) AS 'Class', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Origin) AS 'Departs', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Destination) AS 'Arrives' FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Passenger RP ON RP.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.LegId AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY R.ResrNo, I.Id;");
-            ResultSet rs = ExecQuery.execQuery("SELECT * FROM itinerary WHERE Reservation='" + resr + "' ORDER BY Booking");
+            ResultSet rs = ExecQuery.execQuery("SELECT DISTINCT Booking, Flight, Departs, Arrives, Customer, UserId, Class, BookingDate, Fare FROM itinerary WHERE Reservation='" + resr + "' ORDER BY Booking");
             JsonObject result = new JsonObject();
             String customer = "";
             String userId = "";
@@ -44,9 +44,9 @@ public class Itinerary extends HttpServlet {
 
             JsonArray jsonLegs = new JsonArray();
             while(rs.next()) {
-                String flight = rs.getString(3);
-                String origin = rs.getString(13);
-                String destination = rs.getString(14);
+                String flight = rs.getString(2);
+                String origin = rs.getString(3);
+                String destination = rs.getString(4);
                 ArrayList<Leg> legs = findLegs(origin, destination, flight);
                 for(Leg leg: legs) {
                     JsonObject newJsonLeg = new JsonObject();
@@ -60,19 +60,21 @@ public class Itinerary extends HttpServlet {
                     jsonLegs.add(newJsonLeg);
                     System.out.println(newJsonLeg.toString());
                 }
-                customer = rs.getString(7);
-                userId = rs.getString(8);
-                classTravel = rs.getString(12);
-                bookingDate = rs.getString(5);
-                fare = rs.getDouble(6);
+                customer = rs.getString(5);
+                userId = rs.getString(6);
+                classTravel = rs.getString(7);
+                bookingDate = rs.getString(8);
+                fare = rs.getDouble(9);
             }
-            rs = ExecQuery.execQuery("SELECT * FROM Itinerary WHERE Reservation='" + resr + "' GROUP BY Passenger ORDER BY Passenger;");
+            String exec = "SELECT DISTINCT Passenger, SeatPref, MealPref FROM Itinerary WHERE Reservation='" + resr + "';";
+            System.out.println(exec);
+            rs = ExecQuery.execQuery(exec);
             JsonArray jsonPassengers = new JsonArray();
             while(rs.next()) {
                 JsonObject newJsonPass = new JsonObject();
-                String name = rs.getString(9);
-                String seatPref = rs.getString(10);
-                String mealPref = rs.getString(11);
+                String name = rs.getString(1);
+                String seatPref = rs.getString(2);
+                String mealPref = rs.getString(3);
                 newJsonPass.addProperty("name", name);
                 newJsonPass.addProperty("seatPref", seatPref);
                 newJsonPass.addProperty("mealPref", mealPref);
