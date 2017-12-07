@@ -44,5 +44,63 @@
     </div>
 </div>
 
+<div style="margin: 20px;">
+    <h1 style="color: #e05d0f">Flight Suggestions.</h1>
+    <table class="ui sortable orange celled structured table" id="bstTable" style="margin: 20px; width: 40%; ">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Flight</th>
+            <th rowspan="2" class="center aligned">Airport</th>
+            <th rowspan="2" class="center aligned">City</th>
+            <th rowspan="2" class="center aligned">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    $(window).on('load', getFlightSuggestions());
+
+    function getFlightSuggestions() {
+        $.ajax({
+            type: 'GET',
+            url: "/flightsuggestions?userId=awesomejane@ftw.com",
+            success: function (data) {
+                $(document).ready(function () {
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        var dests = JSON.parse(data[i].destinations);
+                        var rs = dests.length;
+
+                        $('#bstTable tbody').append('<tr>\n' +
+                            '        <td rowspan=' + rs + 'class="center aligned">' + data[i].flight + '</td>\n' +
+                            '        <td class="center aligned">' + dests[0].airport + '</td>\n' +
+                            '        <td class="center aligned">' + dests[0].city + '</td>\n' +
+                            '        <td class="center aligned">' + dests[0].country + '</td>\n' +
+                            '    </tr>');
+
+                        if (rs > 1) {
+                            for (var j = 1; j < rs; j++) {
+                                $('#bstTable tbody').append('<tr>\n' +
+                                    '        <td class="center aligned">' + dests[j].airport + '</td>\n' +
+                                    '        <td class="center aligned">' + dests[j].city + '</td>\n' +
+                                    '        <td class="center aligned">' + dests[j].country + '</td>\n' +
+                                    '    </tr>');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+</script>
+
+
 </body>
 </html>
