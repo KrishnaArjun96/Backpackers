@@ -41,6 +41,8 @@ function getFlights() {
 
                 var checked = (j === 0) ? 'checked' : '';
 
+                var val = i + ',' + j;
+
                 $('#result').append('<div class="ui orange segment" style="margin: 10px; width: 60%;">\n' +
                     '    <div class="ui grid">\n' +
                     '        <div class="eight wide column">\n' +
@@ -53,17 +55,45 @@ function getFlights() {
                     '        </div>\n' +
                     '        <div class="two wide column">\n' +
                     '            <h3>$ ' + price + '</h3>\n' +
-                    '            <label>Select:  <input type="radio" name=' + i + ' ' + checked + '/></label>\n' +
+                    '            <label>Select:  <input type="radio" value=' + val + ' name=' + i + ' ' + checked + '/></label>\n' +
                     '        </div>\n' +
                     '    </div>\n' +
                     '</div>');
             }
         }
-
     });
 }
 
 
+$(function () {
+
+    $("#goButton").on('click', function () {
+
+        var choices = [];
+
+        for (var i = 0; i < search.length; i++) {
+            var radio = $("input[name=" + i + "]:checked").val();
+            var arr = radio.split(',');
+            choices.push(search[arr[0]][arr[1]]);
+        }
 
 
+        console.log(choices);
+
+        // $.ajax({
+        //     type: reqType,
+        //     url: '/employee',
+        //     contentType: 'application/json',
+        //     data: JSON.stringify(details),
+        //     success: function(data){
+        //         if(data.success){
+        //             alert("Success: "+details.firstName+" has been "+ cur +"ed.");
+        //         }else{
+        //             alert("Failed: "+data.error);
+        //         }
+        //     }
+        // });
+
+    });
+});
 
