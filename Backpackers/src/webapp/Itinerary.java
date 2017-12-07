@@ -83,7 +83,7 @@ public class Itinerary extends HttpServlet {
             result.addProperty("classTravel", classTravel);
             result.addProperty("bookingDate", bookingDate);
             result.addProperty("fare", fare);
-            result.addProperty("legs", String.valueOf(jsonLegs));
+            result.addProperty("legs", jsonLegs.toString());
             result.addProperty("passengers", jsonPassengers.toString());
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");

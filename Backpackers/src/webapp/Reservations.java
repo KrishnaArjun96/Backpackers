@@ -23,14 +23,14 @@ public class Reservations extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String customer = request.getParameter("userId");
         String type = request.getParameter("type");
-        if(type.equals("current")) {
+        if(type.equals("history")) {
             try {
                 createConnection();
                 if (viewExists("history")) {
                     dropView("history");
-                    createView("history", "SELECT DISTINCT (SELECT concat(FirstName,' ',LastName) FROM Person where c.PersonId=Id) AS 'Customer', C.UserId, R.ResrNo, I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'Date of Booking', SUM(R.Fare + R.BookingFee) AS 'Fare' FROM Booking I, Reservation R, Customer C WHERE I.TravelDate > CURDATE() AND I.ResrNo=R.ResrNo AND C.UserId = R.UserId GROUP BY R.ResrNo;");
                 }
-                ResultSet rs = ExecQuery.execQuery("SELECT * FROM history WHERE UserId='" + customer + "' GROUP BY Reservation");
+                createView("history", "SELECT DISTINCT (SELECT concat(FirstName,' ',LastName) FROM Person where c.PersonId=Id) AS 'Customer', C.UserId, R.ResrNo, I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'Date of Booking', SUM(R.Fare + R.BookingFee) AS 'Fare' FROM Booking I, Reservation R, Customer C WHERE I.TravelDate < CURDATE() AND I.ResrNo=R.ResrNo AND C.UserId = R.UserId GROUP BY R.ResrNo;");
+                ResultSet rs = ExecQuery.execQuery("SELECT * FROM history WHERE UserId='" + customer + "' GROUP BY ResrNo");
                 JsonArray jarray = new JsonArray();
                 while (rs.next()) {
                     JsonObject resultSet = new JsonObject();
@@ -58,14 +58,14 @@ public class Reservations extends HttpServlet {
             }
             closeConnection();
         }
-        else if(type.equals("history")) {
+        else if(type.equals("current")) {
             try {
                 createConnection();
                 if (viewExists("current_reservations_customer")) {
                     dropView("current_reservations_customer");
-                    createView("current_reservations_customer", "SELECT DISTINCT (SELECT concat(FirstName,' ',LastName) FROM Person where c.PersonId=Id) AS 'Customer', C.UserId, R.ResrNo, I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'Date of Booking', SUM(R.Fare + R.BookingFee) AS 'Fare' FROM Booking I, Reservation R, Customer C WHERE I.TravelDate < CURDATE() AND I.ResrNo=R.ResrNo AND C.UserId = R.UserId GROUP BY R.ResrNo;");
                 }
-                ResultSet rs = ExecQuery.execQuery("SELECT * FROM current_reservations_customer WHERE UserId='" + customer + "' GROUP BY Reservation");
+                createView("current_reservations_customer", "SELECT DISTINCT (SELECT concat(FirstName,' ',LastName) FROM Person where c.PersonId=Id) AS 'Customer', C.UserId, R.ResrNo, I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'Date of Booking', SUM(R.Fare + R.BookingFee) AS 'Fare' FROM Booking I, Reservation R, Customer C WHERE I.TravelDate > CURDATE() AND I.ResrNo=R.ResrNo AND C.UserId = R.UserId GROUP BY R.ResrNo;");
+                ResultSet rs = ExecQuery.execQuery("SELECT * FROM current_reservations_customer WHERE UserId='" + customer + "' GROUP BY ResrNo");
                 JsonArray jarray = new JsonArray();
                 while (rs.next()) {
                     JsonObject resultSet = new JsonObject();
