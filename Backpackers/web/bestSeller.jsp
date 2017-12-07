@@ -44,6 +44,40 @@
         </a>
     </div>
 </div>
+<div style="margin: 20px;">
+    <h1 style="color: #e05d0f">Best Seller List of Flights.</h1>
+    <table class="ui sortable orange celled structured table" id="bstTable" style="margin: 20px; width: 40%; ">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Flight</th>
+            <th rowspan="2" class="center aligned">Reservations</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(window).on('load', getFlights());
+
+    function getFlights() {
+        $.ajax({
+            type: 'GET',
+            url: "/bestseller",
+            success: function (data) {
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#bstTable tbody').append('<tr>\n' +
+                            '        <td class="center aligned">' + data[i].flight + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].count + '</td>\n' +
+                            '    </tr>');
+                    }
+                });
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
