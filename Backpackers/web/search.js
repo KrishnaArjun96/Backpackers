@@ -39,6 +39,15 @@ function getFlights() {
 
                 var price = trip.totalFare;
 
+                var dates = '';
+
+                for (var k = 0; k < trip.dates.length; k++) {
+                    if (k === trip.dates.length - 1)
+                        dates += trip.dates[k];
+                    else
+                        dates += trip.dates[k] + ', ';
+                }
+
                 var checked = (j === 0) ? 'checked' : '';
 
                 var val = i + ',' + j;
@@ -47,7 +56,8 @@ function getFlights() {
                     '    <div class="ui grid">\n' +
                     '        <div class="eight wide column">\n' +
                     '            <h3>' + airline + '</h3>\n' +
-                    '            <h4>' + time + '</h4>\n' +
+                    '            <h5>' + dates + '</h5>\n' +
+                    '            <h5>' + time + '</h5>\n' +
                     '        </div>\n' +
                     '        <div class="six wide column">\n' +
                     '            <h4>Stops: ' + stops + '</h4>\n' +
