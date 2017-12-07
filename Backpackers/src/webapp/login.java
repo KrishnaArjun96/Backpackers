@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static Classes.ExecQuery.closeConnection;
+import static Classes.ExecQuery.createConnection;
+
 @WebServlet(name = "Login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
@@ -32,6 +35,7 @@ public class login extends HttpServlet {
             errorValue = "One or more fields are missing.";
         }else{
             try{
+                createConnection();
                 String exec = "SELECT Id FROM Person WHERE Username=? and Password=?";
                 PreparedStatement pstmt = ExecQuery.updateTable(exec);
                 pstmt.setString(1, username);
@@ -64,16 +68,13 @@ public class login extends HttpServlet {
             map.put("isValid",false);
             map.put("errorValue",errorValue);
         }else{
-            map.put("FirstName",username);
-  //          HttpSession session = request.getSession();
-//            Cookie cookie = new Cookie("FIRST_NAME", user.getFirstName());
-    //        cookie.setMaxAge(24 * 3600);
-      //      response.addCookie(cookie);
+            map.put("username",username);
             map.put("isValid",true);
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(new Gson().toJson(map));
+        closeConnection();
 
 
 

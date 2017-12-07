@@ -120,4 +120,15 @@
         <servlet-name>customer</servlet-name>
         <url-pattern>/customer</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Book</servlet-name>
+        <servlet-class>webapp.Book</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Book</servlet-name>
+        <url-pattern>/Book</url-pattern>
+    </servlet-mapping>
+
 </web-app>

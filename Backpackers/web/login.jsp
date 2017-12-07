@@ -54,7 +54,6 @@
     $(function() {
 
         $("#login").on('click', function() {
-
             var cred = {
                 username: $('#username').val(),
                 password: $('#password').val()
@@ -67,6 +66,7 @@
                 data: JSON.stringify(cred),
                 success: function(data){
                     if(data.isValid) {
+                        sessionStorage.setItem('username',data.username)
                         if (data.isManager)
                             window.location.href = "manager.jsp";
                         else
