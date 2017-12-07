@@ -3,12 +3,14 @@ $(function () {
         console.log("HRE");
         $.ajax({
             type: 'GET',
-            url: '/flightsuggestions?userId=' + $('#name').val(),
+            url: '/flightsuggestions?userId=' + $('#name').val() + '&type=cusrep',
             success: function (data) {
                 console.log(data);
                 $(document).ready(function () {
                     for (var i = 0; i < data.length; i++) {
-                        var airports = data[i].destination;
+                        console.log(data[i]);
+                        console.log(data[i].destinations);
+                        var airports = JSON.parse(data[i].destinations);
                         var dest = '';
 
                         for(var j =0 ;j<airports.length;j++){

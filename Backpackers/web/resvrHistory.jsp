@@ -65,9 +65,10 @@
     $(window).on('load', getReservations());
 
     function getReservations() {
+        var username = sessionStorage.getItem('username');
         $.ajax({
             type: 'GET',
-            url: "/reservations?userId=jdoe@woot.com&type=history",
+            url: "/reservations?userId="+username+"&type=history",
             success: function (data) {
                 $(document).ready(function () {
                     for (var i = 0; i < data.length; i++) {
