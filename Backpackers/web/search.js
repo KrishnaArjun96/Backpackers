@@ -76,23 +76,8 @@ $(function () {
             var arr = radio.split(',');
             choices.push(search[arr[0]][arr[1]]);
         }
-
-
-        console.log(choices);
-
-        // $.ajax({
-        //     type: reqType,
-        //     url: '/employee',
-        //     contentType: 'application/json',
-        //     data: JSON.stringify(details),
-        //     success: function(data){
-        //         if(data.success){
-        //             alert("Success: "+details.firstName+" has been "+ cur +"ed.");
-        //         }else{
-        //             alert("Failed: "+data.error);
-        //         }
-        //     }
-        // });
+        sessionStorage.setItem('selectedFlights', JSON.stringify(data));
+        window.location.href = "confirm.jsp";
 
     });
 });
