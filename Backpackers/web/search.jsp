@@ -15,7 +15,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<link rel="stylesheet" href="search.css">
 <script src="search.js"></script>
 <html>
 <head>
@@ -26,21 +25,56 @@
 <h2 class="ui horizontal divider header" style="margin: 25px">
     JFK -> DXB
 </h2>
-<div>
+<div id="result">
     <div class="ui orange segment" style="margin: 10px; width: 60%">
         <div class="ui grid">
             <div class="eight wide column">
-                <h3>Etihad Airways, EY 111</h3>
+                <h3>Etihad Airways, EY 111 <br> Jet Airways, JT 321<br> Lufthansa, LH 389
+                </h3>
                 <h4>10:00pm - 10:00am </h4>
             </div>
             <div class="six wide column">
-                <h4>Stops: 1</h4>
-                <label>LHW</label>
+                <h4>Stops: 3</h4>
+                <label>LHW, SWI, DOH</label>
             </div>
             <div class="two wide column">
                 <h3>$ 1,400</h3>
                 <label>Select:  <input type="radio" name="from"/></label>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui orange segment" style="margin: 10px; width: 60%">
+    <div class="ui grid">
+        <div class="eight wide column">
+            <h3>Etihad Airways, EY 111</h3>
+            <h4>10:00pm - 10:00am </h4>
+        </div>
+        <div class="six wide column">
+            <h4>Stops: 1</h4>
+            <label>LHW</label>
+        </div>
+        <div class="two wide column">
+            <h3>$ 1,400</h3>
+            <label>Select:  <input type="radio" name="from"/></label>
+        </div>
+    </div>
+</div>
+
+<div class="ui orange segment" style="margin: 10px; width: 60%">
+    <div class="ui grid">
+        <div class="eight wide column">
+            <h3>Etihad Airways, EY 111</h3>
+            <h4>10:00pm - 10:00am </h4>
+        </div>
+        <div class="six wide column">
+            <h4>Stops: 1</h4>
+            <label>LHW</label>
+        </div>
+        <div class="two wide column">
+            <h3>$ 1,400</h3>
+            <label>Select:  <input type="radio" name="from"/></label>
         </div>
     </div>
 </div>
