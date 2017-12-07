@@ -42,13 +42,37 @@
 
 <div style="margin: 20px;">
     <div class="ui buttons" name="type">
-        <button id="add" class="ui orange button" onclick="changeButton('add')">Add</button>
+        <button id="all" class="ui orange button" onclick="changeButton('all')">All</button>
+        <button id="add" class="ui button" onclick="changeButton('add')">Add</button>
         <button id="edit" class="ui button" onclick="changeButton('edit')">Edit</button>
         <button id="delete" class="ui button" onclick="changeButton('delete')">Delete</button>
     </div>
 
+    <div id="empAll">
+        <table class="ui sortable orange celled structured table" id="empTable" style="margin: 20px; width: 90%; ">
+            <thead>
+            <tr>
+                <th rowspan="2" class="center aligned">First Name</th>
+                <th rowspan="2" class="center aligned">Last Name</th>
+                <th rowspan="2" class="center aligned">Address</th>
+                <th rowspan="2" class="center aligned">City</th>
+                <th rowspan="2" class="center aligned">State</th>
+                <th rowspan="2" class="center aligned">Country</th>
+                <th rowspan="2" class="center aligned">Phone</th>
+                <th rowspan="2" class="center aligned">Zip</th>
+                <th rowspan="2" class="center aligned">SSN</th>
+                <th rowspan="2" class="center aligned">Start Date</th>
+                <th rowspan="2" class="center aligned">Wage</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
     <div class="ui form" style="margin: 20px">
-        <div id="empAdd">
+        <div id="empAdd" style="display: none">
 
             <div class="field">
                 <div class="three fields">
@@ -131,7 +155,7 @@
             </div>
 
             <br>
-            <input id="postButton" class="ui large orange button" type="submit"
+            <input style="display: none" id="postButton" class="ui large orange button" type="submit"
                    value="Add"/>
         </div>
     </div>
