@@ -131,4 +131,13 @@
         <url-pattern>/Book</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>auctions</servlet-name>
+        <servlet-class>webapp.Auctions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auctions</servlet-name>
+        <url-pattern>/auctions</url-pattern>
+    </servlet-mapping>
+
 </web-app>

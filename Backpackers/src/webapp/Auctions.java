@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static Classes.Data.getUserId;
 import static Classes.ExecQuery.closeConnection;
 import static Classes.ExecQuery.createConnection;
 
@@ -67,24 +68,20 @@ public class Auctions extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-        String userName = data.get("userName").getAsString();
+        //JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
+        String userName = request.getParameter("userName");
         boolean success = true;
         String error = "";
         int personId = 0;
-        String user = "";
+        String user = getUserId("userName");
         try {
-            ResultSet rs_user = ExecQuery.execQuery("SELECT * FROM Person WHERE UserName='"+userName+"'");
-            if(rs_user.next()) personId = rs_user.getInt("1");
-            rs_user = ExecQuery.execQuery("SELECT * FROM Customer WHERE PersonId="+personId);
-            if(rs_user.next()) user= rs_user.getString(2);
+            createConnection();
 
             ResultSet rs_resr = ExecQuery.execQuery("SELECT * FROM Reservation WHERE UserId='"+user+"' AND CustomerId=" + personId);
             JsonArray jsonArray = new JsonArray();
             while(rs_resr.next()) {
                 int resrNo = rs_resr.getInt(1);
                 JsonObject object = new JsonObject();
-                object.addProperty("resrNo", resrNo);
                 JsonArray bidArray = new JsonArray();
                 ResultSet rs_bid = ExecQuery.execQuery("SELECT * FROM Bid WHERE ResrNo=" + resrNo);
                 while(rs_bid.next()) {
@@ -103,8 +100,11 @@ public class Auctions extends HttpServlet {
                     bidObject.addProperty("status", (status == 1)?"approved":"pending");
                     bidArray.add(bidObject);
                 }
-                object.addProperty("bids", String.valueOf(bidArray));
-                jsonArray.add(object);
+                if(bidArray.size() > 0) {
+                    object.addProperty("resrNo", resrNo);
+                    object.addProperty("bids", String.valueOf(bidArray));
+                    jsonArray.add(object);
+                }
             }
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");

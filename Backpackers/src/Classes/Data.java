@@ -145,4 +145,19 @@ public final class Data {
             CONNECTIONS.addDestinationToNode(findAirport(origin), findAirport(destination));
         }
     }
+
+    public static String getUserId(String userName) {
+        String user = "";
+        int personId = 0;
+        try {
+            ResultSet rs_user = ExecQuery.execQuery("SELECT * FROM Person WHERE Username='"+userName+"'");
+            if(rs_user.next()) personId = rs_user.getInt(1);
+            rs_user = ExecQuery.execQuery("SELECT * FROM Customer WHERE PersonId="+personId);
+            if(rs_user.next()) user= rs_user.getString(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
 }

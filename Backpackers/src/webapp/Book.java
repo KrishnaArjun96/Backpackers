@@ -132,7 +132,7 @@ public class Book extends HttpServlet {
                         int bidCheck = 0;
                         if(rs_bid.next()) bidCheck = rs_bid.getInt(1);
                         if(bidCheck == 0) {
-                            double bidAmount = bids.get(bookingIndex).getAsDouble();
+                            double bidAmount = bids.get(bookingIndex-1).getAsDouble();
                             exec = "INSERT INTO Bid (AuctionId, ResrNo, Status, BidAmount) VALUES (?,?,?,?)";
                             pstmt = ExecQuery.updateTable(exec);
                             pstmt.setInt(1, auctionId);
@@ -153,7 +153,7 @@ public class Book extends HttpServlet {
                 String meal = passenger.get("mealPref").getAsString();
                 exec = "INSERT INTO Passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (?,?,?,?,?)";
                 pstmt = ExecQuery.updateTable(exec);
-                pstmt.setInt(1, i);
+                pstmt.setInt(1, i+1);
                 pstmt.setInt(2, resrNo);
                 pstmt.setString(3, name);
                 pstmt.setString(4, seat);

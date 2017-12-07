@@ -17,8 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static Classes.Data.getDestinations;
-import static Classes.ExecQuery.closeConnection;
-import static Classes.ExecQuery.createConnection;
+import static Classes.ExecQuery.*;
+import static Classes.ExecQuery.createView;
 
 /**
  * Created by Rahul on 12/04/17.
@@ -30,6 +30,10 @@ public class suggestionsFlight extends HttpServlet {
         try {
             createConnection();
             Data.Refresh();
+            if(viewExists("personalised")) {
+                dropView("personalised");
+            }
+            createView("personalised", "SELECT DISTINCT C.UserId AS 'UserId', (SELECT concat(FirstName,' ',LastName) FROM Person WHERE C.PersonId=Id) AS 'Customer', concat(L.AirlineID,' ', L.FlightNo) AS flight FROM Leg L, Customer C WHERE L.Destination IN (SELECT L.Destination FROM Reservation R, Booking I WHERE R.UserId=C.UserId AND R.ResrNo=I.ResrNo AND I.AirlineID=L.AirlineID AND I.FlightNo=L.FlightNo AND I.LegId = L.LegId);");
             ResultSet rs = ExecQuery.execQuery("SELECT * from personalised WHERE UserId='" + userId + "'");
             JsonArray array = new JsonArray();
             while(rs.next()) {
