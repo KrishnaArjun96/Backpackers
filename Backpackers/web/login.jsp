@@ -66,9 +66,12 @@
                 data: JSON.stringify(cred),
                 success: function(data){
                     if(data.isValid) {
+                        console.log(data);
                         sessionStorage.setItem('username',data.username)
                         if (data.isManager)
-                            window.location.href = "manager.jsp";
+                                window.location.href = "manager.jsp";
+                        else if(data.isEmployee)
+                                window.location.href = "cusrep.jsp";
                         else
                             window.location.href = "index.jsp";
                     }

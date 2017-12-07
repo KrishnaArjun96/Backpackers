@@ -43,14 +43,20 @@ public class login extends HttpServlet {
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     int personId = rs.getInt(1);
-                    String isEmployee = "SELECT FirstName FROM Employee WHERE Id=?";
-                    PreparedStatement pstmt2 = ExecQuery.updateTable(exec);
+                    String isEmployee = "SELECT Role FROM Employee WHERE PersonId=?";
+                    PreparedStatement pstmt2 = ExecQuery.updateTable(isEmployee);
                     pstmt2.setInt(1, personId);
-                    ResultSet rs2 = pstmt.executeQuery();
-                    if(rs2.next())
-                        map.put("isManager",true);
+                    ResultSet rs2 = pstmt2.executeQuery();
+                    if(rs2.next()){
+                        String role = rs2.getString(1);
+                        if(role.equalsIgnoreCase("manager")){
+                            map.put("isManager",true);
+                        }else{
+                            map.put("isEmployee",true);
+                        }
+                    }
                     else
-                        map.put("isManager",false);
+                        map.put("isEmployee",false);
                 }else{
                     containsError = true;
                     errorValue = "Username or Password incorrect";
