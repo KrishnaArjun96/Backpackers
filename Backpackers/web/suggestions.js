@@ -1,30 +1,40 @@
 $(function () {
     $("#cusNameButton").on('click', function () {
-        console.log("HRE");
-        $.ajax({
-            type: 'GET',
-            url: '/flightsuggestions?userId=' + $('#name').val(),
-            success: function (data) {
-                console.log(data);
-                $(document).ready(function () {
-                    for (var i = 0; i < data.length; i++) {
-                        var airports = data[i].destination;
-                        var dest = '';
+            console.log("HRE");
+            $.ajax({
+                type: 'GET',
+                url: '/flightsuggestions?userId=' + $('#name').val(),
+                success: function (data) {
+                    console.log(data);
 
-                        for(var j =0 ;j<airports.length;j++){
-                            if(j !== airports.length-1)
-                                dest += airports[i];
-                            else
-                                dest += airports[i]+', ';
+                    $(document).ready(function () {
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            var dests = JSON.parse(data[i].destinations);
+                            var rs = dests.length;
+
+                            $('#bstTable tbody').append('<tr>\n' +
+                                '        <td rowspan=' + rs + 'class="center aligned">' + data[i].flight + '</td>\n' +
+                                '        <td class="center aligned">' + dests[0].airport + '</td>\n' +
+                                '        <td class="center aligned">' + dests[0].city + '</td>\n' +
+                                '        <td class="center aligned">' + dests[0].country + '</td>\n' +
+                                '    </tr>');
+
+                            if (rs > 1) {
+                                for (var j = 1; j < rs; j++) {
+                                    $('#bstTable tbody').append('<tr>\n' +
+                                        '        <td class="center aligned">' + dests[j].airport + '</td>\n' +
+                                        '        <td class="center aligned">' + dests[j].city + '</td>\n' +
+                                        '        <td class="center aligned">' + dests[j].country + '</td>\n' +
+                                        '    </tr>');
+                                }
+                            }
                         }
+                    });
 
-                        $('#customerTable tbody').append('<tr>\n' +
-                            '        <td class="center aligned">' + data[i].flight + '</td>\n' +
-                            '        <td class="center aligned">' + dest + '</td>\n' +
-                            '    </tr>');
-                    }
-                });
-            }
-        });
-    });
+                }
+            });
+        }
+    )
 });

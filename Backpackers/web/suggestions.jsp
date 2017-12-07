@@ -37,19 +37,21 @@
     <div class="ui form">
         <div class="fields">
             <div class="field">
-                <label>Customer Name</label>
-                <input type="text" placeholder="Customer Name" id="name">
+                <label>Customer User Id</label>
+                <input type="text" placeholder="Customer User Id" id="name">
             </div>
             <div class="field">
                 <button class="ui orange button" id="cusNameButton" style="position: relative; top: 20px;">Go</button>
             </div>
         </div>
     </div>
-    <table class="ui sortable orange celled structured table" id="customerTable" style="margin: 20px; width: 50%;">
+    <table class="ui sortable orange celled structured table" id="bstTable" style="margin: 20px; width: 40%; ">
         <thead>
         <tr>
             <th rowspan="2" class="center aligned">Flight</th>
-            <th rowspan="2" class="center aligned">Destinations</th>
+            <th rowspan="2" class="center aligned">Airport</th>
+            <th rowspan="2" class="center aligned">City</th>
+            <th rowspan="2" class="center aligned">Country</th>
         </tr>
         </thead>
         <tbody>
