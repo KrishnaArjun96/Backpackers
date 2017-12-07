@@ -14,7 +14,7 @@
 
 <head>
     <title>Welcome!</title>
-    <link rel="icon" href="tabIcon4.png">
+    <link rel="icon" href="tabIconCRep.png">
 </head>
 
 <body>
