@@ -27,6 +27,9 @@
         <a class="active item">
             <i class="plane icon"></i> Flight Suggestions
         </a>
+        <a class="item" href="cusrepResr.jsp">
+            <i class="globe icon"></i> Reservation
+        </a>
         <a class="item" style="float: right" href="login.jsp">
             <i class="power icon"></i>
         </a>

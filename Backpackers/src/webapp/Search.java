@@ -77,14 +77,19 @@ public class Search extends HttpServlet {
                 String date = tripData.get("date").getAsString();
 
                 ArrayList<Option> options = search(origin, destination, date, prefClass, passengers);
+                options.sort(new Comparator<Option>() {
+                    @Override
+                    public int compare(Option o1, Option o2) {
+                        return o2.getTotalDuration() - o1.getTotalDuration();
+                    }
+                });
                 allOptions.add(options);
             }
         }
+
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        System.out.println(new Gson().toJson(allOptions));
         response.getWriter().write(new Gson().toJson(allOptions));
-        System.out.println("WRITTEN...");
         closeConnection();
     }
 
@@ -360,7 +365,7 @@ public class Search extends HttpServlet {
     }
 
     public static boolean validateOption(Option option, String date, int passengers, String prefClass) throws ParseException, SQLException, ClassNotFoundException {
-        if(!isFlightOperational(option.getLegs().get(0).getFlight(), date)) return false;
+        //if(!isFlightOperational(option.getLegs().get(0).getFlight(), date)) return false;
         String travelDate = date;
         String[] dates = new String[option.getLegs().size()];
         int[] layovers = new int[option.getLegs().size()-1];

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static Classes.Data.getDestinations;
+import static Classes.Data.getUserId;
 import static Classes.ExecQuery.*;
 import static Classes.ExecQuery.createView;
 
@@ -26,7 +27,8 @@ import static Classes.ExecQuery.createView;
 @WebServlet(name = "flightsuggestions")
 public class suggestionsFlight extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String userId = request.getParameter("userId");
+        String userName = request.getParameter("userId");
+        String userId = getUserId(userName);
         try {
             createConnection();
             Data.Refresh();
