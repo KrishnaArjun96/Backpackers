@@ -59,12 +59,12 @@
     </servlet-mapping>
 
     <servlet>
-    <servlet-name>reservations</servlet-name>
+    <servlet-name>reservationListing</servlet-name>
     <servlet-class>webapp.ReservationListings</servlet-class>
 </servlet>
     <servlet-mapping>
-        <servlet-name>reservations</servlet-name>
-        <url-pattern>/reservations</url-pattern>
+        <servlet-name>reservationListing</servlet-name>
+        <url-pattern>/reservationListing</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -77,12 +77,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>currResrs</servlet-name>
+        <servlet-name>reservations</servlet-name>
         <servlet-class>webapp.Reservations</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>currResrs</servlet-name>
-        <url-pattern>/currResrs</url-pattern>
+        <servlet-name>reservations</servlet-name>
+        <url-pattern>/reservations</url-pattern>
     </servlet-mapping>
 
     <servlet>

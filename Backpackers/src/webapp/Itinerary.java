@@ -32,8 +32,8 @@ public class Itinerary extends HttpServlet {
             Data.Refresh();
             if(viewExists("itinerary")) {
                 dropView("itinerary");
-                createView("itinerary", "SELECT DISTINCT I.ResrNo AS 'Reservation', I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'BookingDate', (R.BookingFee + R.Fare) AS 'Fare', (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', R.UserId, RP.Name AS 'Passenger', RP.SeatPref, RP.MealPref, (SELECT Name FROM Class WHERE Id = I.ClassId) AS 'Class', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Origin) AS 'Departs', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Destination) AS 'Arrives' FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Passenger RP ON RP.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.LegId AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY R.ResrNo, I.Id;");
             }
+            createView("itinerary", "SELECT DISTINCT I.ResrNo AS 'Reservation', I.Id AS 'Booking', concat(I.AirlineId, ' ', I.FlightNo) AS 'Flight', I.TravelDate, R.BookingDate AS 'BookingDate', (R.BookingFee + R.Fare) AS 'Fare', (SELECT DISTINCT concat(P.FirstName, ' ', P.LastName) FROM Person P, Customer C WHERE C.PersonId = P.Id AND C.UserId = R.UserId) AS 'Customer', R.UserId, RP.Name AS 'Passenger', RP.SeatPref, RP.MealPref, (SELECT Name FROM Class WHERE Id = I.ClassId) AS 'Class', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Origin) AS 'Departs', (SELECT DISTINCT A.Id FROM Airport A WHERE A.Id = L.Destination) AS 'Arrives' FROM Booking I JOIN Reservation R ON R.ResrNo = I.ResrNo JOIN Passenger RP ON RP.ResrNo = I.ResrNo JOIN Flight F ON F.AirlineId = I.AirlineId AND F.FlightNo = I.FlightNo JOIN Leg L ON I.LegId = L.LegId AND L.AirlineId = I.AirlineId AND L.FlightNo = I.FlightNo ORDER BY R.ResrNo, I.Id;");
             ResultSet rs = ExecQuery.execQuery("SELECT * FROM itinerary WHERE Reservation='" + resr + "' ORDER BY Booking");
             JsonObject result = new JsonObject();
             String customer = "";
@@ -83,7 +83,7 @@ public class Itinerary extends HttpServlet {
             result.addProperty("classTravel", classTravel);
             result.addProperty("bookingDate", bookingDate);
             result.addProperty("fare", fare);
-            result.addProperty("legs", String.valueOf(jsonLegs));
+            result.addProperty("legs", jsonLegs.toString());
             result.addProperty("passengers", jsonPassengers.toString());
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");

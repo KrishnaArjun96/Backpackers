@@ -31,8 +31,9 @@ public class SalesReport  extends HttpServlet {
             createConnection();
             if(viewExists("sales_report")) {
                 dropView("sales_report");
-                createView("sales_report", "SELECT ResrNo AS 'Reservation #', MONTH(BookingDate) AS 'Month', YEAR(BookingDate) AS 'Year', (BookingFee + Fare) AS 'Sale', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND EmployeeSSN = E.SSN) AS 'Representative', BookingDate FROM Reservation;");
             }
+            createView("sales_report", "SELECT ResrNo AS 'Reservation #', MONTH(BookingDate) AS 'Month', YEAR(BookingDate) AS 'Year', (BookingFee + Fare) AS 'Sale', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND EmployeeSSN = E.SSN) AS 'Representative', BookingDate FROM Reservation;");
+
             ResultSet rs_sales = ExecQuery.execQuery("SELECT * FROM sales_report WHERE Month=" + month + " AND Year=" + year);
             JsonArray resultSet = new JsonArray();
             while(rs_sales.next()) {
