@@ -43,5 +43,47 @@
     </div>
 </div>
 
+<div style="margin: 20px;">
+    <h1 style="color: #e05d0f">Best Seller List of Flights.</h1>
+    <table class="ui sortable orange celled structured table" id="bstTable" style="margin: 20px; width: 40%; ">
+        <thead>
+        <tr>
+            <th rowspan="2" class="center aligned">Reservation Number</th>
+            <th rowspan="2" class="center aligned">Booking ID</th>
+            <th rowspan="2" class="center aligned">Flight</th>
+            <th rowspan="2" class="center aligned">Travel Date</th>
+            <th rowspan="2" class="center aligned">Booking Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(window).on('load', getReservations());
+
+    function getReservations() {
+        $.ajax({
+            type: 'GET',
+            url: "/reservations?userId=jdoe@woot.com&type=history",
+            success: function (data) {
+                $(document).ready(function () {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#bstTable tbody').append('<tr>\n' +
+                            '        <td class="center aligned">' + data[i].resr + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].booking + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].flight + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].travelDate + '</td>\n' +
+                            '        <td class="center aligned">' + data[i].bookingDate + '</td>\n' +
+                            '    </tr>');
+                    }
+                });
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
