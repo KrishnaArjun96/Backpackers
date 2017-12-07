@@ -25,8 +25,8 @@ public class bestSeller extends HttpServlet {
             createConnection();
             if(viewExists("best_seller")) {
                 dropView("best_seller");
-                createView("best_seller", "SELECT concat(F.AirlineId, ' ', F.FlightNo) AS 'Flight', (SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo) AS 'Count' FROM Flight F ORDER BY Count DESC;");
             }
+            createView("best_seller", "SELECT concat(F.AirlineId, ' ', F.FlightNo) AS 'Flight', (SELECT COUNT(*) FROM Booking I WHERE I.AirlineId = F.AirlineId AND I.FlightNo = F.FlightNo) AS 'Count' FROM Flight F ORDER BY Count DESC;");
             ResultSet rs = ExecQuery.execQuery("SELECT * FROM best_seller");
             JsonArray jarray = new JsonArray();
             while(rs.next()) {

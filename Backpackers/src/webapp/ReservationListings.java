@@ -30,8 +30,8 @@ public class ReservationListings extends HttpServlet {
                 String[] dates = date.split("-");
                 if(viewExists("reservations_flight")) {
                     dropView("reservations_flight");
-                    createView("reservations_flight", "SELECT concat(F.AirlineID, ' ', F.FlightNo) AS 'Flight', R.ResrNo AS 'Reservation', B.Id AS 'Booking', R.BookingDate AS 'BookingDate', B.TravelDate AS 'TravelDate', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND E.SSN = R.EmployeeSSN) AS 'Representative' FROM Reservation R, Flight F, Booking B WHERE F.AirlineID = B.AirlineID AND F.FlightNo = B.FlightNo AND B.ResrNo = R.ResrNo ORDER BY Reservation, Booking;");
                 }
+                createView("reservations_flight", "SELECT concat(F.AirlineID, ' ', F.FlightNo) AS 'Flight', R.ResrNo AS 'Reservation', B.Id AS 'Booking', R.BookingDate AS 'BookingDate', B.TravelDate AS 'TravelDate', (SELECT concat(P.FirstName, ' ', P.LastName) FROM Person P, Employee E WHERE P.id = E.PersonId AND E.SSN = R.EmployeeSSN) AS 'Representative' FROM Reservation R, Flight F, Booking B WHERE F.AirlineID = B.AirlineID AND F.FlightNo = B.FlightNo AND B.ResrNo = R.ResrNo ORDER BY Reservation, Booking;");
                 ResultSet rs = ExecQuery.execQuery("SELECT * FROM reservations_flight WHERE Flight = '" + flight + "' AND TravelDate='" + date + "'");
                 JsonArray jarray = new JsonArray();
                 while(rs.next()) {
