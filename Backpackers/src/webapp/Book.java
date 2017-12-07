@@ -97,7 +97,7 @@ public class Book extends HttpServlet {
                     String layover = "00:00";
                     if(j != legsData.size() - 1)
                         layover = convertTimeFormat(layovers.get(j).getAsInt());
-                    exec = "INSERT INTO Booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (?,?,?,?,?,?,?)";
+                    exec = "INSERT INTO Booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId, Layover) VALUES (?,?,?,?,?,?,?,?)";
                     pstmt = ExecQuery.updateTable(exec);
                     pstmt.setInt(1, bookingIndex);
                     pstmt.setInt(2, resrNo);
@@ -111,25 +111,28 @@ public class Book extends HttpServlet {
 
                     if(isAuction) {
                         bids = requestData.get("bids").getAsJsonArray();
-                        exec = "SELECT CASE WHEN COUNT(1) > 0 THEN Id ELSE 0 END AS 'Id' FROM Auction WHERE LegId=" + legId + " AND FlightNo=" + flightNo + " AND AirlineId='" + airlineId + "'";
+                        exec = "SELECT CASE WHEN COUNT(1) > 0 THEN Id ELSE 0 END AS 'Id' FROM Auction WHERE BookingId=" + bookingIndex + " AND FlightNo=" + flightNo + " AND AirlineId='" + airlineId + "'";
                         ResultSet rs = ExecQuery.execQuery(exec);
                         int auctionId = 0;
                         if(rs.next()) auctionId = rs.getInt(1);
                         if(auctionId == 0) {
-                            exec = "INSERT INTO Auction (LegId, FlightNo, AirlineId, TravelDate) VALUES (?,?,?,?)";
+                            exec = "INSERT INTO Auction (BookingId, FlightNo, AirlineId, TravelDate) VALUES (?,?,?,?)";
                             pstmt = ExecQuery.updateTable(exec);
-                            pstmt.setInt(1, legId);
+                            pstmt.setInt(1, bookingIndex);
                             pstmt.setInt(2, flightNo);
                             pstmt.setString(3, airlineId);
                             pstmt.setDate(4, java.sql.Date.valueOf(travelDate));
                             pstmt.executeUpdate();
+                            exec = "SELECT CASE WHEN COUNT(1) > 0 THEN Id ELSE 0 END AS 'Id' FROM Auction WHERE BookingId=" + bookingIndex + " AND FlightNo=" + flightNo + " AND AirlineId='" + airlineId + "'";
+                            rs = ExecQuery.execQuery(exec);
+                            if(rs.next()) auctionId = rs.getInt(1);
                         }
                         exec = "SELECT CASE WHEN COUNT(1) > 0 THEN 1 ELSE 0 END AS 'Check' FROM Bid WHERE ResrNo=" + resrNo + " AND AuctionId=" + auctionId;
                         ResultSet rs_bid = ExecQuery.execQuery(exec);
                         int bidCheck = 0;
                         if(rs_bid.next()) bidCheck = rs_bid.getInt(1);
                         if(bidCheck == 0) {
-                            double bidAmount = bids.get(i).getAsDouble();
+                            double bidAmount = bids.get(bookingIndex).getAsDouble();
                             exec = "INSERT INTO Bid (AuctionId, ResrNo, Status, BidAmount) VALUES (?,?,?,?)";
                             pstmt = ExecQuery.updateTable(exec);
                             pstmt.setInt(1, auctionId);
