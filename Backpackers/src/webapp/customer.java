@@ -25,6 +25,13 @@ import static Classes.ExecQuery.createConnection;
  */
 @WebServlet(name = "customer")
 public class customer extends HttpServlet {
+    public static String getUserName(String fName, String lName) {
+        String uName = "";
+        uName += fName.charAt(0);
+        uName = uName.concat(lName);
+        return uName;
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
         String userId = data.get("user").getAsString();
