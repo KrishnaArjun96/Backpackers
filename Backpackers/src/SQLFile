@@ -1,0 +1,369 @@
+create table airline
+(
+	Id char(2) not null
+		primary key,
+	Name varchar(20) not null
+);
+
+INSERT INTO backpackers.airline (Id, Name) VALUES ('AA', 'American Airlines');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('AB', 'Air Berlin');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('B6', 'JetBlue Airways');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('BA', 'British Airlines');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('DL', 'Delta Airlines');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('EK', 'Emirates');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('LH', 'Lufthansa');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('MD', 'Air Madagascar');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('NQ', 'Air Japan');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('UA', 'United Airlines');
+INSERT INTO backpackers.airline (Id, Name) VALUES ('WN', 'Southwest Airlines');
+
+create table airport
+(
+	Id char(3) not null
+		primary key,
+	Name varchar(75) not null,
+	City varchar(75) not null,
+	Country varchar(75) not null,
+	IsVisible bit default b'1' null
+);
+
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('ATL', 'Hartsfield-Jackson Atlanta International', 'Atlanta', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('BLR', 'Kempegowda International', 'Bengaluru', 'India', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('BOS', 'Logan International', 'Boston', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('DXB', 'Dubai International', 'Dubai', 'United Arab Emirates', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('HND', 'Tokyo International', 'Tokyo', 'Japan', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('JFK', 'John F. Kennedy International', 'New York', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('LAX', 'Los Angeles International', 'Los Angeles', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('LGA', 'LaGuardia', 'New York', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('LHR', 'London Heathrow', 'London', 'United Kingdom', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('ORD', 'Chicago O''Hare International', 'Chicago', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('SFO', 'San Francisco International', 'San Francisco', 'United States of America', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('TNR', 'Ivato International', 'Antananarivo', 'Madagascar', true);
+INSERT INTO backpackers.airport (Id, Name, City, Country, IsVisible) VALUES ('TXL', 'Berlin Tegel', 'Berlin', 'Germany', true);
+
+create table flight
+(
+	FlightNo int not null,
+	AirlineId char(2) not null,
+	Stops int not null,
+	Days int not null,
+	IsVisible bit default b'1' null,
+	primary key (FlightNo, AirlineId),
+	constraint flight_ibfk_1
+		foreign key (AirlineId) references backpackers.airline (Id)
+			on update cascade
+);
+
+create index AirlineId on flight (AirlineId);
+
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (111, 'AA', 2, 1010100, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (111, 'B6', 2, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (112, 'AA', 2, 1010100, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (112, 'B6', 2, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (203, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (204, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (215, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (216, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (225, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (226, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (442, 'B6', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (443, 'B6', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (564, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (565, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (566, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (567, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (568, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (569, 'EK', 1, 1111111, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (1336, 'MD', 1, 11, true);
+INSERT INTO backpackers.flight (FlightNo, AirlineId, Stops, Days, IsVisible) VALUES (1337, 'MD', 1, 11, true);
+
+create table class
+(
+	Id int auto_increment
+		primary key,
+	FlightNo int not null,
+	AirlineId char(2) not null,
+	Name varchar(20) not null,
+	Aircraft varchar(20) not null,
+	Fare decimal(10,2) not null,
+	Seats int not null,
+	IsVisible bit default b'1' null,
+	ClassRank int not null,
+	constraint class_ibfk_2
+		foreign key (AirlineId, FlightNo) references backpackers.flight (AirlineId, FlightNo)
+			on update cascade,
+	constraint class_ibfk_1
+		foreign key (AirlineId) references backpackers.airline (Id)
+			on update cascade
+);
+
+create index AirlineId on class (AirlineId, FlightNo);
+
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'AA', 'First', 'Boeing 787-9', 2500.00, 8, true, 4);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'AA', 'Business', 'Boeing 787-9', 1800.00, 22, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'AA', 'Premium Economy', 'Boeing 787-9', 2100.00, 8, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'AA', 'Economy', 'Boeing 787-9', 1500.00, 234, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'B6', 'Business', 'Airbus A321 neo', 1800.00, 16, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (111, 'B6', 'Economy', 'Airbus A321 neo', 1000.00, 143, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1337, 'MD', 'Business', 'Airbus A340-300', 1800.00, 30, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1337, 'MD', 'Premium Economy', 'Airbus A340-300', 1500.00, 21, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1337, 'MD', 'Economy', 'Airbus A340-300', 900.00, 224, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'AA', 'First', 'Boeing 787-9', 2500.00, 8, true, 4);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'AA', 'Business', 'Boeing 787-9', 1800.00, 22, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'AA', 'Premium Economy', 'Boeing 787-9', 2100.00, 8, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'AA', 'Economy', 'Boeing 787-9', 2500.00, 234, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'B6', 'Business', 'Airbus A321 neo', 1800.00, 16, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (112, 'B6', 'Economy', 'Airbus A321 neo', 1000.00, 143, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1336, 'MD', 'Business', 'Airbus A340-300', 1800.00, 30, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1336, 'MD', 'Premium Economy', 'Airbus A340-300', 1500.00, 21, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (1336, 'MD', 'Economy', 'Airbus A340-300', 900.00, 224, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (203, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (203, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (203, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (204, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (204, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (204, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (566, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (566, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (566, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (567, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (567, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (567, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (215, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (215, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (215, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (216, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (216, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (216, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (225, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (225, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (225, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (226, 'EK', 'First', 'Airbus A380-800', 2500.00, 14, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (226, 'EK', 'Business', 'Airbus A380-800', 1800.00, 76, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (226, 'EK', 'Economy', 'Airbus A380-800', 700.00, 399, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (442, 'B6', 'Business', 'Airbus A321 neo', 1800.00, 16, true, 0);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (442, 'B6', 'Economy', 'Airbus A321 neo', 1000.00, 143, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (443, 'B6', 'Business', 'Airbus A321 neo', 1800.00, 16, true, 0);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (443, 'B6', 'Economy', 'Airbus A321 neo', 1000.00, 143, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (564, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (564, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (564, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (565, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (565, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (565, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (568, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (568, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (568, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (569, 'EK', 'First', 'Boeing 777-300ER', 1200.00, 8, true, 3);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (569, 'EK', 'Business', 'Boeing 777-300ER', 900.00, 42, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (569, 'EK', 'Economy', 'Boeing 777-300ER', 200.00, 310, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (442, 'B6', 'Business', 'Airbus A321 neo', 600.00, 16, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (442, 'B6', 'Economy', 'Airbus A321 neo', 300.00, 143, true, 1);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (443, 'B6', 'Business', 'Airbus A321 neo', 600.00, 16, true, 2);
+INSERT INTO backpackers.class (FlightNo, AirlineId, Name, Aircraft, Fare, Seats, IsVisible, ClassRank) VALUES (443, 'B6', 'Economy', 'Airbus A321 neo', 300.00, 143, true, 1);
+
+create table leg
+(
+	LegId int not null,
+	FlightNo int not null,
+	AirlineId char(2) not null,
+	Origin char(3) not null,
+	Destination char(3) not null,
+	Departure time not null,
+	Arrival time not null,
+	Duration time not null,
+	primary key (LegId, FlightNo, AirlineId),
+	constraint leg_ibfk_1
+		foreign key (AirlineId, FlightNo) references backpackers.flight (AirlineId, FlightNo)
+			on update cascade,
+	constraint leg_ibfk_2
+		foreign key (Origin) references backpackers.airport (Id)
+			on update cascade,
+	constraint leg_ibfk_3
+		foreign key (Destination) references backpackers.airport (Id)
+			on update cascade
+);
+
+create index AirlineId
+	on leg (AirlineId, FlightNo);
+
+create index Destination
+	on leg (Destination);
+
+create index Origin
+	on leg (Origin);
+
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 111, 'AA', 'LGA', 'LAX', '17:00:00', '20:10:00', '06:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 111, 'B6', 'SFO', 'BOS', '19:30:00', '04:50:00', '05:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 112, 'AA', 'HND', 'LAX', '09:00:00', '14:10:00', '06:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 112, 'B6', 'LHR', 'BOS', '14:30:00', '17:20:00', '05:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 203, 'EK', 'DXB', 'JFK', '02:30:00', '08:15:00', '14:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 204, 'EK', 'JFK', 'DXB', '10:40:00', '08:40:00', '14:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 215, 'EK', 'DXB', 'LAX', '08:30:00', '12:45:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 216, 'EK', 'LAX', 'DXB', '15:20:00', '07:40:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 225, 'EK', 'DXB', 'SFO', '08:20:00', '13:05:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 226, 'EK', 'SFO', 'DXB', '15:40:00', '07:25:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 442, 'B6', 'JFK', 'SFO', '11:30:00', '14:30:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 443, 'B6', 'SFO', 'JFK', '21:20:00', '06:20:00', '16:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 564, 'EK', 'DXB', 'BLR', '08:50:00', '03:40:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 565, 'EK', 'BLR', 'DXB', '13:00:00', '10:25:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 566, 'EK', 'DXB', 'BLR', '13:30:00', '19:00:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 567, 'EK', 'BLR', 'DXB', '20:00:00', '23:10:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 568, 'EK', 'DXB', 'BLR', '02:25:00', '21:50:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 569, 'EK', 'BLR', 'DXB', '06:50:00', '04:20:00', '04:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 1336, 'MD', 'TNR', 'JFK', '13:00:00', '18:50:00', '08:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (1, 1337, 'MD', 'JFK', 'TNR', '23:00:00', '11:00:00', '08:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (2, 111, 'AA', 'LAX', 'HND', '21:30:00', '03:00:00', '06:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (2, 111, 'B6', 'BOS', 'LHR', '06:00:00', '12:15:00', '05:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (2, 112, 'AA', 'LAX', 'LGA', '15:30:00', '23:50:00', '06:00:00');
+INSERT INTO backpackers.leg (LegId, FlightNo, AirlineId, Origin, Destination, Departure, Arrival, Duration) VALUES (2, 112, 'B6', 'BOS', 'SFO', '19:00:00', '23:00:00', '05:00:00');
+
+create table person
+(
+	Id int auto_increment
+		primary key,
+	FirstName varchar(20) not null,
+	Address varchar(80) not null,
+	City varchar(75) null,
+	State varchar(75) null,
+	Country varchar(75) not null,
+	ZipCode varchar(10) not null,
+	Phone varchar(20) not null,
+	LastName varchar(20) not null,
+	constraint person_Id_uindex
+		unique (Id)
+);
+
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('Jane', 'Smith', '100 Nicolls Rd', 'Stony Brook', 'New York', '+1 (555) 555-5555', '17790', 'United States of America');
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('John', 'Doe', '123 N Fake Street', 'New York City', 'New York', '+1 (123) 123-1234', '10001', 'United States of America');
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('Rick', 'Astley', '1337 Internet Lane', 'Los Angeles', 'California', '+1 (314) 159-2653', '90001', 'United States of America');
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('Benito', 'Mills', '2904 Stanton Hollow Road', 'Winchester', 'Massachusetts', '+1 (781) 460-4856', '01890', 'United States of America');
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('Manuel', 'Bacon', '992 Wiseman Street', 'Knoxville', 'Tennessee', '+1 (865) 392-3479', '37933', 'United States of America');
+INSERT INTO backpackers.person (FirstName, LastName, Address, City, State, Phone, ZipCode, Country) VALUES ('Dong', 'Chen', '2991 Haymond Rocks Road', 'Lostine', 'Oregon', '+1 (541) 569-4222', '97885', 'United States of America');
+
+create table customer
+(
+	PersonId int not null,
+	UserId varchar(20) not null,
+	JoinDate date not null,
+	CardNo char(16) not null,
+	SeatPref varchar(20) null,
+	MealPref varchar(20) null,
+	Rating int null,
+	primary key (PersonId, UserId),
+	constraint customer_person_Id_fk
+		foreign key (PersonId) references backpackers.person (Id)
+);
+
+INSERT INTO backpackers.customer (PersonId, UserId, JoinDate, CardNo, SeatPref, MealPref, Rating) VALUES (19, 'awesomejane@ftw.com', '2015-12-06', '1111222233334444', 'window', 'veg', 3);
+INSERT INTO backpackers.customer (PersonId, UserId, JoinDate, CardNo, SeatPref, MealPref, Rating) VALUES (20, 'jdoe@woot.com', '2017-05-15', '5555666677778888', 'aisle', 'sea food', 4);
+INSERT INTO backpackers.customer (PersonId, UserId, JoinDate, CardNo, SeatPref, MealPref, Rating) VALUES (21, 'rickroller@rolld.com', '2017-10-25', '9999000011112222', 'window', 'vegan', 5);
+
+create table employee
+(
+	PersonId int not null,
+	SSN char(9) not null,
+	StartDate date not null,
+	Role varchar(20) not null,
+	WageHourly decimal(10,2) not null,
+	primary key (PersonId, SSN),
+	constraint employee_person_Id_fk
+		foreign key (PersonId) references backpackers.person (Id)
+			on update cascade on delete cascade
+);
+
+INSERT INTO backpackers.employee (PersonId, SSN, StartDate, Role, WageHourly) VALUES (22, '121224455', '2017-01-02', 'employee', 45.00);
+INSERT INTO backpackers.employee (PersonId, SSN, StartDate, Role, WageHourly) VALUES (23, '303112222', '2017-06-04', 'employee', 40.00);
+INSERT INTO backpackers.employee (PersonId, SSN, StartDate, Role, WageHourly) VALUES (24, '541023333', '2016-08-08', 'manager', 55.00);
+
+create table reservation
+(
+	ResrNo int not null
+		primary key,
+	BookingDate date not null,
+	Fare decimal(10,2) not null,
+	BookingFee decimal(10,2) not null,
+	IsVisible bit default b'1' null,
+	EmployeeId int not null,
+	EmployeeSSN char(9) not null,
+	CustomerId int not null,
+	UserId varchar(20) not null,
+	constraint reservation_ibfk_1
+		foreign key (EmployeeId, EmployeeSSN) references backpackers.employee (PersonId, SSN)
+			on update cascade,
+	constraint reservation_ibfk_2
+		foreign key (CustomerId, UserId) references backpackers.customer (PersonId, UserId)
+			on update cascade
+);
+
+create index CustomerId
+	on reservation (CustomerId, UserId);
+
+create index EmployeeId
+	on reservation (EmployeeId, EmployeeSSN);
+
+INSERT INTO backpackers.reservation (ResrNo, BookingDate, Fare, BookingFee, IsVisible, EmployeeId, EmployeeSSN, CustomerId, UserId) VALUES (111, '2017-09-04', 1500.00, 150.00, true, 22, '121224455', 19, 'awesomejane@ftw.com');
+INSERT INTO backpackers.reservation (ResrNo, BookingDate, Fare, BookingFee, IsVisible, EmployeeId, EmployeeSSN, CustomerId, UserId) VALUES (222, '2017-10-10', 1800.00, 180.00, true, 23, '303112222', 20, 'jdoe@woot.com');
+INSERT INTO backpackers.reservation (ResrNo, BookingDate, Fare, BookingFee, IsVisible, EmployeeId, EmployeeSSN, CustomerId, UserId) VALUES (333, '2017-10-31', 900.00, 90.00, true, 23, '303112222', 21, 'rickroller@rolld.com');
+INSERT INTO backpackers.reservation (ResrNo, BookingDate, Fare, BookingFee, IsVisible, EmployeeId, EmployeeSSN, CustomerId, UserId) VALUES (444, '2017-11-21', 2100.00, 210.00, true, 24, '541023333', 19, 'awesomejane@ftw.com');
+
+
+create table booking
+(
+	Id int not null,
+	ResrNo int not null,
+	LegId int not null,
+	FlightNo int not null,
+	AirlineId char(2) not null,
+	TravelDate date not null,
+	ClassId int not null,
+	primary key (Id, ResrNo),
+	constraint booking_ibfk_1
+		foreign key (ResrNo) references backpackers.reservation (ResrNo)
+			on update cascade,
+	constraint booking_ibfk_3
+		foreign key (LegId, FlightNo, AirlineId) references backpackers.leg (LegId, FlightNo, AirlineId)
+			on update cascade,
+	constraint booking_class_Id_fk
+		foreign key (ClassId) references backpackers.class (Id)
+			on update cascade on delete cascade
+);
+
+create index LegId on booking (LegId, FlightNo, AirlineId);
+
+create index ResrNo on booking (ResrNo);
+
+create index booking_class_Id_fk on booking (ClassId);
+
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (1, 111, 1, 111, 'AA', '2017-12-27', 4);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (1, 222, 1, 111, 'B6', '2017-12-21', 5);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (1, 333, 1, 1337, 'MD', '2017-12-30', 9);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (1, 444, 1, 567, 'EK', '2018-01-26', 30);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (2, 111, 2, 111, 'AA', '2017-12-27', 4);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (2, 444, 1, 203, 'EK', '2018-01-27', 21);
+INSERT INTO backpackers.booking (Id, ResrNo, LegId, FlightNo, AirlineId, TravelDate, ClassId) VALUES (3, 444, 1, 442, 'B6', '2018-01-27', 60);
+
+create table passenger
+(
+	PaxId int not null,
+	ResrNo int not null,
+	SeatPref varchar(20) null,
+	MealPref varchar(20) null,
+	Name varchar(20) not null,
+	constraint passenger_ibfk_1
+		foreign key (ResrNo) references backpackers.reservation (ResrNo)
+			on update cascade
+);
+
+create index ResrNo on passenger (ResrNo);
+
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (1, 111, 'Ashlynn Kutch', 'window', 'Veg');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (2, 111, 'Douglas Harber', 'Aisle', 'Low Calorie');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (3, 111, 'Jane Smith', 'window', 'Veg');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (1, 222, 'John Doe', 'Aisle', 'Sea Food');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (1, 333, 'Mauricio Prohaska', 'window', 'Veg');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (2, 333, 'Javon Kertzmann', 'Aisle', 'Halal');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (3, 333, 'Rick Astley', 'window', 'Vegan');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (1, 444, 'Celestino Cremin', 'Aisle', 'Vegan');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (2, 444, 'Elliot Blick', 'window', 'Low Calorie');
+INSERT INTO backpackers.passenger (PaxId, ResrNo, Name, SeatPref, MealPref) VALUES (3, 444, 'Jane Smith', 'window', 'Veg');

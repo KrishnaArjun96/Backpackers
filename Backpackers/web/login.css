@@ -1,0 +1,12 @@
+
+body > .grid {
+    height: 100%;
+    /*width:0 98vw;*/
+}
+
+.image {
+    margin-top: -100px;
+}
+.column {
+    max-width: 450px;
+}

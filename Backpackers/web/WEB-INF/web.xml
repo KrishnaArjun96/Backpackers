@@ -3,4 +3,141 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>webapp.login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>webapp.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>employee</servlet-name>
+        <servlet-class>webapp.employee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>flights</servlet-name>
+        <servlet-class>webapp.FlightListings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flights</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>revenue</servlet-name>
+        <servlet-class>webapp.Revenue</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>revenue</servlet-name>
+        <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>sales</servlet-name>
+        <servlet-class>webapp.SalesReport</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sales</servlet-name>
+        <url-pattern>/sales</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>reservationListing</servlet-name>
+    <servlet-class>webapp.ReservationListings</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>reservationListing</servlet-name>
+        <url-pattern>/reservationListing</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>flightsuggestions</servlet-name>
+        <servlet-class>webapp.suggestionsFlight</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flightsuggestions</servlet-name>
+        <url-pattern>/flightsuggestions</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>reservations</servlet-name>
+        <servlet-class>webapp.Reservations</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reservations</servlet-name>
+        <url-pattern>/reservations</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>itinerary</servlet-name>
+        <servlet-class>webapp.Itinerary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>itinerary</servlet-name>
+        <url-pattern>/itinerary</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>maillist</servlet-name>
+        <servlet-class>webapp.MailList</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>maillist</servlet-name>
+        <url-pattern>/maillist</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>bestseller</servlet-name>
+        <servlet-class>webapp.bestSeller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bestseller</servlet-name>
+        <url-pattern>/bestseller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>customer</servlet-name>
+        <servlet-class>webapp.customer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>customer</servlet-name>
+        <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Book</servlet-name>
+        <servlet-class>webapp.Book</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Book</servlet-name>
+        <url-pattern>/Book</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>auctions</servlet-name>
+        <servlet-class>webapp.Auctions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auctions</servlet-name>
+        <url-pattern>/auctions</url-pattern>
+    </servlet-mapping>
+
 </web-app>
